@@ -9,11 +9,15 @@ dev:
 	$(PYTHON) -m uvicorn apps.api.app.main:app --reload --port 8000 &
 	$(PNPM) --filter web dev
 
-test: test-claims test-backend test-frontend
-	@echo "All PashuPoshan test suites passed!"
+test: test-claims test-i18n test-backend test-frontend
+	@echo "All FeedShield test suites passed!"
+
+test-i18n:
+	@echo "Running FeedShield I18N Parity & Script Audit..."
+	$(PYTHON) scripts/i18n_audit.py
 
 test-claims:
-	@echo "Running PashuPoshan Claims & Honesty Linter..."
+	@echo "Running FeedShield Claims & Honesty Linter..."
 	$(PYTHON) ml/claims_lint.py
 
 test-backend:

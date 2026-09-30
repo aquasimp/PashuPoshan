@@ -1,7 +1,9 @@
 {
   "common": {
-    "appName": "PashuPoshan",
+    "appName": "FeedShield",
     "tagline": "Test. Understand. Act.",
+    "subtitle": "AI-Powered Feed & Silage Intelligence",
+    "sihId": "SIH26111",
     "syncStatus": {
       "savedOnDevice": "Saved on device",
       "queued": "Queued",
@@ -29,19 +31,42 @@
       "verify": "Verify Authenticity"
     }
   },
+  "nav": {
+    "test": "Start New Test",
+    "demo": "Hero Demo",
+    "history": "History",
+    "models": "Models",
+    "more": "More",
+    "tour": "Judge Tour",
+    "compare": "Compare Batches",
+    "sync": "Sync Queue",
+    "admin": "Admin Intelligence",
+    "storage": "Bunker & Pit Storage",
+    "settings": "Settings",
+    "designSystem": "Design System",
+    "language": "Language",
+    "theme": "Theme",
+    "online": "Online",
+    "offline": "Offline (On-Device)"
+  },
   "farmer": {
     "homeTitle": "Feed & Silage Quality",
+    "homeSubtitle": "Multi-modal rapid on-farm screening fusing optical imaging, core temperature, and pH sensing with full offline capability.",
     "welcome": "Welcome back",
     "startTest": "Start New Test",
     "testSilage": "Silage Fermentation Test",
+    "testSilageSubtitle": "Comprehensive evaluation for pit, bunker, and wrapped bag silage. Fuses core pH probe, internal temperature probe, ambient differential, and visual inspection.",
     "testFeed": "Cattle Feed / Fodder Test",
+    "testFeedSubtitle": "Optical and assay screening for commercial cattle feed pellets, mash, oil cake (mustard, cotton), and dry hay.",
     "recentTests": "Recent Sample Tests",
     "storageAlerts": "Active Pit Warnings",
     "capturePrompt": "Capture Sample Photograph",
     "captureHint": "Place sample on clean plain surface with uniform daylight",
     "retakeBlur": "Hold camera steady.",
     "retakeLighting": "Improve lighting.",
-    "retakeDistance": "Move closer."
+    "retakeDistance": "Move closer.",
+    "demoAlertTitle": "DEMO · Fictional Dairy Cooperative",
+    "demoAlertDesc": "Sample pit 4 showed temperature rise of +8.2°C and pH 5.4. ESTIMATED aerobic heating risk detected."
   },
   "results": {
     "title": "Analysis Result",
@@ -49,12 +74,13 @@
     "good": "GOOD",
     "attention": "ATTENTION",
     "highRisk": "HIGH RISK",
+    "indeterminate": "INDETERMINATE",
     "inputCompleteness": "Input Completeness",
     "nutrition": {
       "title": "Nutritional Profile",
-      "notMeasured": "Not measured",
-      "crudeProtein": "Crude Protein",
-      "dryMatter": "Dry Matter",
+      "notMeasured": "Not measured (without NIR spectrometer)",
+      "crudeProtein": "Crude Protein (CP)",
+      "dryMatter": "Dry Matter (DM)",
       "ndf": "Neutral Detergent Fiber (NDF)",
       "adf": "Acid Detergent Fiber (ADF)"
     },
@@ -80,7 +106,7 @@
     }
   },
   "advisory": {
-    "title": "Actionable Advisory",
+    "title": "Actionable Farmer Advisory",
     "decision": "Action Decision",
     "decisions": {
       "FEED": "FEED",
@@ -96,6 +122,34 @@
       "storage": "Storage Remediation",
       "risk": "Animal Health Risk",
       "nextStep": "Recommended Next Step"
+    }
+  },
+  "voice": {
+    "listen": "Listen",
+    "stop": "Stop",
+    "replay": "Replay",
+    "voiceLanguage": "Voice Language",
+    "followApp": "Follow App Language",
+    "hindi": "हिन्दी (Hindi Voice)",
+    "englishIndia": "English (India)",
+    "notSupported": "Voice output is not supported in this browser.",
+    "noVoiceNotice": "No voice available for this language on your device. Please install text-to-speech voice data in device settings.",
+    "testVoice": "Test Voice Output",
+    "speed": "Reading Speed",
+    "speedSlow": "Slow",
+    "speedNormal": "Normal",
+    "speedFast": "Fast",
+    "autoRead": "Auto-read advisories on load"
+  },
+  "models": {
+    "title": "FeedShield Intelligence Models",
+    "subtitle": "Chemometric NIR calibration and optical visual analysis pipelines.",
+    "disclaimer": "Pipeline verified on synthetic demo data — NOT a validation of field accuracy.",
+    "pending": {
+      "realFieldNir": "REAL FIELD NIR: PENDING",
+      "realIndianFeedImage": "REAL INDIAN FEED IMAGE MODEL: PENDING",
+      "realUrea": "REAL UREA VALIDATION: PENDING",
+      "realExternal": "REAL EXTERNAL VALIDATION: PENDING"
     }
   },
   "admin": {

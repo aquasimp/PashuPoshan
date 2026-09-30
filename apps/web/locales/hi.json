@@ -1,7 +1,9 @@
 {
   "common": {
-    "appName": "PashuPoshan (पशु पोषण)",
+    "appName": "FeedShield (फ़ीडशील्ड)",
     "tagline": "जांचें। समझें। सही कदम उठाएं।",
+    "subtitle": "एआई-संचालित पशु आहार व साइलेज विश्लेषण",
+    "sihId": "SIH26111",
     "syncStatus": {
       "savedOnDevice": "डिवाइस पर सुरक्षित",
       "queued": "कतार में",
@@ -29,19 +31,42 @@
       "verify": "प्रमाणिकता जांचें"
     }
   },
+  "nav": {
+    "test": "नया टेस्ट शुरू करें",
+    "demo": "हीरो डेमो",
+    "history": "परीक्षण इतिहास",
+    "models": "एआई मॉडल",
+    "more": "अन्य विकल्प",
+    "tour": "जज टूर",
+    "compare": "बैच तुलना",
+    "sync": "सिंक कतार",
+    "admin": "व्यवस्थापक इंटेलिजेंस",
+    "storage": "बंकर व साइलेज भंडारण",
+    "settings": "सेटिंग्स",
+    "designSystem": "डिज़ाइन सिस्टम",
+    "language": "भाषा",
+    "theme": "थीम",
+    "online": "ऑनलाइन",
+    "offline": "ऑफलाइन (डिवाइस पर)"
+  },
   "farmer": {
     "homeTitle": "पशु आहार एवं साइलेज गुणवत्ता",
+    "homeSubtitle": "ऑप्टिकल इमेजिंग, आंतरिक तापमान और पीएच सेंसर के समन्वय से ऑन-फार्म तीव्र स्क्रीनिंग — पूरी तरह ऑफलाइन सक्षम।",
     "welcome": "नमस्ते",
     "startTest": "नया टेस्ट शुरू करें",
     "testSilage": "साइलेज किण्वन टेस्ट",
+    "testSilageSubtitle": "गड्ढे, बंकर और बैग साइलेज का व्यापक मूल्यांकन। आंतरिक पीएच, आंतरिक तापमान अंतर और दृश्य निरीक्षण का समन्वय।",
     "testFeed": "पशु आहार / चारा टेस्ट",
+    "testFeedSubtitle": "व्यावसायिक पशु आहार पेलेट, चोकर, खली (सरसों, बिनौला) और सूखे चारे के लिए ऑप्टिकल व रासायनिक स्ट्रिप स्क्रीनिंग।",
     "recentTests": "हाल के परीक्षण",
     "storageAlerts": "साइलेज गड्ढे की चेतावनियाँ",
     "capturePrompt": "नमूने की फ़ोटो लें",
     "captureHint": "नमूने को साफ सतह पर रखें और सीधी रोशनी में फोटो लें",
     "retakeBlur": "कैमरा स्थिर रखें, तस्वीर धुंधली है।",
     "retakeLighting": "रोशनी बेहतर करें, तस्वीर अंधेरी या बहुत चमकदार है।",
-    "retakeDistance": "कैमरा थोड़ा पास लाएं और नमूने को बीच में रखें।"
+    "retakeDistance": "कैमरा थोड़ा पास लाएं और नमूने को बीच में रखें।",
+    "demoAlertTitle": "डेमो · काल्पनिक डेयरी सहकारी समिति",
+    "demoAlertDesc": "नमूना गड्ढे 4 में +8.2°C तापमान वृद्धि और 5.4 pH पाया गया। अनुमानित (ESTIMATED) हवा से गर्म होने का जोखिम मिला।"
   },
   "results": {
     "title": "विश्लेषण परिणाम",
@@ -49,6 +74,7 @@
     "good": "उत्तम (GOOD)",
     "attention": "ध्यान दें (ATTENTION)",
     "highRisk": "उच्च जोखिम (HIGH RISK)",
+    "indeterminate": "अनिश्चित (INDETERMINATE)",
     "inputCompleteness": "इनपुट पूर्णता",
     "nutrition": {
       "title": "पोषण प्रोफ़ाइल",
@@ -73,14 +99,14 @@
     },
     "silageRisks": {
       "airIngress": "हवा रिसाव जोखिम",
-      "heating": "गर्म होने का जोखिम",
-      "spoilage": "सड़ने का खतरा",
+      "heating": "हवा से गर्म होने का जोखिम",
+      "spoilage": "खराबी / सड़न का खतरा",
       "fermentation": "किण्वन विफलता जोखिम",
       "mould": "फफूंद फैलाव जोखिम"
     }
   },
   "advisory": {
-    "title": "कार्य योजना व सलाह",
+    "title": "कार्य योजना व किसान सलाह",
     "decision": "कार्य निर्णय",
     "decisions": {
       "FEED": "खिलाएं (FEED)",
@@ -96,6 +122,34 @@
       "storage": "भंडारण सुधार",
       "risk": "पशु स्वास्थ्य जोखिम",
       "nextStep": "अनुशंसित अगला कदम"
+    }
+  },
+  "voice": {
+    "listen": "सलाह सुनें",
+    "stop": "रोकें",
+    "replay": "पुनः सुनें",
+    "voiceLanguage": "आवाज़ की भाषा",
+    "followApp": "ऐप की भाषा के अनुसार",
+    "hindi": "हिन्दी (Hindi Voice)",
+    "englishIndia": "अंग्रेज़ी (English - India)",
+    "notSupported": "इस ब्राउज़र में आवाज़ आउटपुट समर्थित नहीं है।",
+    "noVoiceNotice": "आपके डिवाइस पर इस भाषा के लिए कोई वॉइस डेटा उपलब्ध नहीं है। कृपया डिवाइस सेटिंग में वॉइस डेटा जोड़ें।",
+    "testVoice": "आवाज़ परीक्षण करें",
+    "speed": "पठन गति",
+    "speedSlow": "धीमी",
+    "speedNormal": "सामान्य",
+    "speedFast": "तेज़",
+    "autoRead": "परिणाम लोड होने पर स्वतः पढ़ें"
+  },
+  "models": {
+    "title": "FeedShield इंटेलिजेंस मॉडल्स",
+    "subtitle": "कीमोमेट्रिक एनआईआर कैलिब्रेशन और ऑप्टिकल विज़ुअल विश्लेषण पाइपलाइन।",
+    "disclaimer": "सिंथेटिक डेमो डेटा पर सत्यापित — यह वास्तविक क्षेत्रीय सटीकता का सत्यापन नहीं है।",
+    "pending": {
+      "realFieldNir": "REAL FIELD NIR: PENDING",
+      "realIndianFeedImage": "REAL INDIAN FEED IMAGE MODEL: PENDING",
+      "realUrea": "REAL UREA VALIDATION: PENDING",
+      "realExternal": "REAL EXTERNAL VALIDATION: PENDING"
     }
   },
   "admin": {

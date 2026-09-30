@@ -1,7 +1,9 @@
 {
   "common": {
-    "appName": "PashuPoshan",
+    "appName": "FeedShield",
     "tagline": "Test karein. Samjhein. Action lein.",
+    "subtitle": "AI-Powered pashu aahar aur silage intelligence",
+    "sihId": "SIH26111",
     "syncStatus": {
       "savedOnDevice": "Device par saved",
       "queued": "Queue mein hai",
@@ -29,19 +31,42 @@
       "verify": "Asliyat verify karein"
     }
   },
+  "nav": {
+    "test": "Naya Test Shuru Karein",
+    "demo": "Hero Demo",
+    "history": "History",
+    "models": "AI Models",
+    "more": "More Options",
+    "tour": "Judge Tour",
+    "compare": "Batches Compare",
+    "sync": "Sync Queue",
+    "admin": "Admin Intelligence",
+    "storage": "Bunker & Pit Storage",
+    "settings": "Settings",
+    "designSystem": "Design System",
+    "language": "Bhasha",
+    "theme": "Theme",
+    "online": "Online",
+    "offline": "Offline (Device par)"
+  },
   "farmer": {
     "homeTitle": "Pashu Aahar aur Silage Quality",
+    "homeSubtitle": "Optical imaging, internal temperature aur pH sensor fusion se on-farm rapid screening — bina internet ke bhi kaam karega.",
     "welcome": "Namaste",
     "startTest": "Naya Test Shuru Karein",
     "testSilage": "Silage Fermentation Test",
+    "testSilageSubtitle": "Pit, bunker aur wrapped bag silage ka pura assessment. Core pH probe, temperature sensor aur visual inspection ka combination.",
     "testFeed": "Pashu Aahar / Chara Test",
+    "testFeedSubtitle": "Commercial cattle feed pellets, mash, khal (mustard, cotton) aur sookhe chare ke liye optical aur strip screening.",
     "recentTests": "Haal ke tests",
     "storageAlerts": "Silage Pit Alerts",
     "capturePrompt": "Sample ki photo kheinchein",
     "captureHint": "Sample ko saaf jagah par rakhein aur acchi roshni mein photo lein",
     "retakeBlur": "Camera steady rakhein, photo blur aayi hai.",
     "retakeLighting": "Lighting improve karein, photo dark ya glare wali hai.",
-    "retakeDistance": "Camera thoda paas layein aur sample ko center karein."
+    "retakeDistance": "Camera thoda paas layein aur sample ko center karein.",
+    "demoAlertTitle": "DEMO · Fictional Dairy Cooperative",
+    "demoAlertDesc": "Sample pit 4 mein +8.2°C temperature rise aur 5.4 pH mila. ESTIMATED hawa se garam hone (heating) ka risk paya gaya."
   },
   "results": {
     "title": "Analysis Result",
@@ -49,6 +74,7 @@
     "good": "Badiya (GOOD)",
     "attention": "Dhyan dein (ATTENTION)",
     "highRisk": "Khatra (HIGH RISK)",
+    "indeterminate": "Indeterminate (INDETERMINATE)",
     "inputCompleteness": "Input Completeness",
     "nutrition": {
       "title": "Nutrition Profile",
@@ -96,6 +122,34 @@
       "storage": "Gaddhe ka dhyan",
       "risk": "Pashu swasthya risk",
       "nextStep": "Agla kadam"
+    }
+  },
+  "voice": {
+    "listen": "Salah Sunein",
+    "stop": "Rokein",
+    "replay": "Phir Se Sunein",
+    "voiceLanguage": "Voice Language",
+    "followApp": "App ki bhasha ke hisaab se",
+    "hindi": "Hindi (Hindi Voice)",
+    "englishIndia": "English (India)",
+    "notSupported": "Is browser mein voice output support nahi hai.",
+    "noVoiceNotice": "Aapke device par is bhasha ki voice data nahi hai. Please device settings mein text-to-speech voice install karein.",
+    "testVoice": "Voice test karein",
+    "speed": "Reading Speed",
+    "speedSlow": "Slow",
+    "speedNormal": "Normal",
+    "speedFast": "Fast",
+    "autoRead": "Screen khulne par apne aap sunein"
+  },
+  "models": {
+    "title": "FeedShield Intelligence Models",
+    "subtitle": "Chemometric NIR calibration aur optical visual analysis pipelines.",
+    "disclaimer": "Pipeline synthetic demo data par verified hai — real field accuracy ka validation nahi hai.",
+    "pending": {
+      "realFieldNir": "REAL FIELD NIR: PENDING",
+      "realIndianFeedImage": "REAL INDIAN FEED IMAGE MODEL: PENDING",
+      "realUrea": "REAL UREA VALIDATION: PENDING",
+      "realExternal": "REAL EXTERNAL VALIDATION: PENDING"
     }
   },
   "admin": {

@@ -23,8 +23,8 @@ export const InputCompleteness: React.FC<InputCompletenessProps> = ({
   className = "",
 }) => {
   const total = modalitiesUsed.length + modalitiesMissing.length;
-  const calculatedScore = score !== undefined ? score : total > 0 ? modalitiesUsed.length / total : 0;
-  const percentage = Math.round(calculatedScore * 100);
+  const rawScore = score !== undefined ? (score > 1 ? score / 100 : score) : total > 0 ? modalitiesUsed.length / total : 0;
+  const percentage = Math.round(rawScore * 100);
 
   return (
     <div className={`p-4 rounded-xl border border-bone bg-surface shadow-subtle ${className}`}>

@@ -44,6 +44,7 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const setLocale = (l: Locale) => {
     setLocaleState(l);
     if (typeof window !== "undefined") {
+      localStorage.setItem("feedshield_locale", l);
       localStorage.setItem("pashuposhan_locale", l);
     }
   };

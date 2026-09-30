@@ -15,6 +15,7 @@ Last updated: Phase G Complete (Final Audit & Delivery)
 | **Phase F** | Admin, Demo & Traceability (Analytics, Hero Demo, Tour) | **DONE** | 6/6 |
 | **Phase G** | QA, Hardening & Docs (E2E, Screenshots, Audits, Checklist) | **DONE** | 6/6 |
 | **Phase H** | Final Polish & Release Candidate (ML Pipeline, Liquid Glass, Dark Mode, Vernacular Audit, Zero-Flash Theme) | **DONE** | 10/10 |
+| **Phase I** | FeedShield Polish Pass v2 (Canonical Brand, Liquid Glass Primitives, i18n Audit, Voice Ladder, Overflow Matrix) | **DONE** | 10/10 |
 
 ---
 
@@ -92,3 +93,17 @@ Last updated: Phase G Complete (Final Audit & Delivery)
   - Vitest: 33 / 33 passed (100%).
   - Next.js Production Build: 21 / 21 static and dynamic pages compiled successfully with 0 errors.
 - Real field models maintained explicitly as `PENDING — MODEL BUILD / VALIDATION IN PROGRESS`.
+
+### Phase I — FeedShield Polish Pass v2 (Release Candidate RC2)
+- Re-established canonical **FeedShield** brand identity across all user-facing screens and services; authored `scripts/brand_lint.py` (0 violations across 70 files).
+- Restored mobile pinch-zoom (`user-scalable=yes`, `maximum-scale=5.0`) and added dynamic per-theme `theme-color` meta tags.
+- Implemented pure semantic Liquid Glass primitives in `apps/web/components/ui/liquid-glass/` (`LiquidGlassCard`, `LiquidGlassPanel`, `LiquidGlassButton`, `LiquidGlassPill`, `Modal`, `Sheet`) with pitch-black obsidian dark mode (`#030303`) and solid fallbacks.
+- Built multilingual Web Speech API engine in `apps/web/lib/voice/` (`voiceEngine.ts`, `speech-normalizer.ts`, `VoiceControl.tsx`) with 4-level selection ladder, Devanagari script safety guard, and sentence chunking <=180 chars. 11/11 Vitest tests passing. Marked `NOT MACHINE-VERIFIED` for device audio sign-off.
+- Completely redesigned navigation: desktop navbar (4 primary links + "More" dropdown + right cluster) and mobile navigation (slim header + fixed 5-tab thumb-reachable bottom bar).
+- Redesigned all action buttons with minimum 48px touch targets, zero Devanagari text clipping, and honest non-marketing copy.
+- Built and ran automated I18N Parity & Script audit (`scripts/i18n_audit.py`): 125 keys, 0 missing, 0 placeholder bugs, 0 script errors. Created `i18n/glossary.md` and flagged 16 phrases in `docs/I18N_REVIEW_NEEDED.md` for native agricultural review.
+- Executed chemometrics training pipeline on 1,200 synthetic NIR samples (964 train / 236 test, GroupKFold zero-leakage) for PLSR, SVR, and Random Forest; generated metrics in `ml/metrics/`. Added perturbation test and out-of-domain tests (46/46 pytest tests pass).
+- Generated 104 polish screenshots in `qa/polish/` across 6 viewports, 3 languages, and 2 themes. Visual inspection fixed InputCompleteness percentage calculation.
+- Executed automated horizontal overflow sweep (`e2e/overflow_matrix.spec.ts`): 36/36 test cases passed (100% pass rate).
+- Audited production build with Google Lighthouse 13.5.0: Home (A11y: 98, SEO: 100), Result (A11y: 93), Hero Demo (A11y: 95, SEO: 100).
+- Authored evaluator checklist in `docs/MANUAL_CHECKS.md` and comprehensive release report in `docs/FINAL_AUDIT_REPORT.md`.

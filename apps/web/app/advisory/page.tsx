@@ -25,6 +25,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { VoiceControl } from "@/components/ui/VoiceControl";
 import { LiquidGlassButton } from "@/components/ui/liquid-glass";
 import { db, LocalSample, LocalAnalysis, LocalAdvisory } from "@/lib/db";
+import { ensureDemoDataLoaded } from "@/lib/seedLocalDb";
 import { useI18n } from "@/lib/i18n";
 
 function AdvisoryContent() {
@@ -44,7 +45,11 @@ function AdvisoryContent() {
         return;
       }
       try {
-        const s = await db.samples.get(sampleId);
+        let s = await db.samples.get(sampleId);
+        if (!s) {
+          await ensureDemoDataLoaded();
+          s = await db.samples.get(sampleId);
+        }
         if (s) {
           setSample(s);
           const a = await db.analyses.where("sampleId").equals(sampleId).first();

@@ -1,6 +1,6 @@
-# FeedShield Machine Learning Model Limitations & Operational Boundaries
+# PashuPoshan Machine Learning Model Limitations & Operational Boundaries
 
-In accordance with **CLAUDE.md Section 0.7 & 0.8**, this document describes the scientific, physical, and calibration boundaries of all models implemented in FeedShield.
+In accordance with **CLAUDE.md Section 0.7 & 0.8**, this document describes the scientific, physical, and calibration boundaries of all models implemented in PashuPoshan.
 
 ---
 

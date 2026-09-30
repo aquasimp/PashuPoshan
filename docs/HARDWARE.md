@@ -1,4 +1,4 @@
-# FeedShield Hardware Adapter Architecture
+# PashuPoshan Hardware Adapter Architecture
 
 This document defines the hardware abstraction layer, adapter interfaces, simulated drivers, and Web Bluetooth / serial integration protocols per **CLAUDE.md Section 0.9 & 0.10**.
 

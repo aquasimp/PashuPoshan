@@ -18,7 +18,7 @@ def test_health_endpoint():
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "healthy"
-    assert data["service"] == "feedshield-api"
+    assert data["service"] in ("pashuposhan-api", "feedshield-api")
 
 
 @pytest.mark.parametrize("email,password,expected_role", [

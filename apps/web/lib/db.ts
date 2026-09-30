@@ -83,7 +83,7 @@ export interface OutboxItem {
   createdAt: string;
 }
 
-export class FeedShieldDatabase extends Dexie {
+export class PashuPoshanDatabase extends Dexie {
   samples!: Table<LocalSample, string>;
   images!: Table<LocalImage, string>;
   analyses!: Table<LocalAnalysis, string>;
@@ -91,7 +91,7 @@ export class FeedShieldDatabase extends Dexie {
   outbox!: Table<OutboxItem, string>;
 
   constructor() {
-    super("FeedShieldLocalDB");
+    super("PashuPoshanLocalDB");
     this.version(1).stores({
       samples: "id, clientId, sampleType, syncStatus, collectedAt",
       images: "id, sampleId, isAcceptable",
@@ -102,4 +102,5 @@ export class FeedShieldDatabase extends Dexie {
   }
 }
 
-export const db = new FeedShieldDatabase();
+export const FeedShieldDatabase = PashuPoshanDatabase;
+export const db = new PashuPoshanDatabase();

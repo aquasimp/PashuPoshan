@@ -7,12 +7,12 @@ class Settings(BaseSettings):
     API_PORT: int = 8000
     API_HOST: str = "0.0.0.0"
     ENVIRONMENT: str = "development"
-    SECRET_KEY: str = "feedshield_development_secret_key_change_in_production_32chars"
+    SECRET_KEY: str = "pashuposhan_development_secret_key_change_in_production_32chars"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
     
     # SQLite local file default for easy demo and local run
-    DATABASE_URL: str = "sqlite:///./feedshield.db"
+    DATABASE_URL: str = "sqlite:///./pashuposhan.db"
     
     UPLOAD_DIR: str = "./uploads"
     REPORTS_DIR: str = "./reports"

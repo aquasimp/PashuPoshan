@@ -1,4 +1,4 @@
-# FeedShield Engineering Build Plan & Phase Roadmap
+# PashuPoshan — Engineering Build Plan & Phase Roadmap
 
 **Timeline Budget:** 14-day schedule  
 **Execution Paradigm:** Vertical-slice-first, honesty-first, demo-complete.

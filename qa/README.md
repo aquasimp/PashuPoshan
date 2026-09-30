@@ -1,4 +1,4 @@
-# FeedShield QA & Visual Verification
+# PashuPoshan QA & Visual Verification
 
 This directory contains QA assets, responsive breakpoint verification notes, and screenshots for mobile (390x844) and desktop (1440x900) views.
 

@@ -15,7 +15,7 @@ from apps.api.app.security import get_password_hash
 
 
 def seed():
-    print("[INFO] Seeding FeedShield database...")
+    print("[INFO] Seeding PashuPoshan database...")
     Base.metadata.create_all(bind=engine)
     db = SessionLocal()
 
@@ -41,6 +41,11 @@ def seed():
 
         # 2. Seed Users
         user_definitions = [
+            ("farmer@pashuposhan.in", "Farmer@123", "Ramesh Patel (रमेश पटेल)", "9876543210", "farmer"),
+            ("manager@pashuposhan.in", "Manager@123", "Sunil Sharma (सुनील शर्मा)", "9876543211", "cooperative_manager"),
+            ("vet@pashuposhan.in", "Vet@123", "Dr. Ananya Rao (डॉ. अनन्या राव)", "9876543212", "veterinarian"),
+            ("admin@pashuposhan.in", "Admin@123", "PashuPoshan Admin", "9876543213", "admin"),
+            # Backward-compatible aliases for existing automated test suites
             ("farmer@feedshield.in", "Farmer@123", "Ramesh Patel (रमेश पटेल)", "9876543210", "farmer"),
             ("manager@feedshield.in", "Manager@123", "Sunil Sharma (सुनील शर्मा)", "9876543211", "cooperative_manager"),
             ("vet@feedshield.in", "Vet@123", "Dr. Ananya Rao (डॉ. अनन्या राव)", "9876543212", "veterinarian"),
@@ -125,9 +130,9 @@ def seed():
 
         # 5. Seed Devices
         devices = [
-            ("nir_spectrometer", "NIR-SIM-9001", "FeedShield NIR Pro (Simulated)", "v2.4", True),
+            ("nir_spectrometer", "NIR-SIM-9001", "PashuPoshan NIR Pro (Simulated)", "v2.4", True),
             ("ph_probe", "PROBE-SIM-4001", "Digital pH/Temp AgroProbe (Simulated)", "v1.1", True),
-            ("assay_reader", "ASSAY-SIM-2001", "FeedShield Colorimetric Card Reader", "v1.0", True),
+            ("assay_reader", "ASSAY-SIM-2001", "PashuPoshan Colorimetric Card Reader", "v1.0", True),
         ]
 
         for dev_type, serial, model, fw, is_sim in devices:
@@ -144,7 +149,7 @@ def seed():
                 db.commit()
                 print(f"  + Created Device: {model} ({serial})")
 
-        print("[SUCCESS] FeedShield database seed completed successfully!")
+        print("[SUCCESS] PashuPoshan database seed completed successfully!")
 
     finally:
         db.close()

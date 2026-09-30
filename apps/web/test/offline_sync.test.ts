@@ -3,7 +3,7 @@ import { db } from "../lib/db";
 import { evaluateSilage } from "../lib/rules/silageEngine";
 import { generateSampleId, generateClientId } from "../lib/sync";
 
-describe("FeedShield Offline-First PWA & Dexie Sync Engine", () => {
+describe("PashuPoshan Offline-First PWA & Dexie Sync Engine", () => {
   beforeEach(async () => {
     await db.samples.clear();
     await db.analyses.clear();

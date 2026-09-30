@@ -1,20 +1,20 @@
 # PROMPT 0 — MASTER CONTEXT
-*(FeedShield System Guide)*
+*(PashuPoshan System Guide — formerly FeedShield)*
 
 ## 0.1 Identity
 
 | | |
 |---|---|
-| Product | **FeedShield** — AI-Powered Feed & Silage Intelligence |
+| Product | **PashuPoshan** (formerly FeedShield) — AI-Powered Feed & Silage Intelligence |
 | Tagline | **Test. Understand. Act.** |
 | Problem statement | **SIH26111** — Smart AI-Enabled Rapid Feed and Silage Quality Testing System for Dairy Farmers |
 | Organization | Ministry of Fisheries, Animal Husbandry & Dairying |
 | Department | Department of Animal Husbandry & Dairying |
 | Theme / Category | Agriculture, FoodTech & Rural Development / Software |
 
-**Positioning line:** *FeedShield brings rapid feed and silage quality intelligence closer to the farmer.*
+**Positioning line:** *PashuPoshan brings rapid feed and silage quality intelligence closer to the farmer.*
 
-FeedShield is a **rapid screening + measurement + prediction + decision-support platform** with explicit laboratory referral. It is not a universal instant laboratory.
+PashuPoshan is a **rapid screening + measurement + prediction + decision-support platform** with explicit laboratory referral. It is not a universal instant laboratory.
 
 **Pillars:** Multimodal · Offline · Explainable · Farmer-centric · Traceable.
 

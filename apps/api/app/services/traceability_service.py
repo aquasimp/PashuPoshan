@@ -69,4 +69,4 @@ def verify_signed_token(token: str, expected_result_hash: Optional[str] = None) 
     if expected_result_hash and payload.get("result_hash") != expected_result_hash:
         return "Tampered", payload, "Result hash mismatch between signed token and database record."
 
-    return "Verified", payload, "Authentic FeedShield verification certificate."
+    return "Verified", payload, "Authentic PashuPoshan verification certificate."

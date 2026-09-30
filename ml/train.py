@@ -53,7 +53,7 @@ def calculate_metrics(y_true, y_pred):
 
 def train_and_evaluate():
     ensure_dirs()
-    print("[INFO] Starting FeedShield NIR Chemometric Training & Model Registration...")
+    print("[INFO] Starting PashuPoshan NIR Chemometric Training & Model Registration...")
 
     # Load or generate dataset
     df, spectra = generate_synthetic_dataset(n_samples=1200, seed=42)

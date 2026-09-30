@@ -1,6 +1,6 @@
-# FeedShield Scientific Validation Plan
+# PashuPoshan Scientific Validation Plan
 
-This document outlines the protocols required to validate FeedShield across representative sampling, instrument repeatability, operator reproducibility, and cross-seasonal/geographic deployments per **CLAUDE.md Section 0.10 & 0.11**.
+This document outlines the protocols required to validate PashuPoshan across representative sampling, instrument repeatability, operator reproducibility, and cross-seasonal/geographic deployments per **CLAUDE.md Section 0.10 & 0.11**.
 
 ---
 

@@ -5,15 +5,15 @@ PYTHON ?= .venv/Scripts/python
 PNPM ?= pnpm
 
 dev:
-	@echo "Starting FeedShield API and Web Frontend..."
+	@echo "Starting PashuPoshan API and Web Frontend..."
 	$(PYTHON) -m uvicorn apps.api.app.main:app --reload --port 8000 &
 	$(PNPM) --filter web dev
 
 test: test-claims test-backend test-frontend
-	@echo "All FeedShield test suites passed!"
+	@echo "All PashuPoshan test suites passed!"
 
 test-claims:
-	@echo "Running FeedShield Claims & Honesty Linter..."
+	@echo "Running PashuPoshan Claims & Honesty Linter..."
 	$(PYTHON) ml/claims_lint.py
 
 test-backend:
@@ -25,15 +25,15 @@ test-frontend:
 	$(PNPM) --filter web test:run
 
 seed:
-	@echo "Seeding FeedShield Database with Demo Entities..."
+	@echo "Seeding PashuPoshan Database with Demo Entities..."
 	$(PYTHON) tools/seed/seed_data.py
 
 train:
-	@echo "Executing FeedShield ML & Chemometrics Training Pipeline..."
+	@echo "Executing PashuPoshan ML & Chemometrics Training Pipeline..."
 	$(PYTHON) ml/train.py
 
 demo: seed train
-	@echo "FeedShield demo environment initialized!"
+	@echo "PashuPoshan demo environment initialized!"
 
 lint:
 	$(PNPM) --filter web lint

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FeedShield Claims & Scientific Honesty Linter.
+PashuPoshan Claims & Scientific Honesty Linter.
 Scans all i18n bundles, templates, UI components, and reports for forbidden claims
 per CLAUDE.md Section 0.7.
 """
@@ -71,7 +71,7 @@ def run_lint():
             except Exception as e:
                 print(f"Warning reading {file_path}: {e}")
 
-    print(f"Scanned {scanned_count} files across FeedShield workspace.")
+    print(f"Scanned {scanned_count} files across PashuPoshan workspace.")
 
     if violations:
         print("\n[FAIL] SCIENTIFIC HONESTY VIOLATION DETECTED!")
@@ -81,7 +81,7 @@ def run_lint():
         print("\nPlease reword these statements to adhere to CLAUDE.md Section 0.7.")
         sys.exit(1)
     else:
-        print("[PASS] Claims Lint Passed: All scanned files comply with the FeedShield Claims Policy.")
+        print("[PASS] Claims Lint Passed: All scanned files comply with the PashuPoshan Claims Policy.")
         sys.exit(0)
 
 

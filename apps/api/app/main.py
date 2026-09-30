@@ -28,13 +28,13 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
 )
-logger = logging.getLogger("feedshield.api")
+logger = logging.getLogger("pashuposhan.api")
 
 # Ensure database tables exist
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    title="FeedShield API",
+    title="PashuPoshan API",
     description="Smart AI-Enabled Rapid Feed and Silage Quality Testing System API (SIH26111)",
     version="1.0.0",
     docs_url="/docs",
@@ -89,7 +89,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 def health_check():
     return {
         "status": "healthy",
-        "service": "feedshield-api",
+        "service": "pashuposhan-api",
         "version": "1.0.0",
         "environment": settings.ENVIRONMENT,
         "timestamp": datetime.utcnow().isoformat(),

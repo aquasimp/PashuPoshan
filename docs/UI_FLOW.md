@@ -1,4 +1,4 @@
-# FeedShield UI Flow & Screen Inventory
+# PashuPoshan UI Flow & Screen Inventory
 
 This document defines the 23-screen inventory across all user roles, detailed tap-count paths for farmers, and UI state guidelines per **CLAUDE.md Section 0.4 & 0.13**.
 

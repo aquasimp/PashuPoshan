@@ -1,4 +1,4 @@
-const CACHE_NAME = 'feedshield-cache-v1';
+const CACHE_NAME = 'pashuposhan-cache-v1';
 const OFFLINE_URL = '/offline.html';
 
 const STATIC_ASSETS = [

@@ -1,4 +1,4 @@
-# FeedShield — 3-Minute Judge Demonstration Script
+# PashuPoshan — 3-Minute Judge Demonstration Script
 *(SIH 2026 · Problem Statement SIH26111)*
 
 **Title:** Smart AI-Enabled Rapid Feed & Silage Quality Testing System for Dairy Farmers  
@@ -13,7 +13,7 @@
 * **Spoken Pitch:**
   > *"Good morning, respected judges. In India, over 30% of ensiled fodder in rural dairy pits undergoes silent aerobic deterioration. Farmers cannot see microscopic air ingress or clostridial rotting from the surface. By the time mold appears, cows have consumed spoiled feed, suffering acute rumen acidosis, ketosis, and a catastrophic 15% to 20% drop in daily milk yield.*
   > 
-  > *Today, testing takes 10 to 14 days at distant state laboratories. Smallholders have zero rapid tools. We built **FeedShield**: bringing rapid feed and silage intelligence directly into the farmer's hands on a mid-range smartphone."*
+  > *Today, testing takes 10 to 14 days at distant state laboratories. Smallholders have zero rapid tools. We built **PashuPoshan**: bringing rapid feed and silage intelligence directly into the farmer's hands on a mid-range smartphone."*
 * **On-Screen Action:**
   - Show Farmer Home Screen (`http://localhost:3000/`).
   - Point to 1-tap **"Start New Test"** button and live **Pit #2 Storage Alert** (+12°C heating warning).
@@ -22,7 +22,7 @@
 
 ### 0:35 – 1:20 | Hero Demo: Healthy vs Spoiled Silage (`/demo/hero`)
 * **Spoken Pitch:**
-  > *"FeedShield is not a generic AI wrapper. It is a multimodal screening, measurement, and decision engine combining optical QA, core probe sensors, and chemometrics.*
+  > *"PashuPoshan is not a generic AI wrapper. It is a multimodal screening, measurement, and decision engine combining optical QA, core probe sensors, and chemometrics.*
   > 
   > *Look at our side-by-side Hero Demo. On the left is **Healthy Corn Silage**: pH 3.9, lactic-acid dominant, cold core stable within 2°C of ambient. Decision: **FEED**.*
   > 

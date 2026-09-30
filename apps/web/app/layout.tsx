@@ -4,7 +4,7 @@ import { I18nProvider } from "@/lib/i18n";
 import { ThemeProvider } from "@/lib/theme";
 
 export const metadata: Metadata = {
-  title: "FeedShield — AI-Powered Feed & Silage Intelligence",
+  title: "PashuPoshan — AI-Powered Feed & Silage Intelligence",
   description: "Smart AI-Enabled Rapid Feed and Silage Quality Testing System for Dairy Farmers (SIH26111)",
   manifest: "/manifest.json",
   icons: {
@@ -35,7 +35,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                var stored = localStorage.getItem('feedshield-theme');
+                var stored = localStorage.getItem('pashuposhan-theme') || localStorage.getItem('feedshield-theme');
                 var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                 if (stored === 'dark' || (stored === 'system' && prefersDark) || (!stored && prefersDark)) {
                   document.documentElement.classList.add('dark');
@@ -62,10 +62,10 @@ export default function RootLayout({
                 window.addEventListener('load', function() {
                   navigator.serviceWorker.register('/sw.js').then(
                     function(registration) {
-                      console.log('FeedShield SW registered:', registration.scope);
+                      console.log('PashuPoshan SW registered:', registration.scope);
                     },
                     function(err) {
-                      console.log('FeedShield SW registration failed:', err);
+                      console.log('PashuPoshan SW registration failed:', err);
                     }
                   );
                 });

@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("FeedShield End-to-End Farmer Offline Flow", () => {
+test.describe("PashuPoshan End-to-End Farmer Offline Flow", () => {
   test("completes end-to-end 3-tap silage evaluation to actionable voice advisory", async ({ page }) => {
     // 1. Visit Farmer Home
     await page.goto("/");
-    await expect(page).toHaveTitle(/FeedShield/);
+    await expect(page).toHaveTitle(/PashuPoshan/);
     await expect(page.locator("h1")).toContainText("Test your feed");
 
     // Tap 1: Start New Test
@@ -32,7 +32,7 @@ test.describe("FeedShield End-to-End Farmer Offline Flow", () => {
 
     // 5. 7-Step Restrained Processing Sequence
     await expect(page).toHaveURL(/\/test\/processing/);
-    await expect(page.locator("h1")).toContainText("FeedShield Multimodal Engine");
+    await expect(page.locator("h1")).toContainText("PashuPoshan Multimodal Engine");
 
     // Auto-redirects to result upon step 7 completion
     await page.waitForURL(/\/test\/result\?id=/, { timeout: 15000 });

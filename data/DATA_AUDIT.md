@@ -1,7 +1,7 @@
-# FeedShield Data Audit
+# PashuPoshan Data Audit
 
 **Date of Audit:** 2026-09-30  
-**Auditor:** FeedShield AI Systems Engineering Team  
+**Auditor:** PashuPoshan AI Systems Engineering Team  
 **Evaluation Standard:** CLAUDE.md Section 0.8 (Data Rule — Decision Ladder)
 
 ---

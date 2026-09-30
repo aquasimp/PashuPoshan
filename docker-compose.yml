@@ -3,18 +3,18 @@ version: '3.8'
 services:
   postgres:
     image: postgres:15-alpine
-    container_name: feedshield_postgres
+    container_name: pashuposhan_postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: feedshield
-      POSTGRES_PASSWORD: feedshield_pass
-      POSTGRES_DB: feedshield_db
+      POSTGRES_USER: pashuposhan
+      POSTGRES_PASSWORD: pashuposhan_pass
+      POSTGRES_DB: pashuposhan_db
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U feedshield -d feedshield_db"]
+      test: ["CMD-SHELL", "pg_isready -U pashuposhan -d pashuposhan_db"]
       interval: 5s
       timeout: 5s
       retries: 5

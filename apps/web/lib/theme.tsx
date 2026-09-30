@@ -14,7 +14,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const THEME_STORAGE_KEY = "feedshield-theme";
+const THEME_STORAGE_KEY = "pashuposhan-theme";
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>("system");
@@ -23,7 +23,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   useEffect(() => {
     // Read persisted theme
-    const stored = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
+    const stored = (localStorage.getItem(THEME_STORAGE_KEY) || localStorage.getItem("feedshield-theme")) as Theme | null;
     const initialTheme: Theme = stored === "light" || stored === "dark" || stored === "system" ? stored : "system";
     setThemeState(initialTheme);
 

@@ -62,7 +62,7 @@ export const Navbar: React.FC = () => {
           </div>
           <div>
             <span className="font-display font-bold text-lg text-forest dark:text-dark-ink tracking-tight block leading-none">
-              FeedShield
+              PashuPoshan
             </span>
             <span className="text-[10px] text-muted dark:text-dark-muted tracking-wider uppercase font-sans">
               SIH26111

@@ -7,7 +7,7 @@ import { DemoBadge } from "../components/ui/DemoBadge";
 import { InputCompleteness } from "../components/ui/InputCompleteness";
 import { I18nProvider, useI18n } from "../lib/i18n";
 
-describe("FeedShield Design System Smoke Tests", () => {
+describe("PashuPoshan Design System Smoke Tests", () => {
   it("renders all canonical evidence tags correctly", () => {
     const tags = ["DETECTED", "PREDICTED", "ESTIMATED", "USER-ENTERED", "SENSOR-MEASURED", "DEMO"] as const;
     tags.forEach((tag) => {
@@ -55,6 +55,6 @@ describe("FeedShield Design System Smoke Tests", () => {
       </I18nProvider>
     );
 
-    expect(screen.getByText("FeedShield")).toBeInTheDocument();
+    expect(screen.getByText("PashuPoshan")).toBeInTheDocument();
   });
 });

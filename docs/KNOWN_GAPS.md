@@ -1,4 +1,4 @@
-# FeedShield Known Gaps & Stub Registry
+# PashuPoshan Known Gaps & Stub Registry
 
 In strict adherence to **CLAUDE.md Section 0.3 Rule 5 (No fake functionality)**, this registry tracks any feature that is simulated, interface-only, or currently in progress.
 

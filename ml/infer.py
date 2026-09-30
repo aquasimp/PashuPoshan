@@ -19,7 +19,7 @@ from apps.api.app.rules.silage_engine import SilageRiskEngine
 MODELS_DIR = ROOT_DIR / "ml" / "models"
 
 
-class FeedShieldInferencePipeline:
+class PashuPoshanInferencePipeline:
     def __init__(self):
         self.ad_evaluator: Optional[ApplicabilityDomainEvaluator] = None
         self.models: Dict[str, Any] = {}
@@ -109,4 +109,5 @@ class FeedShieldInferencePipeline:
         return envelopes
 
 
-pipeline = FeedShieldInferencePipeline()
+pipeline = PashuPoshanInferencePipeline()
+FeedShieldInferencePipeline = PashuPoshanInferencePipeline

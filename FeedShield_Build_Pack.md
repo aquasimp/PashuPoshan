@@ -1,4 +1,4 @@
-# FEEDSHIELD BUILD PACK v2
+# PASHUPOSHAN BUILD PACK (formerly FeedShield)
 
 **SIH 2026 · SIH26111 · Smart AI-Enabled Rapid Feed & Silage Quality Testing System for Dairy Farmers**
 

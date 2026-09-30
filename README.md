@@ -1,4 +1,4 @@
-# FeedShield — AI-Powered Feed & Silage Intelligence
+# PashuPoshan — AI-Powered Feed & Silage Intelligence
 
 > **SIH 2026 · Problem Statement SIH26111**  
 > *Smart AI-Enabled Rapid Feed and Silage Quality Testing System for Dairy Farmers*  
@@ -9,9 +9,9 @@
 
 ## 🌾 Overview
 
-**FeedShield** is a rapid screening, measurement, prediction, and decision-support platform designed for Indian dairy farmers and rural milk cooperatives. By combining on-device computer vision, portable Near-Infrared (NIR) chemometrics, digital probe telemetry, and an expert silage fermentation risk engine, FeedShield empowers farmers to detect spoilage, prevent mycotoxicosis, verify feed purity, and optimize milk yield.
+**PashuPoshan** is a rapid screening, measurement, prediction, and decision-support platform designed for Indian dairy farmers and rural milk cooperatives. By combining on-device computer vision, portable Near-Infrared (NIR) chemometrics, digital probe telemetry, and an expert silage fermentation risk engine, PashuPoshan empowers farmers to detect spoilage, prevent mycotoxicosis, verify feed purity, and optimize milk yield.
 
-FeedShield strictly enforces the **Honesty Policy**: every prediction carries an `<EvidenceTag>` (`DETECTED`, `PREDICTED`, `ESTIMATED`, `USER-ENTERED`, `SENSOR-MEASURED`, `DEMO`), an uncertainty interval, an applicability domain check, and clear laboratory referral when out-of-domain.
+PashuPoshan strictly enforces the **Honesty Policy**: every prediction carries an `<EvidenceTag>` (`DETECTED`, `PREDICTED`, `ESTIMATED`, `USER-ENTERED`, `SENSOR-MEASURED`, `DEMO`), an uncertainty interval, an applicability domain check, and clear laboratory referral when out-of-domain.
 
 ---
 
@@ -72,7 +72,7 @@ uvicorn apps.api.app.main:app --reload --port 8000
 pnpm --filter web dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) to access FeedShield.
+Visit [http://localhost:3000](http://localhost:3000) to access PashuPoshan.
 
 ---
 
@@ -89,7 +89,7 @@ Visit [http://localhost:3000](http://localhost:3000) to access FeedShield.
 
 ## 📜 Claims Policy & Honesty Enforcement
 
-FeedShield code, documentation, and user interfaces are guarded by a continuous integration claims linter (`ml/claims_lint.py`). Run the linter anytime via:
+PashuPoshan code, documentation, and user interfaces are guarded by a continuous integration claims linter (`ml/claims_lint.py`). Run the linter anytime via:
 ```bash
 python ml/claims_lint.py
 ```

@@ -1,4 +1,4 @@
-# FeedShield Forbidden Claims List
+# PashuPoshan Forbidden Claims List
 # Any occurrence of these phrases in UI strings, i18n bundles, docs, or PDF templates is a build violation.
 rgb measures protein
 rgb measures fibre

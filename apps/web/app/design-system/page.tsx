@@ -92,9 +92,9 @@ export default function DesignSystemPage() {
             <div>
               <div className="flex items-center gap-3">
                 <h1 className="text-2xl sm:text-3xl font-display font-bold text-forest dark:text-dark-forest">
-                  FeedShield Design System
+                  PashuPoshan Design System
                 </h1>
-                <DemoBadge label="TOKEN SPEC" subtext="FeedShield Editorial AgriTech" />
+                <DemoBadge label="TOKEN SPEC" subtext="PashuPoshan Editorial AgriTech" />
               </div>
               <p className="text-muted dark:text-dark-muted text-xs sm:text-sm mt-1">
                 Component foundations, Liquid Glass tokens, dual light/dark themes, and honest scientific badges.

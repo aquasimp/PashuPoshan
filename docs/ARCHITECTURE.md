@@ -1,6 +1,6 @@
-# FeedShield System Architecture
+# PashuPoshan System Architecture
 
-This document outlines the system topology, deployment paradigms, operational workflows, and data synchronization patterns for FeedShield.
+This document outlines the system topology, deployment paradigms, operational workflows, and data synchronization patterns for PashuPoshan.
 
 ---
 

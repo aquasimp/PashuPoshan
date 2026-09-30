@@ -35,7 +35,7 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [locale, setLocaleState] = useState<Locale>("en");
 
   useEffect(() => {
-    const saved = localStorage.getItem("feedshield_locale") as Locale;
+    const saved = (localStorage.getItem("pashuposhan_locale") || localStorage.getItem("feedshield_locale")) as Locale;
     if (saved && translations[saved]) {
       setLocaleState(saved);
     }
@@ -44,7 +44,7 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const setLocale = (l: Locale) => {
     setLocaleState(l);
     if (typeof window !== "undefined") {
-      localStorage.setItem("feedshield_locale", l);
+      localStorage.setItem("pashuposhan_locale", l);
     }
   };
 

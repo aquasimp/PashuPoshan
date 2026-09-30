@@ -177,7 +177,7 @@ export default function TestSelectPage() {
         <div className="p-4 rounded-2xl glass-card border border-bone dark:border-dark-border flex items-start gap-3 text-xs text-forest dark:text-sage-light">
           <Info className="w-4 h-4 shrink-0 text-forest dark:text-emerald-400 mt-0.5" />
           <p className="leading-relaxed">
-            <strong className="font-semibold text-ink dark:text-dark-ink">FeedShield Scientific Honesty Standard:</strong> FeedShield operates as a rapid screening, measurement, and decision-support tool. It explicitly refers suspect, contaminated, or out-of-domain samples to accredited state veterinary laboratories. RGB photography alone is never claimed to estimate protein, NDF, or invisible urea.
+            <strong className="font-semibold text-ink dark:text-dark-ink">PashuPoshan Scientific Honesty Standard:</strong> PashuPoshan operates as a rapid screening, measurement, and decision-support tool. It explicitly refers suspect, contaminated, or out-of-domain samples to accredited state veterinary laboratories. RGB photography alone is never claimed to estimate protein, NDF, or invisible urea.
           </p>
         </div>
       </main>

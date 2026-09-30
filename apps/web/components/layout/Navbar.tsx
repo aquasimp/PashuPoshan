@@ -1,11 +1,31 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ShieldCheck, Wifi, WifiOff, Menu, X, BarChart3, Cpu, Sparkles, Navigation } from "lucide-react";
-import { LanguageSwitcher, useI18n } from "@/lib/i18n";
+import {
+  ShieldCheck,
+  Wifi,
+  WifiOff,
+  ChevronDown,
+  Home,
+  PlusCircle,
+  History,
+  RefreshCw,
+  MoreHorizontal,
+  Compass,
+  Layers,
+  Sparkles,
+  BarChart3,
+  Warehouse,
+  Settings,
+  Palette,
+  ExternalLink,
+} from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { CompactLanguageSelect } from "@/components/ui/CompactLanguageSelect";
+import { Sheet } from "@/components/ui/liquid-glass";
 import { db } from "@/lib/db";
 
 export const Navbar: React.FC = () => {
@@ -13,7 +33,9 @@ export const Navbar: React.FC = () => {
   const { t } = useI18n();
   const [isOnline, setIsOnline] = useState<boolean>(true);
   const [pendingSyncCount, setPendingSyncCount] = useState<number>(0);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [isMoreOpen, setIsMoreOpen] = useState<boolean>(false);
+  const [isMobileSheetOpen, setIsMobileSheetOpen] = useState<boolean>(false);
+  const moreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsOnline(navigator.onLine);
@@ -23,13 +45,12 @@ export const Navbar: React.FC = () => {
     window.addEventListener("online", handleOnline);
     window.addEventListener("offline", handleOffline);
 
-    // Check Dexie outbox for pending sync
     const checkOutbox = async () => {
       try {
         const count = await db.outbox.where("status").equals("pending").count();
         setPendingSyncCount(count);
       } catch (e) {
-        // Dexie might not be ready in SSR
+        // Dexie might not be ready during hydration
       }
     };
     checkOutbox();
@@ -42,140 +63,362 @@ export const Navbar: React.FC = () => {
     };
   }, []);
 
-  const navLinks = [
-    { href: "/", label: t("farmer.homeTitle") },
-    { href: "/test", label: t("farmer.startTest") },
-    { href: "/demo/hero", label: "Hero Demo" },
-    { href: "/demo/tour", label: "Judge Tour" },
-    { href: "/models", label: "Models" },
-    { href: "/history", label: t("farmer.recentTests") },
-    { href: "/sync", label: `Sync (${pendingSyncCount})` },
+  // Close desktop "More" dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
+        setIsMoreOpen(false);
+      }
+    };
+    if (isMoreOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMoreOpen]);
+
+  // Primary 4 desktop links
+  const primaryLinks = [
+    { href: "/test", label: t("nav.test") },
+    { href: "/demo/hero", label: t("nav.demo") },
+    { href: "/history", label: t("nav.history") },
+    { href: "/models", label: t("nav.models") },
   ];
 
+  // Secondary items for "More" menu
+  const secondaryLinks = [
+    { href: "/demo/tour", label: t("nav.tour"), icon: Compass },
+    { href: "/compare", label: t("nav.compare"), icon: Layers },
+    { href: "/storage", label: t("nav.storage"), icon: Warehouse },
+    { href: "/sync", label: `${t("nav.sync")} (${pendingSyncCount})`, icon: RefreshCw },
+    { href: "/admin", label: t("nav.admin"), icon: BarChart3 },
+    { href: "/settings", label: t("nav.settings"), icon: Settings },
+    { href: "/design-system", label: t("nav.designSystem"), icon: Palette },
+  ];
+
+  const isMoreActive = secondaryLinks.some((l) => pathname === l.href);
+
   return (
-    <header className="sticky top-0 z-50 px-4 py-2.5 glass-nav transition-colors duration-200">
-      <div className="max-w-6xl mx-auto flex items-center justify-between">
-        {/* Brand */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-9 h-9 rounded-xl bg-forest dark:bg-dark-forest flex items-center justify-center text-white shadow-card group-hover:scale-105 transition-all">
-            <ShieldCheck className="w-5 h-5 text-mist" />
-          </div>
-          <div>
-            <span className="font-display font-bold text-lg text-forest dark:text-dark-ink tracking-tight block leading-none">
-              PashuPoshan
-            </span>
-            <span className="text-[10px] text-muted dark:text-dark-muted tracking-wider uppercase font-sans">
+    <>
+      {/* Top Navbar Header */}
+      <header className="sticky top-0 z-40 px-3 sm:px-6 py-2.5 glass-surface-2 backdrop-blur-xl border-b border-edge transition-all">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
+          {/* Brand + SIH26111 Chip */}
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-forest dark:bg-emerald-950/80 border border-forest/30 dark:border-emerald-600/40 flex items-center justify-center text-white shadow-card group-hover:scale-105 transition-transform flex-shrink-0">
+                <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-300" />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-display font-bold text-base sm:text-lg text-ink-1 tracking-tight leading-none">
+                  FeedShield
+                </span>
+                <span className="text-[10px] text-ink-3 hidden sm:block tracking-wide">
+                  AI Feed &amp; Silage
+                </span>
+              </div>
+            </Link>
+
+            <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold tracking-wider bg-moss/10 dark:bg-moss/20 text-moss dark:text-emerald-300 border border-moss/20 dark:border-moss/40">
               SIH26111
             </span>
           </div>
+
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-1.5 text-xs xl:text-sm font-medium">
+            {primaryLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`px-3 py-1.5 rounded-xl transition-all ${
+                    isActive
+                      ? "glass-surface-active border border-edge text-forest dark:text-emerald-300 font-semibold shadow-subtle"
+                      : "text-ink-2 hover:text-ink-1 hover:glass-surface-1"
+                  }`}
+                >
+                  <span className="text-balance leading-normal">{link.label}</span>
+                </Link>
+              );
+            })}
+
+            {/* Desktop "More" Dropdown Menu */}
+            <div ref={moreRef} className="relative inline-block">
+              <button
+                type="button"
+                onClick={() => setIsMoreOpen(!isMoreOpen)}
+                aria-haspopup="true"
+                aria-expanded={isMoreOpen}
+                className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 ${
+                  isMoreActive
+                    ? "glass-surface-active border border-edge text-forest dark:text-emerald-300 font-semibold"
+                    : "text-ink-2 hover:text-ink-1 hover:glass-surface-1"
+                }`}
+              >
+                <span>{t("nav.more")}</span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isMoreOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {isMoreOpen && (
+                <div className="absolute right-0 top-full mt-2 w-56 p-1.5 rounded-2xl glass-surface-3 border border-edge shadow-elevated z-50 animate-in fade-in zoom-in-95 duration-150">
+                  {secondaryLinks.map((item) => {
+                    const Icon = item.icon;
+                    const isActive = pathname === item.href;
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setIsMoreOpen(false)}
+                        aria-current={isActive ? "page" : undefined}
+                        className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium transition-all ${
+                          isActive
+                            ? "glass-surface-active text-forest dark:text-emerald-300 font-semibold border border-edge"
+                            : "text-ink-2 hover:text-ink-1 hover:glass-surface-2"
+                        }`}
+                      >
+                        <Icon className="w-4 h-4 text-forest dark:text-emerald-400 flex-shrink-0" />
+                        <span>{item.label}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </nav>
+
+          {/* Action Controls Cluster */}
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+            {/* Online / Offline Status Pill */}
+            <div
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border font-sans ${
+                isOnline
+                  ? "bg-emerald-50 dark:bg-emerald-950/40 text-forest dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60"
+                  : "bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border-amber-300 dark:border-amber-700/60"
+              }`}
+              title={isOnline ? "Online Sync Active" : "Offline On-Device Mode"}
+            >
+              {isOnline ? (
+                <>
+                  <Wifi className="w-3.5 h-3.5 text-moss dark:text-emerald-400" />
+                  <span className="hidden sm:inline">{t("nav.online")}</span>
+                </>
+              ) : (
+                <>
+                  <WifiOff className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" />
+                  <span className="hidden sm:inline">{t("nav.offline")}</span>
+                </>
+              )}
+            </div>
+
+            {/* Sync Badge if pending items */}
+            {pendingSyncCount > 0 && (
+              <Link
+                href="/sync"
+                className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-mono font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 hover:scale-105 transition-transform"
+                title={`${pendingSyncCount} items queued for sync`}
+              >
+                <RefreshCw className="w-3 h-3 animate-spin" />
+                <span>{pendingSyncCount}</span>
+              </Link>
+            )}
+
+            {/* Theme Toggle (Light / Dark) */}
+            <ThemeToggle compact />
+
+            {/* Compact Language Selector Dropdown */}
+            <CompactLanguageSelect />
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Bottom Tab Bar (Thumb-reachable Navigation) */}
+      <nav
+        aria-label="Mobile Bottom Navigation"
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 glass-surface-3 backdrop-blur-xl border-t border-edge py-1.5 px-2 flex items-center justify-around shadow-float"
+      >
+        <Link
+          href="/"
+          aria-current={pathname === "/" ? "page" : undefined}
+          className={`flex flex-col items-center justify-center min-w-[56px] py-1 px-1 rounded-xl transition-all ${
+            pathname === "/"
+              ? "text-forest dark:text-emerald-300 font-semibold"
+              : "text-ink-2 hover:text-ink-1"
+          }`}
+        >
+          <Home className="w-5 h-5 mb-0.5" />
+          <span className="text-[10px] leading-tight font-sans">Home</span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-5 text-sm font-medium">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`transition-colors py-1 ${
-                pathname === link.href
-                  ? "text-forest dark:text-dark-forest border-b-2 border-forest dark:border-dark-forest font-semibold"
-                  : "text-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-ink"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+        <Link
+          href="/test"
+          aria-current={pathname === "/test" ? "page" : undefined}
+          className={`flex flex-col items-center justify-center min-w-[56px] py-1 px-1 rounded-xl transition-all ${
+            pathname === "/test"
+              ? "text-forest dark:text-emerald-300 font-semibold"
+              : "text-ink-2 hover:text-ink-1"
+          }`}
+        >
+          <PlusCircle className="w-5 h-5 mb-0.5" />
+          <span className="text-[10px] leading-tight font-sans">Test</span>
+        </Link>
+
+        <Link
+          href="/history"
+          aria-current={pathname === "/history" ? "page" : undefined}
+          className={`flex flex-col items-center justify-center min-w-[56px] py-1 px-1 rounded-xl transition-all ${
+            pathname === "/history"
+              ? "text-forest dark:text-emerald-300 font-semibold"
+              : "text-ink-2 hover:text-ink-1"
+          }`}
+        >
+          <History className="w-5 h-5 mb-0.5" />
+          <span className="text-[10px] leading-tight font-sans">History</span>
+        </Link>
+
+        <Link
+          href="/sync"
+          aria-current={pathname === "/sync" ? "page" : undefined}
+          className={`relative flex flex-col items-center justify-center min-w-[56px] py-1 px-1 rounded-xl transition-all ${
+            pathname === "/sync"
+              ? "text-forest dark:text-emerald-300 font-semibold"
+              : "text-ink-2 hover:text-ink-1"
+          }`}
+        >
+          <RefreshCw className="w-5 h-5 mb-0.5" />
+          {pendingSyncCount > 0 && (
+            <span className="absolute top-0.5 right-2 w-4 h-4 rounded-full bg-amber-500 text-white text-[9px] font-mono font-bold flex items-center justify-center">
+              {pendingSyncCount}
+            </span>
+          )}
+          <span className="text-[10px] leading-tight font-sans">Sync</span>
+        </Link>
+
+        <button
+          type="button"
+          onClick={() => setIsMobileSheetOpen(true)}
+          className={`flex flex-col items-center justify-center min-w-[56px] py-1 px-1 rounded-xl transition-all ${
+            isMobileSheetOpen || isMoreActive
+              ? "text-forest dark:text-emerald-300 font-semibold"
+              : "text-ink-2 hover:text-ink-1"
+          }`}
+        >
+          <MoreHorizontal className="w-5 h-5 mb-0.5" />
+          <span className="text-[10px] leading-tight font-sans">More</span>
+        </button>
+      </nav>
+
+      {/* Mobile "More" Sheet Modal */}
+      <Sheet
+        isOpen={isMobileSheetOpen}
+        onClose={() => setIsMobileSheetOpen(false)}
+        title="More FeedShield Modules"
+      >
+        <div className="space-y-2">
+          <Link
+            href="/demo/hero"
+            onClick={() => setIsMobileSheetOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-2xl glass-surface-1 hover:glass-surface-2 border border-edge text-ink-1 transition-all"
+          >
+            <Sparkles className="w-5 h-5 text-forest dark:text-emerald-400" />
+            <div>
+              <div className="text-sm font-semibold">{t("nav.demo")}</div>
+              <div className="text-xs text-ink-2">Healthy vs Spoiled side-by-side</div>
+            </div>
+          </Link>
+
+          <Link
+            href="/demo/tour"
+            onClick={() => setIsMobileSheetOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-2xl glass-surface-1 hover:glass-surface-2 border border-edge text-ink-1 transition-all"
+          >
+            <Compass className="w-5 h-5 text-forest dark:text-emerald-400" />
+            <div>
+              <div className="text-sm font-semibold">{t("nav.tour")}</div>
+              <div className="text-xs text-ink-2">Interactive 3-minute walk-through</div>
+            </div>
+          </Link>
+
+          <Link
+            href="/models"
+            onClick={() => setIsMobileSheetOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-2xl glass-surface-1 hover:glass-surface-2 border border-edge text-ink-1 transition-all"
+          >
+            <Layers className="w-5 h-5 text-forest dark:text-emerald-400" />
+            <div>
+              <div className="text-sm font-semibold">{t("nav.models")}</div>
+              <div className="text-xs text-ink-2">Chemometric NIR models &amp; metrics</div>
+            </div>
+          </Link>
+
+          <Link
+            href="/compare"
+            onClick={() => setIsMobileSheetOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-2xl glass-surface-1 hover:glass-surface-2 border border-edge text-ink-1 transition-all"
+          >
+            <Layers className="w-5 h-5 text-forest dark:text-emerald-400" />
+            <div>
+              <div className="text-sm font-semibold">{t("nav.compare")}</div>
+              <div className="text-xs text-ink-2">Compare feed batches &amp; pits</div>
+            </div>
+          </Link>
+
+          <Link
+            href="/storage"
+            onClick={() => setIsMobileSheetOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-2xl glass-surface-1 hover:glass-surface-2 border border-edge text-ink-1 transition-all"
+          >
+            <Warehouse className="w-5 h-5 text-forest dark:text-emerald-400" />
+            <div>
+              <div className="text-sm font-semibold">{t("nav.storage")}</div>
+              <div className="text-xs text-ink-2">Bunker &amp; pit sensor telemetry</div>
+            </div>
+          </Link>
+
+          <Link
+            href="/settings"
+            onClick={() => setIsMobileSheetOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-2xl glass-surface-1 hover:glass-surface-2 border border-edge text-ink-1 transition-all"
+          >
+            <Settings className="w-5 h-5 text-forest dark:text-emerald-400" />
+            <div>
+              <div className="text-sm font-semibold">{t("nav.settings")}</div>
+              <div className="text-xs text-ink-2">Voice, sync &amp; display preferences</div>
+            </div>
+          </Link>
+
           <Link
             href="/admin"
-            className={`transition-colors py-1 flex items-center gap-1 ${
-              pathname === "/admin"
-                ? "text-forest dark:text-dark-forest border-b-2 border-forest dark:border-dark-forest font-semibold"
-                : "text-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-ink"
-            }`}
+            onClick={() => setIsMobileSheetOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-2xl glass-surface-1 hover:glass-surface-2 border border-edge text-ink-1 transition-all"
           >
-            <BarChart3 className="w-3.5 h-3.5" />
-            <span>Admin</span>
+            <BarChart3 className="w-5 h-5 text-forest dark:text-emerald-400" />
+            <div>
+              <div className="text-sm font-semibold">{t("nav.admin")}</div>
+              <div className="text-xs text-ink-2">Cooperative command center</div>
+            </div>
           </Link>
-        </nav>
 
-        {/* Action Controls */}
-        <div className="flex items-center gap-2">
-          {/* Online/Offline status indicator */}
-          <div
-            className={`hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border font-sans ${
-              isOnline
-                ? "bg-emerald-50 dark:bg-emerald-950/40 text-forest dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60"
-                : "bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border-amber-300 dark:border-amber-700/60"
-            }`}
-            title={isOnline ? "Online Central Sync Active" : "Working Offline on Local Device"}
+          <Link
+            href="/design-system"
+            onClick={() => setIsMobileSheetOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-2xl glass-surface-1 hover:glass-surface-2 border border-edge text-ink-1 transition-all"
           >
-            {isOnline ? (
-              <>
-                <Wifi className="w-3.5 h-3.5 text-moss dark:text-emerald-400" />
-                <span>Online</span>
-              </>
-            ) : (
-              <>
-                <WifiOff className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" />
-                <span>Offline</span>
-              </>
-            )}
-          </div>
+            <Palette className="w-5 h-5 text-forest dark:text-emerald-400" />
+            <div>
+              <div className="text-sm font-semibold">{t("nav.designSystem")}</div>
+              <div className="text-xs text-ink-2">Liquid glass tokens &amp; components</div>
+            </div>
+          </Link>
 
-          {/* Theme Toggle (Light / Dark) */}
-          <ThemeToggle compact />
-
-          {/* Language Switcher */}
-          <LanguageSwitcher />
-
-          {/* Mobile hamburger menu button */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl text-ink dark:text-dark-ink hover:bg-bone dark:hover:bg-dark-card transition-colors border border-transparent hover:border-bone dark:hover:border-white/10"
-            aria-label="Toggle Navigation"
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden pt-3 pb-2 border-t border-bone/80 dark:border-white/10 mt-2 space-y-1.5 animate-in fade-in slide-in-from-top-2 duration-150">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className={`block px-3 py-2 rounded-xl text-sm font-medium transition-all ${
-                pathname === link.href
-                  ? "bg-forest dark:bg-dark-forest text-white"
-                  : "text-ink dark:text-dark-ink hover:bg-bone dark:hover:bg-dark-card"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <div className="pt-2 border-t border-bone/60 dark:border-white/10 flex items-center justify-between px-3">
-            <Link
-              href="/admin"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-xs text-muted dark:text-dark-muted hover:text-forest dark:hover:text-dark-forest flex items-center gap-1.5 py-1"
-            >
-              <BarChart3 className="w-4 h-4" />
-              <span>Admin Center</span>
-            </Link>
-            <Link
-              href="/design-system"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-xs text-muted dark:text-dark-muted hover:text-forest dark:hover:text-dark-forest py-1"
-            >
-              <span>Design System</span>
-            </Link>
+          <div className="pt-4 mt-2 border-t border-edge flex items-center justify-between text-xs text-ink-3">
+            <span className="font-mono">SIH26111 · FeedShield</span>
+            <span className="font-sans">Offline-first AI System</span>
           </div>
         </div>
-      )}
-    </header>
+      </Sheet>
+    </>
   );
 };

@@ -63,7 +63,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-bg-0 text-ink-1 min-h-screen selection:bg-moss/20 selection:text-forest transition-colors duration-200">
+      <body className="bg-bg-0 text-ink-1 min-h-screen pb-20 lg:pb-0 selection:bg-moss/20 selection:text-forest transition-colors duration-200">
         <div className="ambient-glow-layer" aria-hidden="true" />
         <ThemeProvider>
           <I18nProvider>

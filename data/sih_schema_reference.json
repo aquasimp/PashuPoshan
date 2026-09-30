@@ -1,0 +1,89 @@
+{
+  "title": "Official SIH26111 Problem Statement Reference Dataset",
+  "problem_statement": "SIH26111 — Smart AI-Enabled Rapid Feed and Silage Quality Testing System for Dairy Farmers",
+  "ministry": "Ministry of Fisheries, Animal Husbandry & Dairying (DAHD)",
+  "disclaimer": "OFFICIAL SIH26111 EXAMPLE / SCHEMA REFERENCE. Used for schema validation, demo seed data, UI examples, and requirement traceability. NOT a machine learning training dataset.",
+  "data_provenance": "sih_ps_example",
+  "records": [
+    {
+      "sample_id": "F001",
+      "feed_type": "Cattle Feed Pellet",
+      "moisture_pct": 10.0,
+      "protein_pct": 21.0,
+      "fiber_pct": 14.0,
+      "aflatoxin_ppb": 5.0,
+      "ph": null,
+      "adulteration_detected": "None",
+      "quality_status": "Good",
+      "feedshield_mapping": {
+        "overall_grade": "GOOD",
+        "action_recommendation": "SAFE_TO_FEED",
+        "modality_source": "Laboratory / User-Entered Reference"
+      }
+    },
+    {
+      "sample_id": "F002",
+      "feed_type": "Silage",
+      "moisture_pct": 68.0,
+      "protein_pct": 9.0,
+      "fiber_pct": 24.0,
+      "aflatoxin_ppb": 12.0,
+      "ph": 4.1,
+      "adulteration_detected": "Mould Presence",
+      "quality_status": "Moderate",
+      "feedshield_mapping": {
+        "overall_grade": "ATTENTION",
+        "action_recommendation": "FEED_WITH_CAUTION",
+        "modality_source": "Probe + Surface Mould Visual Inspection"
+      }
+    },
+    {
+      "sample_id": "F003",
+      "feed_type": "Mineral Mixture",
+      "moisture_pct": 3.0,
+      "protein_pct": null,
+      "fiber_pct": null,
+      "aflatoxin_ppb": 0.0,
+      "ph": null,
+      "adulteration_detected": "Excess Salt",
+      "quality_status": "Poor",
+      "feedshield_mapping": {
+        "overall_grade": "ATTENTION",
+        "action_recommendation": "BLEND",
+        "modality_source": "Chemical / Confirmatory Assay Screening"
+      }
+    },
+    {
+      "sample_id": "F004",
+      "feed_type": "Feed Mash",
+      "moisture_pct": 12.0,
+      "protein_pct": 18.0,
+      "fiber_pct": 16.0,
+      "aflatoxin_ppb": 20.0,
+      "ph": null,
+      "adulteration_detected": "Sand Contamination",
+      "quality_status": "Unsafe",
+      "feedshield_mapping": {
+        "overall_grade": "HIGH RISK",
+        "action_recommendation": "DISCARD",
+        "modality_source": "Physical / Spectral Anomaly Screening"
+      }
+    },
+    {
+      "sample_id": "F005",
+      "feed_type": "Silage",
+      "moisture_pct": 72.0,
+      "protein_pct": 8.0,
+      "fiber_pct": 28.0,
+      "aflatoxin_ppb": 8.0,
+      "ph": 5.8,
+      "adulteration_detected": "Spoilage Detected",
+      "quality_status": "Poor",
+      "feedshield_mapping": {
+        "overall_grade": "HIGH RISK",
+        "action_recommendation": "DISCARD",
+        "modality_source": "Probe + Fermentation Failure Indicator"
+      }
+    }
+  ]
+}

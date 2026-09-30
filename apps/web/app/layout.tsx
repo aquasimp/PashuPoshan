@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { I18nProvider } from "@/lib/i18n";
+import { ThemeProvider } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "FeedShield — AI-Powered Feed & Silage Intelligence",
@@ -26,15 +27,34 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#1F4D3A" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var stored = localStorage.getItem('feedshield-theme');
+                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (stored === 'dark' || (stored === 'system' && prefersDark) || (!stored && prefersDark)) {
+                  document.documentElement.classList.add('dark');
+                  document.documentElement.style.colorScheme = 'dark';
+                } else {
+                  document.documentElement.classList.remove('dark');
+                  document.documentElement.style.colorScheme = 'light';
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
       </head>
-      <body className="bg-ivory text-ink min-h-screen selection:bg-moss/20 selection:text-forest">
-        <I18nProvider>
-          {children}
-        </I18nProvider>
+      <body className="bg-ivory dark:bg-dark-bg text-ink dark:text-dark-ink min-h-screen selection:bg-moss/20 selection:text-forest transition-colors duration-200">
+        <ThemeProvider>
+          <I18nProvider>
+            {children}
+          </I18nProvider>
+        </ThemeProvider>
         <script
           dangerouslySetInnerHTML={{
             __html: `

@@ -176,19 +176,19 @@ function AdvisoryContent() {
   return (
     <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-8 space-y-6">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-xs text-muted">
-        <Link href={`/test/result?id=${sample.id}`} className="hover:text-forest flex items-center gap-1">
+      <div className="flex items-center gap-2 text-xs text-muted dark:text-dark-muted">
+        <Link href={`/test/result?id=${sample.id}`} className="hover:text-forest dark:hover:text-emerald-400 flex items-center gap-1">
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to Result</span>
         </Link>
         <span>/</span>
-        <span className="text-ink font-medium">Actionable Advisory</span>
+        <span className="text-ink dark:text-dark-ink font-medium">Actionable Advisory</span>
       </div>
 
-      {/* Decision Banner Card */}
-      <div className={`rounded-3xl p-6 sm:p-8 ${decisionTheme.bg} ${decisionTheme.text} shadow-card space-y-3`}>
+      {/* Decision Banner Card with Rich Contrast */}
+      <div className={`rounded-3xl p-6 sm:p-8 ${decisionTheme.bg} ${decisionTheme.text} shadow-float space-y-3 border border-white/20 dark:border-white/10`}>
         <div className="flex items-center justify-between">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider bg-white/20 px-3 py-1 rounded-full">
+          <span className="text-xs font-mono font-bold uppercase tracking-wider bg-white/20 backdrop-blur-md px-3 py-1 rounded-full shadow-sm">
             {decisionTheme.tag}
           </span>
           <span className="text-xs font-mono opacity-80">{sample.id}</span>
@@ -198,18 +198,18 @@ function AdvisoryContent() {
           <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">
             Decision: {advisory.decision}
           </h1>
-          <p className="text-sm opacity-90 mt-1 max-w-xl font-sans">
+          <p className="text-sm opacity-90 mt-1 max-w-xl font-sans leading-relaxed">
             {decisionTheme.sub}
           </p>
         </div>
       </div>
 
-      {/* Voice Guidance Readout Player Card */}
-      <div className="bg-surface rounded-3xl p-5 border border-bone shadow-card flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
+      {/* Voice Guidance Readout Player Card with Liquid Glass */}
+      <div className="glass-card rounded-3xl p-5 border border-bone dark:border-dark-border shadow-card flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
           <div
-            className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${
-              isPlayingVoice ? "bg-terracotta text-white" : "bg-forest/10 text-forest"
+            className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors shadow-sm ${
+              isPlayingVoice ? "bg-terracotta text-white" : "bg-forest/10 dark:bg-emerald-500/10 text-forest dark:text-emerald-400"
             }`}
           >
             {isPlayingVoice ? (
@@ -219,10 +219,10 @@ function AdvisoryContent() {
             )}
           </div>
           <div>
-            <h3 className="font-semibold text-sm text-ink">
+            <h3 className="font-semibold text-sm text-ink dark:text-dark-ink">
               {t("advisory.voiceReadout")}
             </h3>
-            <p className="text-xs text-muted">
+            <p className="text-xs text-muted dark:text-dark-muted">
               Audio narration in Vernacular Voice ({locale.toUpperCase()})
             </p>
           </div>
@@ -231,10 +231,10 @@ function AdvisoryContent() {
         {/* Animated Audio Wave bars when playing */}
         {isPlayingVoice && (
           <div className="flex items-center gap-1">
-            <span className="w-1 h-6 bg-forest rounded-full animate-bounce" />
-            <span className="w-1 h-8 bg-moss rounded-full animate-bounce [animation-delay:0.15s]" />
-            <span className="w-1 h-5 bg-forest rounded-full animate-bounce [animation-delay:0.3s]" />
-            <span className="w-1 h-7 bg-moss rounded-full animate-bounce [animation-delay:0.2s]" />
+            <span className="w-1 h-6 bg-forest dark:bg-emerald-400 rounded-full animate-bounce" />
+            <span className="w-1 h-8 bg-moss dark:bg-emerald-300 rounded-full animate-bounce [animation-delay:0.15s]" />
+            <span className="w-1 h-5 bg-forest dark:bg-emerald-400 rounded-full animate-bounce [animation-delay:0.3s]" />
+            <span className="w-1 h-7 bg-moss dark:bg-emerald-300 rounded-full animate-bounce [animation-delay:0.2s]" />
           </div>
         )}
 
@@ -244,7 +244,7 @@ function AdvisoryContent() {
           className={`inline-flex items-center gap-2 px-5 py-3 rounded-2xl font-bold text-xs shadow-sm transition-all ${
             isPlayingVoice
               ? "bg-stone-800 text-white hover:bg-stone-900"
-              : "bg-forest text-white hover:bg-deep"
+              : "bg-forest dark:bg-emerald-600 text-white hover:bg-deep dark:hover:bg-emerald-700"
           }`}
           id="btn-voice-readout"
         >
@@ -264,88 +264,88 @@ function AdvisoryContent() {
 
       {/* 6-Step Actionable Advisory Chain */}
       <div className="space-y-3">
-        <h2 className="font-display text-xl font-bold text-ink">
+        <h2 className="font-display text-xl font-bold text-ink dark:text-dark-ink">
           6-Step Advisory Protocol
         </h2>
-        <p className="text-xs text-muted">
+        <p className="text-xs text-muted dark:text-dark-muted">
           Sequential guidance designed for immediate farm-level action and veterinary risk mitigation.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
           {/* Step 1: Result */}
-          <div className="p-5 rounded-2xl bg-surface border border-bone shadow-card space-y-2">
+          <div className="p-5 rounded-2xl glass-card border border-bone dark:border-dark-border shadow-card space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-forest font-mono">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-forest dark:text-emerald-400 font-mono">
                 1. {t("advisory.steps.result")}
               </span>
-              <CheckCircle2 className="w-4 h-4 text-forest" />
+              <CheckCircle2 className="w-4 h-4 text-forest dark:text-emerald-400" />
             </div>
-            <p className="text-xs font-semibold text-ink leading-relaxed">
+            <p className="text-xs font-semibold text-ink dark:text-dark-ink leading-relaxed">
               {advisory.chain.result}
             </p>
           </div>
 
           {/* Step 2: Issue */}
-          <div className="p-5 rounded-2xl bg-surface border border-bone shadow-card space-y-2">
+          <div className="p-5 rounded-2xl glass-card border border-bone dark:border-dark-border shadow-card space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700 font-mono">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 font-mono">
                 2. {t("advisory.steps.issue")}
               </span>
-              <AlertTriangle className="w-4 h-4 text-amber-700" />
+              <AlertTriangle className="w-4 h-4 text-amber-700 dark:text-amber-400" />
             </div>
-            <p className="text-xs font-semibold text-ink leading-relaxed">
+            <p className="text-xs font-semibold text-ink dark:text-dark-ink leading-relaxed">
               {advisory.chain.issue}
             </p>
           </div>
 
           {/* Step 3: Immediate Action */}
-          <div className="p-5 rounded-2xl bg-surface border-2 border-forest/30 shadow-card space-y-2 md:col-span-2">
+          <div className="p-5 rounded-2xl glass-card border-2 border-forest/30 dark:border-emerald-500/40 shadow-card space-y-2 md:col-span-2">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-forest font-mono">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-forest dark:text-emerald-400 font-mono">
                 3. {t("advisory.steps.action")} (Today's Feeding)
               </span>
-              <Sparkles className="w-4 h-4 text-forest" />
+              <Sparkles className="w-4 h-4 text-forest dark:text-emerald-400" />
             </div>
-            <p className="text-sm font-bold text-forest leading-relaxed">
+            <p className="text-sm font-bold text-forest dark:text-emerald-300 leading-relaxed">
               {advisory.chain.action}
             </p>
           </div>
 
           {/* Step 4: Storage Remediation */}
-          <div className="p-5 rounded-2xl bg-surface border border-bone shadow-card space-y-2">
+          <div className="p-5 rounded-2xl glass-card border border-bone dark:border-dark-border shadow-card space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-muted font-mono">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-muted dark:text-dark-muted font-mono">
                 4. {t("advisory.steps.storage")}
               </span>
-              <Layers className="w-4 h-4 text-muted" />
+              <Layers className="w-4 h-4 text-muted dark:text-dark-muted" />
             </div>
-            <p className="text-xs font-semibold text-ink leading-relaxed">
+            <p className="text-xs font-semibold text-ink dark:text-dark-ink leading-relaxed">
               {advisory.chain.storage}
             </p>
           </div>
 
           {/* Step 5: Animal Health Risk */}
-          <div className="p-5 rounded-2xl bg-surface border border-bone shadow-card space-y-2">
+          <div className="p-5 rounded-2xl glass-card border border-bone dark:border-dark-border shadow-card space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-terracotta font-mono">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-terracotta dark:text-rose-400 font-mono">
                 5. {t("advisory.steps.risk")}
               </span>
-              <Stethoscope className="w-4 h-4 text-terracotta" />
+              <Stethoscope className="w-4 h-4 text-terracotta dark:text-rose-400" />
             </div>
-            <p className="text-xs font-semibold text-ink leading-relaxed">
+            <p className="text-xs font-semibold text-ink dark:text-dark-ink leading-relaxed">
               {advisory.chain.risk}
             </p>
           </div>
 
           {/* Step 6: Recommended Next Step */}
-          <div className="p-5 rounded-2xl bg-surface border border-bone shadow-card space-y-2 md:col-span-2">
+          <div className="p-5 rounded-2xl glass-card border border-bone dark:border-dark-border shadow-card space-y-2 md:col-span-2">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-forest font-mono">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-forest dark:text-emerald-400 font-mono">
                 6. {t("advisory.steps.nextStep")}
               </span>
-              <ArrowRight className="w-4 h-4 text-forest" />
+              <ArrowRight className="w-4 h-4 text-forest dark:text-emerald-400" />
             </div>
-            <p className="text-xs font-semibold text-ink leading-relaxed">
+            <p className="text-xs font-semibold text-ink dark:text-dark-ink leading-relaxed">
               {advisory.chain.nextStep}
             </p>
           </div>
@@ -353,11 +353,11 @@ function AdvisoryContent() {
       </div>
 
       {/* Veterinarian Referral Note */}
-      <div className="p-4 rounded-2xl bg-mist/30 border border-mist flex items-start gap-3 text-xs text-forest">
-        <Stethoscope className="w-5 h-5 text-forest shrink-0 mt-0.5" />
+      <div className="p-4 rounded-2xl bg-mist/30 dark:bg-emerald-950/20 border border-mist dark:border-emerald-800/40 flex items-start gap-3 text-xs text-forest dark:text-sage-light">
+        <Stethoscope className="w-5 h-5 text-forest dark:text-emerald-400 shrink-0 mt-0.5" />
         <div className="space-y-1">
-          <h4 className="font-bold">Veterinary Consultation Recommendation</h4>
-          <p className="leading-relaxed text-forest/90">
+          <h4 className="font-bold text-ink dark:text-dark-ink">Veterinary Consultation Recommendation</h4>
+          <p className="leading-relaxed text-forest/90 dark:text-sage-light/90">
             If milk yield suddenly declines or cows exhibit loose dung, fever, or depressed appetite after silage ration introduction, notify your dairy cooperative veterinary field officer immediately.
           </p>
         </div>
@@ -367,7 +367,7 @@ function AdvisoryContent() {
       <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
         <Link
           href={`/test/result?id=${sample.id}`}
-          className="text-xs font-semibold text-forest hover:underline flex items-center gap-1.5"
+          className="text-xs font-semibold text-forest dark:text-emerald-400 hover:underline flex items-center gap-1.5"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to Quality Gauge</span>
@@ -380,7 +380,7 @@ function AdvisoryContent() {
               onClick={() => {
                 window.open(`/api/v1/reports/${analysis.id}/pdf`, "_blank");
               }}
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-forest text-white text-xs font-bold shadow-sm hover:bg-deep transition-all"
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-forest dark:bg-emerald-600 text-white text-xs font-bold shadow-sm hover:bg-deep dark:hover:bg-emerald-700 transition-all"
             >
               <Download className="w-4 h-4" />
               <span>Download PDF</span>
@@ -389,7 +389,7 @@ function AdvisoryContent() {
 
           <Link
             href="/"
-            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-surface border border-bone text-ink text-xs font-semibold hover:bg-bone transition-all"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl glass-card border border-bone dark:border-dark-border text-ink dark:text-dark-ink text-xs font-semibold hover:bg-bone dark:hover:bg-dark-card transition-all"
           >
             <span>Done</span>
           </Link>
@@ -401,9 +401,9 @@ function AdvisoryContent() {
 
 export default function AdvisoryPage() {
   return (
-    <div className="min-h-screen bg-ivory flex flex-col font-sans">
+    <div className="min-h-screen bg-ivory dark:bg-dark-bg text-ink dark:text-dark-ink flex flex-col font-sans transition-colors duration-200">
       <Navbar />
-      <Suspense fallback={<div className="p-8 text-center text-xs text-muted">Loading advisory...</div>}>
+      <Suspense fallback={<div className="p-8 text-center text-xs text-muted dark:text-dark-muted">Loading advisory...</div>}>
         <AdvisoryContent />
       </Suspense>
     </div>

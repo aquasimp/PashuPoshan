@@ -14,6 +14,7 @@ Last updated: Phase G Complete (Final Audit & Delivery)
 | **Phase E** | Farmer Frontend (PWA, Hero Results, Offline, Vitest) | **DONE** | 6/6 |
 | **Phase F** | Admin, Demo & Traceability (Analytics, Hero Demo, Tour) | **DONE** | 6/6 |
 | **Phase G** | QA, Hardening & Docs (E2E, Screenshots, Audits, Checklist) | **DONE** | 6/6 |
+| **Phase H** | Final Polish & Release Candidate (ML Pipeline, Liquid Glass, Dark Mode, Vernacular Audit, Zero-Flash Theme) | **DONE** | 10/10 |
 
 ---
 
@@ -74,3 +75,20 @@ Last updated: Phase G Complete (Final Audit & Delivery)
 - Authored Playwright E2E offline test journey (`e2e/offline_journey.spec.ts`).
 - Authored comprehensive audit checklist in `docs/FINAL_CHECKLIST.md`.
 - Updated `Makefile` with clean virtualenv Python paths.
+
+### Phase H — Final ML & Product Polish Pass (Release Candidate)
+- Re-executed full synthetic NIR pipeline (`ml/train.py` on 1,200 spectra, 4 targets: DM R²=0.9496, CP R²=0.9070, NDF R²=0.7258, ADF R²=0.7984).
+- Verified live inference envelope and out-of-domain rejection with Hotelling T² / Q-residual.
+- Mounted `/api/v1/models` and `/api/v1/models/metrics` serving live generated artifacts to UI.
+- Documented official SIH26111 5-row "Dummy Data Set" in `data/sih_schema_reference.json` as schema reference (explicit non-training disclaimer).
+- Created global ThemeProvider with anti-flash inline script and dark mode persistence (`localStorage`).
+- Refined design system with restrained Liquid Glass primitives (`.glass-card`, `.glass-pill`, `.glass-nav`).
+- Completed global audit and Liquid Glass + Dark Mode evolution across all 19 application routes:
+  `/`, `/test`, `/test/capture`, `/test/silage`, `/test/processing`, `/test/result`, `/advisory`, `/history`, `/compare`, `/sync`, `/verify/[id]`, `/demo/hero`, `/demo/tour`, `/admin`, `/models`, `/settings`, `/language`, `/storage`, `/design-system`.
+- Audited vernacular localization across English, Hindi (हिन्दी), and Hinglish with zero missing P0/P1 keys.
+- Executed full test verification:
+  - Claims Linter: 137 files scanned · 0 violations (100% compliant).
+  - Pytest: 45 / 45 passed (100%).
+  - Vitest: 33 / 33 passed (100%).
+  - Next.js Production Build: 21 / 21 static and dynamic pages compiled successfully with 0 errors.
+- Real field models maintained explicitly as `PENDING — MODEL BUILD / VALIDATION IN PROGRESS`.

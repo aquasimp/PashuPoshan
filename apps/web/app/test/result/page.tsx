@@ -95,27 +95,27 @@ function ResultContent() {
   const isSilage = sample.sampleType === "silage";
   const assessment = analysis.silageAssessment;
 
-  return (
+    return (
     <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-8 space-y-6">
       {/* Breadcrumb & Offline Indicator */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-        <div className="flex items-center gap-2 text-muted">
-          <Link href="/" className="hover:text-forest flex items-center gap-1">
+        <div className="flex items-center gap-2 text-muted dark:text-dark-muted">
+          <Link href="/" className="hover:text-forest dark:hover:text-emerald-400 flex items-center gap-1">
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Home</span>
           </Link>
           <span>/</span>
-          <Link href="/history" className="hover:text-forest">
+          <Link href="/history" className="hover:text-forest dark:hover:text-emerald-400">
             History
           </Link>
           <span>/</span>
-          <span className="text-ink font-medium font-mono">{sample.id}</span>
+          <span className="text-ink dark:text-dark-ink font-medium font-mono">{sample.id}</span>
         </div>
 
         <div className="flex items-center gap-2">
           {analysis.analyzedOnDevice && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-stone-100 text-stone-700 border border-stone-300 text-[11px] font-medium">
-              <HardDrive className="w-3 h-3 text-stone-600" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-stone-100 dark:bg-stone-900/60 text-stone-700 dark:text-stone-300 border border-stone-300 dark:border-stone-700 text-[11px] font-medium">
+              <HardDrive className="w-3 h-3 text-stone-600 dark:text-stone-400" />
               <span>Analysed on device — Offline</span>
             </span>
           )}
@@ -124,9 +124,9 @@ function ResultContent() {
       </div>
 
       {/* Top Banner Notice: Synthetic Demo Data */}
-      <div className="p-3 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-between text-xs text-amber-900">
-        <div className="flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-amber-700 shrink-0" />
+      <div className="p-4 rounded-2xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 flex items-center justify-between text-xs text-amber-900 dark:text-amber-300 backdrop-blur-md">
+        <div className="flex items-center gap-2.5">
+          <Sparkles className="w-4 h-4 text-amber-700 dark:text-amber-400 shrink-0" />
           <span>{t("results.claims.syntheticBanner")}</span>
         </div>
         <Link href="/design-system" className="underline font-bold text-[11px] shrink-0">
@@ -134,31 +134,31 @@ function ResultContent() {
         </Link>
       </div>
 
-      {/* Hero Quality Result Card */}
-      <div className="relative overflow-hidden rounded-3xl bg-surface border-2 border-bone p-6 sm:p-8 shadow-card space-y-6">
+      {/* Hero Quality Result Card with Liquid Glass Elevation */}
+      <div className="relative overflow-hidden rounded-3xl glass-card-hero border border-forest/15 dark:border-white/10 p-6 sm:p-9 shadow-float space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
           <div className="space-y-1">
-            <span className="text-xs font-mono font-medium text-muted block">
+            <span className="text-xs font-mono font-medium text-muted dark:text-dark-muted block">
               Sample ID: {sample.id}
             </span>
-            <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink">
+            <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink dark:text-dark-ink">
               {sample.cropOrFeedName}
             </h1>
-            <p className="text-xs text-muted">
+            <p className="text-xs text-muted dark:text-dark-muted">
               Collected on {new Date(sample.collectedAt).toLocaleString()} · {sample.physicalForm}
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2.5">
             <StatusChip status={analysis.overallRisk} size="lg" />
-            <div className="px-3.5 py-1.5 rounded-xl bg-forest text-white font-mono font-bold text-sm tracking-wider shadow-sm">
+            <div className="px-4 py-2 rounded-2xl bg-forest dark:bg-emerald-600 text-white font-mono font-bold text-sm tracking-wider shadow-md">
               DECISION: {analysis.actionDecision}
             </div>
           </div>
         </div>
 
         {/* Input Completeness Component */}
-        <div className="pt-2 border-t border-bone">
+        <div className="pt-2 border-t border-bone dark:border-dark-border">
           <InputCompleteness
             score={analysis.inputCompleteness.score}
             modalitiesUsed={analysis.inputCompleteness.modalitiesUsed}
@@ -168,11 +168,11 @@ function ResultContent() {
 
         {/* Feed Scientific Honesty Claim Banner */}
         {!isSilage && (
-          <div className="p-3.5 rounded-2xl bg-mist/40 border border-mist flex items-start gap-2.5 text-xs text-forest">
-            <Info className="w-4 h-4 text-forest shrink-0 mt-0.5" />
+          <div className="p-4 rounded-2xl bg-mist/40 dark:bg-emerald-950/20 border border-mist dark:border-emerald-800/40 flex items-start gap-2.5 text-xs text-forest dark:text-emerald-300">
+            <Info className="w-4 h-4 text-forest dark:text-emerald-400 shrink-0 mt-0.5" />
             <div>
               <p className="font-semibold">{t("results.claims.ureaImageOnly")}</p>
-              <p className="text-[11px] text-muted mt-0.5">
+              <p className="text-[11px] text-muted dark:text-dark-muted mt-0.5">
                 Crude protein, NDF, and non-visible chemical adulterants require NIR spectroscopy or rapid chemical assay strips.
               </p>
             </div>
@@ -183,94 +183,94 @@ function ResultContent() {
         {isSilage && assessment && (
           <div className="space-y-3 pt-2">
             <div className="flex items-center justify-between">
-              <h3 className="font-semibold text-sm text-ink">Silage Fermentation & Storage Hazards</h3>
+              <h3 className="font-semibold text-sm text-ink dark:text-dark-ink">Silage Fermentation & Storage Hazards</h3>
               <EvidenceTag tag="ESTIMATED" />
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
               {/* 1. Air Ingress */}
-              <div className="p-3.5 rounded-2xl bg-ivory border border-bone space-y-1">
-                <span className="text-[11px] text-muted block leading-tight">Air Ingress</span>
+              <div className="p-3.5 rounded-2xl bg-ivory/80 dark:bg-dark-card border border-bone dark:border-dark-border space-y-1">
+                <span className="text-[11px] text-muted dark:text-dark-muted block leading-tight">Air Ingress</span>
                 <span
                   className={`text-xs font-bold uppercase tracking-wider block ${
                     assessment.airIngressRisk === "low"
-                      ? "text-forest"
+                      ? "text-forest dark:text-emerald-400"
                       : assessment.airIngressRisk === "moderate"
-                      ? "text-amber-700"
-                      : "text-terracotta"
+                      ? "text-amber-700 dark:text-amber-400"
+                      : "text-terracotta dark:text-rose-400"
                   }`}
                 >
                   {assessment.airIngressRisk}
                 </span>
-                <span className="text-[10px] text-muted block">Compaction seal</span>
+                <span className="text-[10px] text-muted dark:text-dark-muted block">Compaction seal</span>
               </div>
 
               {/* 2. Core Heating */}
-              <div className="p-3.5 rounded-2xl bg-ivory border border-bone space-y-1">
-                <span className="text-[11px] text-muted block leading-tight">Aerobic Heating</span>
+              <div className="p-3.5 rounded-2xl bg-ivory/80 dark:bg-dark-card border border-bone dark:border-dark-border space-y-1">
+                <span className="text-[11px] text-muted dark:text-dark-muted block leading-tight">Aerobic Heating</span>
                 <span
                   className={`text-xs font-bold uppercase tracking-wider block ${
                     assessment.heatingRisk === "low"
-                      ? "text-forest"
+                      ? "text-forest dark:text-emerald-400"
                       : assessment.heatingRisk === "moderate"
-                      ? "text-amber-700"
-                      : "text-terracotta"
+                      ? "text-amber-700 dark:text-amber-400"
+                      : "text-terracotta dark:text-rose-400"
                   }`}
                 >
                   {assessment.heatingRisk}
                 </span>
-                <span className="text-[10px] text-muted block">Thermal ΔT core</span>
+                <span className="text-[10px] text-muted dark:text-dark-muted block">Thermal ΔT core</span>
               </div>
 
               {/* 3. Spoilage */}
-              <div className="p-3.5 rounded-2xl bg-ivory border border-bone space-y-1">
-                <span className="text-[11px] text-muted block leading-tight">Spoilage Hazard</span>
+              <div className="p-3.5 rounded-2xl bg-ivory/80 dark:bg-dark-card border border-bone dark:border-dark-border space-y-1">
+                <span className="text-[11px] text-muted dark:text-dark-muted block leading-tight">Spoilage Hazard</span>
                 <span
                   className={`text-xs font-bold uppercase tracking-wider block ${
                     assessment.spoilageRisk === "low"
-                      ? "text-forest"
+                      ? "text-forest dark:text-emerald-400"
                       : assessment.spoilageRisk === "moderate"
-                      ? "text-amber-700"
-                      : "text-terracotta"
+                      ? "text-amber-700 dark:text-amber-400"
+                      : "text-terracotta dark:text-rose-400"
                   }`}
                 >
                   {assessment.spoilageRisk}
                 </span>
-                <span className="text-[10px] text-muted block">Clostridia / mould</span>
+                <span className="text-[10px] text-muted dark:text-dark-muted block">Clostridia / mould</span>
               </div>
 
               {/* 4. Fermentation Failure */}
-              <div className="p-3.5 rounded-2xl bg-ivory border border-bone space-y-1">
-                <span className="text-[11px] text-muted block leading-tight">Fermentation</span>
+              <div className="p-3.5 rounded-2xl bg-ivory/80 dark:bg-dark-card border border-bone dark:border-dark-border space-y-1">
+                <span className="text-[11px] text-muted dark:text-dark-muted block leading-tight">Fermentation</span>
                 <span
                   className={`text-xs font-bold uppercase tracking-wider block ${
                     assessment.fermentationFailureRisk === "low"
-                      ? "text-forest"
+                      ? "text-forest dark:text-emerald-400"
                       : assessment.fermentationFailureRisk === "moderate"
-                      ? "text-amber-700"
-                      : "text-terracotta"
+                      ? "text-amber-700 dark:text-amber-400"
+                      : "text-terracotta dark:text-rose-400"
                   }`}
                 >
                   {assessment.fermentationFailureRisk}
                 </span>
-                <span className="text-[10px] text-muted block">pH trajectory</span>
+                <span className="text-[10px] text-muted dark:text-dark-muted block">pH trajectory</span>
               </div>
 
               {/* 5. Mould Proliferation */}
-              <div className="p-3.5 rounded-2xl bg-ivory border border-bone space-y-1">
-                <span className="text-[11px] text-muted block leading-tight">Mould Risk</span>
+              <div className="p-3.5 rounded-2xl bg-ivory/80 dark:bg-dark-card border border-bone dark:border-dark-border space-y-1">
+                <span className="text-[11px] text-muted dark:text-dark-muted block leading-tight">Mould Risk</span>
                 <span
                   className={`text-xs font-bold uppercase tracking-wider block ${
                     assessment.mouldRisk === "low"
-                      ? "text-forest"
+                      ? "text-forest dark:text-emerald-400"
                       : assessment.mouldRisk === "moderate"
-                      ? "text-amber-700"
-                      : "text-terracotta"
+                      ? "text-amber-700 dark:text-amber-400"
+                      : "text-terracotta dark:text-rose-400"
                   }`}
                 >
                   {assessment.mouldRisk}
                 </span>
-                <span className="text-[10px] text-muted block">Visible / aerobic</span>
+                <span className="text-[10px] text-muted dark:text-dark-muted block">Visible / aerobic</span>
               </div>
             </div>
           </div>
@@ -279,24 +279,24 @@ function ResultContent() {
         {/* Nutritional & Sensor Metrics */}
         <div className="space-y-3 pt-2">
           <div className="flex items-center justify-between">
-            <h3 className="font-semibold text-sm text-ink">Analytical Measurements & Parameters</h3>
-            <span className="text-[11px] text-muted">Prediction Envelope</span>
+            <h3 className="font-semibold text-sm text-ink dark:text-dark-ink">Analytical Measurements & Parameters</h3>
+            <span className="text-[11px] text-muted dark:text-dark-muted">Prediction Envelope</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             {analysis.predictions.map((p, idx) => (
-              <div key={idx} className="p-3.5 rounded-2xl bg-ivory border border-bone space-y-2">
+              <div key={idx} className="p-4 rounded-2xl bg-ivory/80 dark:bg-dark-card border border-bone dark:border-dark-border space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium text-muted">{p.target}</span>
+                  <span className="text-xs font-medium text-muted dark:text-dark-muted">{p.target}</span>
                   <EvidenceTag tag={p.evidenceTag} />
                 </div>
                 <div className="flex items-baseline gap-1.5">
-                  <span className="font-mono text-xl font-bold text-ink">
+                  <span className="font-mono text-xl font-bold text-ink dark:text-dark-ink">
                     {p.value !== null ? p.value : "Out of Range"}
                   </span>
-                  <span className="text-xs text-muted font-sans">{p.unit}</span>
+                  <span className="text-xs text-muted dark:text-dark-muted font-sans">{p.unit}</span>
                 </div>
-                <div className="text-[10px] text-muted flex justify-between font-mono">
+                <div className="text-[10px] text-muted dark:text-dark-muted flex justify-between font-mono">
                   <span>Domain: {p.applicabilityDomain}</span>
                   {p.confidence && <span>Conf: {(p.confidence * 100).toFixed(0)}%</span>}
                 </div>
@@ -304,12 +304,12 @@ function ResultContent() {
             ))}
 
             {!isSilage && (
-              <div className="p-3.5 rounded-2xl bg-bone/40 border border-dashed border-stone-300 space-y-2">
-                <span className="text-xs font-medium text-muted block">Crude Protein & NDF</span>
-                <span className="text-sm font-semibold text-stone-500 block">
+              <div className="p-4 rounded-2xl bg-bone/40 dark:bg-dark-card/50 border border-dashed border-stone-300 dark:border-stone-700 space-y-2">
+                <span className="text-xs font-medium text-muted dark:text-dark-muted block">Crude Protein & NDF</span>
+                <span className="text-sm font-semibold text-stone-500 dark:text-stone-400 block">
                   {t("results.nutrition.notMeasured")}
                 </span>
-                <p className="text-[10px] text-muted">
+                <p className="text-[10px] text-muted dark:text-dark-muted">
                   Requires portable NIR spectrometer scan.
                 </p>
               </div>
@@ -318,10 +318,10 @@ function ResultContent() {
         </div>
 
         {/* Action Buttons Bar */}
-        <div className="pt-4 border-t border-bone flex flex-col sm:flex-row items-center gap-3">
+        <div className="pt-4 border-t border-bone dark:border-dark-border flex flex-col sm:flex-row items-center gap-3">
           <Link
             href={`/advisory?id=${sample.id}`}
-            className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-forest hover:bg-deep text-white font-bold text-sm shadow-md transition-all"
+            className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-forest dark:bg-emerald-600 hover:bg-deep dark:hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition-all"
             id="btn-view-advisory"
           >
             <Volume2 className="w-5 h-5 text-mist" />
@@ -331,9 +331,9 @@ function ResultContent() {
 
           <Link
             href={`/verify/${sample.id}`}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-4 rounded-2xl bg-surface hover:bg-bone text-ink font-semibold text-sm border border-bone transition-all"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-4 rounded-2xl glass-card hover:bg-bone dark:hover:bg-dark-card text-ink dark:text-dark-ink font-semibold text-sm border border-bone dark:border-dark-border transition-all"
           >
-            <QrCode className="w-4 h-4 text-forest" />
+            <QrCode className="w-4 h-4 text-forest dark:text-emerald-400" />
             <span>Traceability QR</span>
           </Link>
 
@@ -342,9 +342,9 @@ function ResultContent() {
             onClick={() => {
               window.open(`/api/v1/reports/${analysis.id}/pdf`, "_blank");
             }}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-4 rounded-2xl bg-surface hover:bg-bone text-ink font-semibold text-sm border border-bone transition-all"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-4 rounded-2xl glass-card hover:bg-bone dark:hover:bg-dark-card text-ink dark:text-dark-ink font-semibold text-sm border border-bone dark:border-dark-border transition-all"
           >
-            <Download className="w-4 h-4 text-forest" />
+            <Download className="w-4 h-4 text-forest dark:text-emerald-400" />
             <span>PDF Report</span>
           </button>
         </div>
@@ -355,9 +355,9 @@ function ResultContent() {
 
 export default function ResultPage() {
   return (
-    <div className="min-h-screen bg-ivory flex flex-col font-sans">
+    <div className="min-h-screen bg-ivory dark:bg-dark-bg text-ink dark:text-dark-ink flex flex-col font-sans transition-colors duration-200">
       <Navbar />
-      <Suspense fallback={<div className="p-8 text-center text-xs text-muted">Loading analysis result...</div>}>
+      <Suspense fallback={<div className="p-8 text-center text-xs text-muted dark:text-dark-muted">Loading analysis result...</div>}>
         <ResultContent />
       </Suspense>
     </div>

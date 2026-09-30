@@ -46,37 +46,37 @@ export default function PublicVerifyPage() {
   }, [tokenParam]);
 
   return (
-    <div className="min-h-screen bg-ivory flex flex-col font-sans">
+    <div className="min-h-screen bg-ivory dark:bg-dark-bg text-ink dark:text-dark-ink flex flex-col font-sans transition-colors duration-200">
       <Navbar />
 
       <main className="flex-1 max-w-3xl w-full mx-auto px-4 py-8 space-y-6">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-xs text-muted">
-          <Link href="/" className="hover:text-forest flex items-center gap-1">
+        <div className="flex items-center gap-2 text-xs text-muted dark:text-dark-muted">
+          <Link href="/" className="hover:text-forest dark:hover:text-dark-forest flex items-center gap-1 transition-colors">
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Home</span>
           </Link>
           <span>/</span>
-          <span className="text-ink font-medium">Public Authenticity Verification</span>
+          <span className="text-ink dark:text-dark-ink font-medium">Public Authenticity Verification</span>
         </div>
 
         {/* Header */}
         <div className="text-center space-y-1">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-forest/10 text-forest text-xs font-semibold">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-forest/10 dark:bg-dark-forest/20 text-forest dark:text-dark-forest text-xs font-semibold">
             <Lock className="w-3.5 h-3.5" />
             <span>FeedShield Cryptographic Verification Protocol</span>
           </div>
-          <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink">
-            Traceability & Integrity Seal
+          <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink dark:text-dark-ink">
+            Traceability &amp; Integrity Seal
           </h1>
-          <p className="text-xs text-muted">
+          <p className="text-xs text-muted dark:text-dark-muted">
             Instant public validation for dairy cooperatives, veterinarians, and cattle owners.
           </p>
         </div>
 
         {/* State Simulator Bar for Judges */}
-        <div className="bg-surface p-3.5 rounded-2xl border border-bone flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-          <span className="font-bold text-muted uppercase tracking-wider text-[11px]">
+        <div className="glass-card p-3.5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+          <span className="font-bold text-muted dark:text-dark-muted uppercase tracking-wider text-[11px]">
             Test Verification State:
           </span>
           <div className="flex items-center gap-2">
@@ -88,8 +88,8 @@ export default function PublicVerifyPage() {
               }}
               className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
                 verificationStatus === "Verified"
-                  ? "bg-forest text-white"
-                  : "bg-ivory border border-bone text-muted hover:text-ink"
+                  ? "bg-forest dark:bg-dark-forest text-white shadow-sm"
+                  : "bg-surface dark:bg-dark-card border border-bone dark:border-dark-border text-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-ink"
               }`}
             >
               1. Verified (Pass)
@@ -102,8 +102,8 @@ export default function PublicVerifyPage() {
               }}
               className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
                 verificationStatus === "Unverified"
-                  ? "bg-amber-600 text-white"
-                  : "bg-ivory border border-bone text-muted hover:text-ink"
+                  ? "bg-amber-600 text-white shadow-sm"
+                  : "bg-surface dark:bg-dark-card border border-bone dark:border-dark-border text-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-ink"
               }`}
             >
               2. Unverified (Pending)
@@ -116,8 +116,8 @@ export default function PublicVerifyPage() {
               }}
               className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
                 verificationStatus === "Tampered"
-                  ? "bg-terracotta text-white"
-                  : "bg-ivory border border-bone text-muted hover:text-ink"
+                  ? "bg-terracotta text-white shadow-sm"
+                  : "bg-surface dark:bg-dark-card border border-bone dark:border-dark-border text-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-ink"
               }`}
             >
               3. Tampered (Warning)
@@ -129,10 +129,10 @@ export default function PublicVerifyPage() {
         <div
           className={`rounded-3xl p-6 sm:p-8 border shadow-card backdrop-blur-md transition-all ${
             verificationStatus === "Verified"
-              ? "bg-gradient-to-br from-emerald-900/90 to-forest text-white border-emerald-500/40"
+              ? "bg-gradient-to-br from-emerald-900/90 to-forest dark:from-emerald-950/90 dark:to-emerald-900 text-white border-emerald-500/40"
               : verificationStatus === "Unverified"
-              ? "bg-gradient-to-br from-amber-900/90 to-amber-950 text-white border-amber-500/40"
-              : "bg-gradient-to-br from-rose-950/95 to-red-900 text-white border-rose-500/40"
+              ? "bg-gradient-to-br from-amber-900/90 to-amber-950 dark:from-amber-950/90 dark:to-amber-900 text-white border-amber-500/40"
+              : "bg-gradient-to-br from-rose-950/95 to-red-900 dark:from-rose-950 dark:to-red-950 text-white border-rose-500/40"
           }`}
         >
           <div className="flex items-start justify-between gap-4">
@@ -196,42 +196,42 @@ export default function PublicVerifyPage() {
         </div>
 
         {/* Detailed Certificate Record */}
-        <div className="bg-surface rounded-3xl p-6 border border-bone shadow-card space-y-4">
-          <h3 className="font-semibold text-sm text-ink">Certified Analytical Details</h3>
+        <div className="glass-card rounded-3xl p-6 space-y-4">
+          <h3 className="font-semibold text-sm text-ink dark:text-dark-ink">Certified Analytical Details</h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-            <div className="p-3.5 rounded-2xl bg-ivory border border-bone space-y-1">
-              <span className="text-muted block text-[11px]">Commodity / Batch</span>
-              <span className="font-bold text-sm text-ink block">Maize Silage (Bunker #1)</span>
-              <span className="text-[10px] text-muted">Physical Form: Chopped & Compacted Silage</span>
+            <div className="p-3.5 rounded-2xl bg-surface/70 dark:bg-dark-card/60 border border-bone dark:border-dark-border space-y-1">
+              <span className="text-muted dark:text-dark-muted block text-[11px]">Commodity / Batch</span>
+              <span className="font-bold text-sm text-ink dark:text-dark-ink block">Maize Silage (Bunker #1)</span>
+              <span className="text-[10px] text-muted dark:text-dark-muted">Physical Form: Chopped &amp; Compacted Silage</span>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-ivory border border-bone space-y-1">
-              <span className="text-muted block text-[11px]">Evaluated Risk Tier</span>
+            <div className="p-3.5 rounded-2xl bg-surface/70 dark:bg-dark-card/60 border border-bone dark:border-dark-border space-y-1">
+              <span className="text-muted dark:text-dark-muted block text-[11px]">Evaluated Risk Tier</span>
               <div className="flex items-center gap-2">
                 <StatusChip status="GOOD" size="sm" />
-                <span className="font-bold text-forest">DECISION: FEED</span>
+                <span className="font-bold text-forest dark:text-dark-forest">DECISION: FEED</span>
               </div>
-              <span className="text-[10px] text-muted">Lactic acid preservation verified</span>
+              <span className="text-[10px] text-muted dark:text-dark-muted">Lactic acid preservation verified</span>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-ivory border border-bone space-y-1">
-              <span className="text-muted block text-[11px]">Sensor Modalities Used</span>
+            <div className="p-3.5 rounded-2xl bg-surface/70 dark:bg-dark-card/60 border border-bone dark:border-dark-border space-y-1">
+              <span className="text-muted dark:text-dark-muted block text-[11px]">Sensor Modalities Used</span>
               <div className="flex flex-wrap gap-1 mt-1">
-                <span className="px-2 py-0.5 rounded bg-moss/10 text-forest text-[10px] font-mono">
+                <span className="px-2 py-0.5 rounded bg-moss/10 dark:bg-dark-moss/20 text-forest dark:text-dark-moss text-[10px] font-mono">
                   pH Probe (3.9)
                 </span>
-                <span className="px-2 py-0.5 rounded bg-moss/10 text-forest text-[10px] font-mono">
+                <span className="px-2 py-0.5 rounded bg-moss/10 dark:bg-dark-moss/20 text-forest dark:text-dark-moss text-[10px] font-mono">
                   Temp Probe (27.5°C)
                 </span>
-                <span className="px-2 py-0.5 rounded bg-moss/10 text-forest text-[10px] font-mono">
+                <span className="px-2 py-0.5 rounded bg-moss/10 dark:bg-dark-moss/20 text-forest dark:text-dark-moss text-[10px] font-mono">
                   Image QA
                 </span>
               </div>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-ivory border border-bone space-y-1">
-              <span className="text-muted block text-[11px]">Evidence Attributions</span>
+            <div className="p-3.5 rounded-2xl bg-surface/70 dark:bg-dark-card/60 border border-bone dark:border-dark-border space-y-1">
+              <span className="text-muted dark:text-dark-muted block text-[11px]">Evidence Attributions</span>
               <div className="flex flex-wrap gap-1 mt-1">
                 <EvidenceTag tag="SENSOR-MEASURED" />
                 <EvidenceTag tag="ESTIMATED" />
@@ -240,10 +240,10 @@ export default function PublicVerifyPage() {
             </div>
           </div>
 
-          <div className="pt-3 border-t border-bone flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="pt-3 border-t border-bone dark:border-dark-border flex flex-col sm:flex-row items-center justify-between gap-3">
             <Link
               href={`/test/result?id=${sampleId}`}
-              className="text-xs font-semibold text-forest hover:underline"
+              className="text-xs font-semibold text-forest dark:text-dark-forest hover:underline"
             >
               View Full Farm Result Record →
             </Link>
@@ -253,7 +253,7 @@ export default function PublicVerifyPage() {
               onClick={() => {
                 window.open(`/api/v1/reports/analysis-01/pdf`, "_blank");
               }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-forest hover:bg-deep text-white text-xs font-bold shadow-sm transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-forest hover:bg-deep dark:bg-dark-forest dark:hover:bg-forest text-white text-xs font-bold shadow-sm transition-all"
             >
               <Download className="w-3.5 h-3.5" />
               <span>Download Signed Audit Certificate (PDF)</span>

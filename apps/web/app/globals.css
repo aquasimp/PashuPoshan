@@ -8,8 +8,20 @@
   --background: #FAF6EC;
   --foreground: #23302A;
   --surface: #FFFDF7;
+  --surface-raised: #FFFFFF;
   --forest: #1F4D3A;
   --bone: #F3EDDD;
+  --muted: #6E7A70;
+}
+
+.dark {
+  --background: #0E1813;
+  --foreground: #F5F2E9;
+  --surface: #16231D;
+  --surface-raised: #1C2D25;
+  --forest: #2D6A50;
+  --bone: #1E3128;
+  --muted: #97A59C;
 }
 
 body {
@@ -19,6 +31,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 h1, h2, .font-display {
@@ -29,6 +42,73 @@ h1, h2, .font-display {
   font-family: 'Noto Sans Devanagari', sans-serif;
 }
 
+/* Liquid Glass System Primitives */
+@layer components {
+  .glass-card {
+    background: rgba(255, 253, 247, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(243, 237, 221, 0.85);
+    box-shadow: 0 8px 30px -4px rgba(31, 77, 58, 0.08), inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+  }
+
+  .dark .glass-card {
+    background: rgba(22, 35, 29, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35), inset 0 1px 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-card-hero {
+    background: rgba(255, 253, 247, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(31, 77, 58, 0.15);
+    box-shadow: 0 16px 48px -8px rgba(20, 54, 40, 0.14), inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  .dark .glass-card-hero {
+    background: rgba(22, 35, 29, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.5), inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-pill {
+    background: rgba(255, 253, 247, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(243, 237, 221, 0.8);
+    box-shadow: 0 4px 16px 0 rgba(35, 48, 42, 0.05);
+  }
+
+  .dark .glass-pill {
+    background: rgba(22, 35, 29, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-nav {
+    background: rgba(255, 253, 247, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(243, 237, 221, 0.8);
+    box-shadow: 0 4px 20px -2px rgba(35, 48, 42, 0.05);
+  }
+
+  .dark .glass-nav {
+    background: rgba(14, 24, 19, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+  }
+}
+
 /* Touch controls minimum 48px on mobile */
 @media (max-width: 640px) {
   button, a.btn-touch, input[type="button"], input[type="submit"] {
@@ -36,7 +116,7 @@ h1, h2, .font-display {
   }
 }
 
-/* Honor accessibility preferences */
+/* Accessibility: Honor reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-delay: -1ms !important;
@@ -47,10 +127,12 @@ h1, h2, .font-display {
   }
 }
 
+/* Accessibility: Honor reduced transparency */
 @media (prefers-reduced-transparency: reduce) {
-  .backdrop-blur-md, .backdrop-blur-lg, .backdrop-blur-sm {
+  .backdrop-blur-md, .backdrop-blur-lg, .backdrop-blur-sm,
+  .glass-card, .glass-card-hero, .glass-pill, .glass-nav {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    background-color: #FFFDF7 !important;
+    background-color: var(--surface) !important;
   }
 }

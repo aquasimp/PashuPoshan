@@ -15,37 +15,37 @@ const statusConfig: Record<
 > = {
   GOOD: {
     label: "GOOD",
-    bg: "bg-emerald-50",
-    text: "text-forest",
-    border: "border-emerald-300",
+    bg: "bg-emerald-50 dark:bg-emerald-950/40",
+    text: "text-forest dark:text-emerald-300",
+    border: "border-emerald-300 dark:border-emerald-700/60",
     icon: CheckCircle,
   },
   ATTENTION: {
     label: "ATTENTION",
-    bg: "bg-amber-50",
-    text: "text-amber-800",
-    border: "border-amber-300",
+    bg: "bg-amber-50 dark:bg-amber-950/40",
+    text: "text-amber-800 dark:text-amber-300",
+    border: "border-amber-300 dark:border-amber-700/60",
     icon: AlertTriangle,
   },
   "HIGH RISK": {
     label: "HIGH RISK",
-    bg: "bg-rose-50",
-    text: "text-rose-800",
-    border: "border-rose-300",
+    bg: "bg-rose-50 dark:bg-rose-950/40",
+    text: "text-rose-800 dark:text-rose-300",
+    border: "border-rose-300 dark:border-rose-700/60",
     icon: XCircle,
   },
   HIGH_RISK: {
     label: "HIGH RISK",
-    bg: "bg-rose-50",
-    text: "text-rose-800",
-    border: "border-rose-300",
+    bg: "bg-rose-50 dark:bg-rose-950/40",
+    text: "text-rose-800 dark:text-rose-300",
+    border: "border-rose-300 dark:border-rose-700/60",
     icon: XCircle,
   },
   INDETERMINATE: {
     label: "INDETERMINATE",
-    bg: "bg-stone-50",
-    text: "text-stone-700",
-    border: "border-stone-300",
+    bg: "bg-stone-100 dark:bg-stone-900/40",
+    text: "text-stone-700 dark:text-stone-300",
+    border: "border-stone-300 dark:border-stone-700/60",
     icon: HelpCircle,
   },
 };
@@ -61,11 +61,17 @@ export const StatusChip: React.FC<StatusChipProps> = ({ status, className = "", 
     lg: "px-4 py-1.5 text-base gap-2 font-semibold",
   }[size];
 
+  const iconSizes = {
+    sm: "w-3 h-3",
+    md: "w-4 h-4",
+    lg: "w-5 h-5",
+  }[size];
+
   return (
     <span
-      className={`inline-flex items-center font-medium rounded-full border tracking-wide font-sans shadow-xs ${config.bg} ${config.text} ${config.border} ${sizeClasses} ${className}`}
+      className={`inline-flex items-center rounded-full font-medium border font-sans shadow-sm ${config.bg} ${config.text} ${config.border} ${sizeClasses} ${className}`}
     >
-      <Icon className={size === "sm" ? "w-3.5 h-3.5" : size === "md" ? "w-4 h-4" : "w-5 h-5"} />
+      <Icon className={`${iconSizes} flex-shrink-0`} />
       <span>{config.label}</span>
     </span>
   );

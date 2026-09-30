@@ -138,29 +138,29 @@ export default function GuidedTourPage() {
   };
 
   return (
-    <div className="min-h-screen bg-ivory flex flex-col font-sans">
+    <div className="min-h-screen bg-ivory dark:bg-dark-bg text-ink dark:text-dark-ink flex flex-col font-sans transition-colors duration-200">
       <Navbar />
 
       <main className="flex-1 max-w-3xl w-full mx-auto px-4 py-8 flex flex-col justify-center space-y-6">
         {/* Tour Navigation Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-forest font-mono">
+            <span className="text-xs font-bold uppercase tracking-wider text-forest dark:text-emerald-400 font-mono">
               JUDGE PITCH TOUR · STEP {current.step} OF {TOUR_STEPS.length}
             </span>
           </div>
 
           <Link
             href="/demo/hero"
-            className="p-1.5 rounded-lg text-muted hover:text-ink hover:bg-bone transition-colors"
+            className="p-2 rounded-xl text-muted dark:text-dark-muted hover:text-ink dark:hover:text-white glass-card border border-bone dark:border-dark-border transition-colors"
             title="Exit Tour"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </Link>
         </div>
 
         {/* Progress Dots */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-2">
           {TOUR_STEPS.map((_, i) => (
             <button
               key={i}
@@ -168,38 +168,38 @@ export default function GuidedTourPage() {
               onClick={() => setCurrentStepIndex(i)}
               className={`h-2 rounded-full transition-all ${
                 i === currentStepIndex
-                  ? "w-8 bg-forest"
+                  ? "w-8 bg-forest dark:bg-emerald-500 shadow-sm"
                   : i < currentStepIndex
-                  ? "w-3 bg-moss"
-                  : "w-2 bg-bone"
+                  ? "w-3 bg-moss dark:bg-emerald-600"
+                  : "w-2 bg-bone dark:bg-dark-card"
               }`}
             />
           ))}
         </div>
 
-        {/* Central Tour Slide Card */}
-        <div className="bg-surface rounded-3xl p-6 sm:p-8 border-2 border-bone shadow-card space-y-6">
+        {/* Central Tour Slide Card with Liquid Glass Elevation */}
+        <div className="glass-card-hero rounded-3xl p-6 sm:p-9 border border-forest/15 dark:border-white/10 shadow-float space-y-6">
           <div className="space-y-2">
-            <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-forest/10 text-forest">
+            <span className="text-xs font-mono font-bold px-3.5 py-1 rounded-full bg-forest/10 dark:bg-emerald-500/15 text-forest dark:text-emerald-300">
               {current.badge}
             </span>
-            <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink tracking-tight pt-1">
+            <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink dark:text-dark-ink tracking-tight pt-1">
               {current.title}
             </h1>
           </div>
 
-          <p className="text-sm sm:text-base text-ink/80 leading-relaxed font-sans">
+          <p className="text-sm sm:text-base text-ink/85 dark:text-dark-ink/85 leading-relaxed font-sans">
             {current.summary}
           </p>
 
-          <div className="space-y-2.5 pt-2 border-t border-bone">
-            <span className="text-xs font-bold uppercase tracking-wider text-muted block">
+          <div className="space-y-2.5 pt-3 border-t border-bone dark:border-dark-border">
+            <span className="text-xs font-bold uppercase tracking-wider text-muted dark:text-dark-muted block">
               Key Technical Innovations:
             </span>
-            <ul className="space-y-2 text-xs sm:text-sm text-ink/90">
+            <ul className="space-y-2 text-xs sm:text-sm text-ink/90 dark:text-dark-ink/90">
               {current.highlights.map((h, i) => (
                 <li key={i} className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-moss shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-moss dark:text-emerald-400 shrink-0 mt-0.5" />
                   <span>{h}</span>
                 </li>
               ))}
@@ -207,16 +207,16 @@ export default function GuidedTourPage() {
           </div>
 
           {/* Action Link to Live Screen */}
-          <div className="pt-4 border-t border-bone flex items-center justify-between">
+          <div className="pt-4 border-t border-bone dark:border-dark-border flex items-center justify-between">
             <Link
               href={current.actionLink}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-forest hover:text-deep hover:underline"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-forest dark:text-emerald-400 hover:text-deep dark:hover:text-emerald-300 hover:underline"
             >
               <span>{current.actionLabel}</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </Link>
 
-            <span className="text-[11px] text-muted font-mono">
+            <span className="text-[11px] text-muted dark:text-dark-muted font-mono">
               {currentStepIndex + 1} / {TOUR_STEPS.length}
             </span>
           </div>
@@ -228,7 +228,7 @@ export default function GuidedTourPage() {
             type="button"
             onClick={prevStep}
             disabled={isFirst}
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-surface border border-bone text-ink font-semibold text-xs disabled:opacity-40 hover:bg-bone transition-all"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl glass-card border border-bone dark:border-dark-border text-ink dark:text-dark-ink font-semibold text-xs disabled:opacity-40 hover:bg-bone dark:hover:bg-dark-card transition-all"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Previous</span>
@@ -237,7 +237,7 @@ export default function GuidedTourPage() {
           {isLast ? (
             <Link
               href="/test"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-forest hover:bg-deep text-white font-bold text-xs shadow-md transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-forest dark:bg-emerald-600 hover:bg-deep dark:hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all"
             >
               <span>Start Live Evaluation</span>
               <ArrowRight className="w-4 h-4" />
@@ -246,7 +246,7 @@ export default function GuidedTourPage() {
             <button
               type="button"
               onClick={nextStep}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-forest hover:bg-deep text-white font-bold text-xs shadow-md transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-forest dark:bg-emerald-600 hover:bg-deep dark:hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all"
             >
               <span>Next Innovation</span>
               <ArrowRight className="w-4 h-4" />

@@ -14,6 +14,16 @@ In accordance with **CLAUDE.md Section 0.7 & 0.8**, this document describes the 
   * ADF: 12% to 46% DM
 * **Mandatory Banner:**
   > **Trained on synthetic demo data — NOT a validation of field accuracy**
+* **Active Demo Model Benchmarks (Generated from `ml/train.py` on 1,200 Synthetic Spectra):**
+  * *Dry Matter (% DM):* PLSR $R^2 = 0.9496$, $\text{RMSEP} = 5.359\%$, $\text{RPD} = 4.452$
+  * *Crude Protein (% DM):* PLSR $R^2 = 0.9070$, $\text{RMSEP} = 1.465\%$, $\text{RPD} = 3.278$
+  * *NDF Fiber (% DM):* PLSR $R^2 = 0.7258$, $\text{RMSEP} = 4.908\%$, $\text{RPD} = 1.910$
+  * *ADF Fiber (% DM):* PLSR $R^2 = 0.7984$, $\text{RMSEP} = 3.068\%$, $\text{RPD} = 2.227$
+* **Real Field Model Status (Zero Fabrication Policy):**
+  * Real Field NIR Model: **PENDING — MODEL BUILD / VALIDATION IN PROGRESS**
+  * Real Indian Feed Image Model: **PENDING — MODEL BUILD / VALIDATION IN PROGRESS**
+  * Real Urea Assay Validation: **PENDING — MODEL BUILD / VALIDATION IN PROGRESS**
+  * Real External Laboratory Validation: **PENDING — MODEL BUILD / VALIDATION IN PROGRESS**
 * **Primary Failure Modes:**
   1. *Out-of-Domain Spectra:* Physical samples differing in particle size, moisture extremes, or unmodeled mineral adulteration trigger Hotelling $T^2$ / Q-residual limits (`INVALID`), returning `value = null`.
   2. *Unground Physical Samples:* Direct unground silage scans exhibit high light scattering variance. Scanning fresh chop requires replicate averaging (3–5 scans) or standardized sample grinding protocol.

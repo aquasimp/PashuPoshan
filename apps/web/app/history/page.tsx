@@ -84,17 +84,17 @@ export default function HistoryPage() {
   });
 
   return (
-    <div className="min-h-screen bg-ivory flex flex-col font-sans">
+    <div className="min-h-screen bg-ivory dark:bg-dark-bg text-ink dark:text-dark-ink flex flex-col font-sans transition-colors duration-200">
       <Navbar />
 
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6">
         {/* Header & New Test CTA */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink">
+            <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink dark:text-dark-ink">
               Test Sample History
             </h1>
-            <p className="text-xs text-muted mt-0.5">
+            <p className="text-xs text-muted dark:text-dark-muted mt-0.5">
               Chronological log of farm feed evaluations stored on this device.
             </p>
           </div>
@@ -115,7 +115,7 @@ export default function HistoryPage() {
 
             <Link
               href="/test"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-forest hover:bg-deep text-white font-bold text-xs shadow-sm transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-forest hover:bg-deep dark:bg-dark-forest dark:hover:bg-forest text-white font-bold text-xs shadow-sm transition-all"
             >
               <PlusCircle className="w-4 h-4" />
               <span>Start New Test</span>
@@ -124,15 +124,15 @@ export default function HistoryPage() {
         </div>
 
         {/* Search & Filter Bar */}
-        <div className="bg-surface p-4 rounded-2xl border border-bone shadow-card flex flex-col sm:flex-row gap-3 items-center justify-between">
+        <div className="glass-card p-4 rounded-2xl flex flex-col sm:flex-row gap-3 items-center justify-between">
           <div className="relative w-full sm:w-72">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted dark:text-dark-muted" />
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search by ID or crop name..."
-              className="w-full pl-9 pr-3 py-2 rounded-xl bg-ivory border border-bone text-xs text-ink focus:outline-none focus:border-forest"
+              className="w-full pl-9 pr-3 py-2 rounded-xl bg-surface/80 dark:bg-dark-card border border-bone dark:border-dark-border text-xs text-ink dark:text-dark-ink focus:outline-none focus:border-forest dark:focus:border-dark-forest placeholder:text-muted dark:placeholder:text-dark-muted"
             />
           </div>
 
@@ -141,7 +141,9 @@ export default function HistoryPage() {
               type="button"
               onClick={() => setActiveFilter("all")}
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                activeFilter === "all" ? "bg-forest text-white" : "bg-ivory text-muted hover:text-ink border border-bone"
+                activeFilter === "all"
+                  ? "bg-forest dark:bg-dark-forest text-white"
+                  : "bg-surface/80 dark:bg-dark-card text-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-ink border border-bone dark:border-dark-border"
               }`}
             >
               All ({samples.length})
@@ -150,7 +152,9 @@ export default function HistoryPage() {
               type="button"
               onClick={() => setActiveFilter("silage")}
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                activeFilter === "silage" ? "bg-forest text-white" : "bg-ivory text-muted hover:text-ink border border-bone"
+                activeFilter === "silage"
+                  ? "bg-forest dark:bg-dark-forest text-white"
+                  : "bg-surface/80 dark:bg-dark-card text-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-ink border border-bone dark:border-dark-border"
               }`}
             >
               Silage
@@ -159,7 +163,9 @@ export default function HistoryPage() {
               type="button"
               onClick={() => setActiveFilter("feed")}
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                activeFilter === "feed" ? "bg-forest text-white" : "bg-ivory text-muted hover:text-ink border border-bone"
+                activeFilter === "feed"
+                  ? "bg-forest dark:bg-dark-forest text-white"
+                  : "bg-surface/80 dark:bg-dark-card text-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-ink border border-bone dark:border-dark-border"
               }`}
             >
               Feed
@@ -168,7 +174,9 @@ export default function HistoryPage() {
               type="button"
               onClick={() => setActiveFilter("high_risk")}
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                activeFilter === "high_risk" ? "bg-terracotta text-white" : "bg-ivory text-muted hover:text-ink border border-bone"
+                activeFilter === "high_risk"
+                  ? "bg-terracotta text-white"
+                  : "bg-surface/80 dark:bg-dark-card text-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-ink border border-bone dark:border-dark-border"
               }`}
             >
               High Risk
@@ -177,7 +185,9 @@ export default function HistoryPage() {
               type="button"
               onClick={() => setActiveFilter("unsynced")}
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                activeFilter === "unsynced" ? "bg-amber-600 text-white" : "bg-ivory text-muted hover:text-ink border border-bone"
+                activeFilter === "unsynced"
+                  ? "bg-amber-600 text-white"
+                  : "bg-surface/80 dark:bg-dark-card text-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-ink border border-bone dark:border-dark-border"
               }`}
             >
               Unsynced
@@ -186,22 +196,22 @@ export default function HistoryPage() {
         </div>
 
         {/* Comparison Helper Notice */}
-        <div className="text-[11px] text-muted flex items-center justify-between px-1">
+        <div className="text-[11px] text-muted dark:text-dark-muted flex items-center justify-between px-1">
           <span>Select any 2 samples using the checkboxes on the left to compare nutritional and sensor diffs.</span>
-          <span>{selectedForCompare.length} / 2 selected</span>
+          <span className="font-mono font-medium">{selectedForCompare.length} / 2 selected</span>
         </div>
 
         {/* Sample List */}
         {loading ? (
-          <div className="p-12 text-center bg-surface rounded-2xl border border-bone">
-            <RefreshCw className="w-6 h-6 animate-spin mx-auto text-forest mb-2" />
-            <p className="text-xs text-muted">Loading farm timeline...</p>
+          <div className="p-12 text-center glass-card rounded-2xl">
+            <RefreshCw className="w-6 h-6 animate-spin mx-auto text-forest dark:text-dark-forest mb-2" />
+            <p className="text-xs text-muted dark:text-dark-muted">Loading farm timeline...</p>
           </div>
         ) : filteredSamples.length === 0 ? (
-          <div className="p-12 text-center bg-surface rounded-2xl border border-bone space-y-3">
-            <Layers className="w-8 h-8 text-muted mx-auto" />
-            <h3 className="font-semibold text-sm text-ink">No samples found</h3>
-            <p className="text-xs text-muted">No records match your search or filter selection.</p>
+          <div className="p-12 text-center glass-card rounded-2xl space-y-3">
+            <Layers className="w-8 h-8 text-muted dark:text-dark-muted mx-auto" />
+            <h3 className="font-semibold text-sm text-ink dark:text-dark-ink">No samples found</h3>
+            <p className="text-xs text-muted dark:text-dark-muted">No records match your search or filter selection.</p>
           </div>
         ) : (
           <div className="space-y-3">
@@ -219,10 +229,10 @@ export default function HistoryPage() {
               return (
                 <div
                   key={s.id}
-                  className={`p-4 rounded-2xl bg-surface border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
+                  className={`p-4 rounded-2xl transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
                     isSelected
-                      ? "border-amber-500 shadow-md bg-amber-50/20"
-                      : "border-bone hover:border-moss/40 shadow-card"
+                      ? "border-amber-500 shadow-md bg-amber-50/30 dark:bg-amber-950/30 border"
+                      : "glass-card hover:border-moss/40 dark:hover:border-dark-moss/50"
                   }`}
                 >
                   <div className="flex items-start sm:items-center gap-3">
@@ -237,15 +247,15 @@ export default function HistoryPage() {
 
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-mono text-xs font-bold text-muted">
+                        <span className="font-mono text-xs font-bold text-muted dark:text-dark-muted">
                           {s.id}
                         </span>
                         <SyncStatusBadge status={s.syncStatus} size="sm" />
                       </div>
-                      <h3 className="font-display font-bold text-base text-ink mt-0.5">
+                      <h3 className="font-display font-bold text-base text-ink dark:text-dark-ink mt-0.5">
                         {s.cropOrFeedName}
                       </h3>
-                      <div className="flex items-center gap-2 text-xs text-muted mt-0.5">
+                      <div className="flex items-center gap-2 text-xs text-muted dark:text-dark-muted mt-0.5">
                         <Calendar className="w-3.5 h-3.5" />
                         <span>{dateStr}</span>
                         <span>•</span>
@@ -255,11 +265,11 @@ export default function HistoryPage() {
                   </div>
 
                   {/* Badges & Actions */}
-                  <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0 pt-2 sm:pt-0 border-t sm:border-0 border-bone">
+                  <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0 pt-2 sm:pt-0 border-t sm:border-0 border-bone dark:border-dark-border">
                     {a && (
                       <div className="flex items-center gap-2">
                         <StatusChip status={a.overallRisk} size="sm" />
-                        <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-forest/10 text-forest">
+                        <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-forest/10 dark:bg-dark-forest/20 text-forest dark:text-dark-forest">
                           {a.actionDecision}
                         </span>
                       </div>
@@ -267,7 +277,7 @@ export default function HistoryPage() {
 
                     <Link
                       href={`/test/result?id=${s.id}`}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-ivory hover:bg-forest hover:text-white text-forest text-xs font-semibold border border-bone transition-all"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface/80 dark:bg-dark-card hover:bg-forest dark:hover:bg-dark-forest hover:text-white dark:hover:text-white text-forest dark:text-dark-forest text-xs font-semibold border border-bone dark:border-dark-border transition-all"
                     >
                       <span>Result</span>
                       <ArrowRight className="w-3.5 h-3.5" />

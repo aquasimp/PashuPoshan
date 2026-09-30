@@ -119,7 +119,7 @@ export default function HeroDemoPage() {
   };
 
   return (
-    <div className="min-h-screen bg-ivory flex flex-col font-sans">
+    <div className="min-h-screen bg-ivory dark:bg-dark-bg text-ink dark:text-dark-ink flex flex-col font-sans transition-colors duration-200">
       <Navbar />
 
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-8 space-y-6">
@@ -127,15 +127,15 @@ export default function HeroDemoPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-moss">
+              <span className="text-xs font-bold uppercase tracking-wider text-moss dark:text-emerald-400">
                 SIH26111 Judges Showcase
               </span>
               <DemoBadge label="5-SCENARIO SUITE" size="sm" />
             </div>
-            <h1 className="font-display text-2xl sm:text-4xl font-bold text-ink tracking-tight mt-1">
+            <h1 className="font-display text-2xl sm:text-4xl font-bold text-ink dark:text-dark-ink tracking-tight mt-1">
               Hero Demo: Healthy vs Spoiled Silage
             </h1>
-            <p className="text-xs sm:text-sm text-muted">
+            <p className="text-xs sm:text-sm text-muted dark:text-dark-muted">
               Live interactive comparison without login. Demonstrates worst supported hazard fusion and instant farmer advisory.
             </p>
           </div>
@@ -143,7 +143,7 @@ export default function HeroDemoPage() {
           <div className="flex items-center gap-3">
             <Link
               href="/demo/tour"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-forest hover:bg-deep text-white font-bold text-xs shadow-md transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-forest dark:bg-emerald-600 hover:bg-deep dark:hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all"
             >
               <Compass className="w-4 h-4 text-mist" />
               <span>Launch 3-Min Judge Tour</span>
@@ -152,24 +152,24 @@ export default function HeroDemoPage() {
             <button
               type="button"
               onClick={handleResetDemo}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface border border-bone text-ink hover:bg-bone text-xs font-medium transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl glass-card border border-bone dark:border-dark-border text-ink dark:text-dark-ink hover:bg-bone dark:hover:bg-dark-card text-xs font-medium transition-colors"
               title="Reset local demo database"
             >
-              <RotateCcw className="w-3.5 h-3.5 text-muted" />
+              <RotateCcw className="w-3.5 h-3.5 text-muted dark:text-dark-muted" />
               <span>Reset Demo</span>
             </button>
           </div>
         </div>
 
         {resetMessage && (
-          <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-forest font-medium flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-moss shrink-0" />
+          <div className="p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 text-xs text-forest dark:text-emerald-300 font-medium flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-moss dark:text-emerald-400 shrink-0" />
             <span>{resetMessage}</span>
           </div>
         )}
 
         {/* 5 Scenario Selector Tabs */}
-        <div className="bg-surface p-2.5 rounded-2xl border border-bone shadow-card flex flex-wrap gap-2">
+        <div className="glass-card p-3 rounded-2xl border border-bone dark:border-dark-border shadow-card flex flex-wrap gap-2">
           {DEMO_SCENARIOS.map((sc) => {
             const isActive = activeScenario.id === sc.id;
             return (
@@ -179,8 +179,8 @@ export default function HeroDemoPage() {
                 onClick={() => setActiveScenario(sc)}
                 className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
                   isActive
-                    ? "bg-forest text-white shadow-sm"
-                    : "bg-ivory hover:bg-bone text-ink border border-bone"
+                    ? "bg-forest dark:bg-emerald-600 text-white shadow-sm"
+                    : "bg-ivory dark:bg-dark-card hover:bg-bone dark:hover:bg-dark-surface text-ink dark:text-dark-ink border border-bone dark:border-dark-border"
                 }`}
               >
                 {sc.name}
@@ -189,52 +189,52 @@ export default function HeroDemoPage() {
           })}
         </div>
 
-        {/* Active Scenario Live Card */}
-        <div className="bg-surface rounded-3xl p-6 border-2 border-forest/20 shadow-card space-y-4">
+        {/* Active Scenario Live Card with Liquid Glass Elevation */}
+        <div className="glass-card-hero rounded-3xl p-6 sm:p-8 border-2 border-forest/20 dark:border-emerald-500/30 shadow-float space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <span className="text-xs font-mono font-bold text-forest uppercase tracking-wider block">
+              <span className="text-xs font-mono font-bold text-forest dark:text-emerald-400 uppercase tracking-wider block">
                 ACTIVE BENCHMARK CASE
               </span>
-              <h2 className="font-display font-bold text-xl text-ink mt-0.5">
+              <h2 className="font-display font-bold text-xl sm:text-2xl text-ink dark:text-dark-ink mt-0.5">
                 {activeScenario.crop}
               </h2>
             </div>
 
             <div className="flex items-center gap-2.5">
               <StatusChip status={activeScenario.risk as any} size="md" />
-              <div className="px-3 py-1 rounded-xl bg-forest text-white font-mono font-bold text-xs">
+              <div className="px-3 py-1 rounded-xl bg-forest dark:bg-emerald-600 text-white font-mono font-bold text-xs">
                 ACTION: {activeScenario.decision}
               </div>
             </div>
           </div>
 
-          <p className="text-xs sm:text-sm text-ink/80 leading-relaxed font-sans">
+          <p className="text-xs sm:text-sm text-ink/80 dark:text-dark-ink/80 leading-relaxed font-sans">
             {activeScenario.summary}
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-            <div className="p-3 rounded-xl bg-ivory border border-bone">
-              <span className="text-[11px] text-muted block">Core Silage pH</span>
-              <span className="font-mono text-base font-bold text-ink">
+            <div className="p-3.5 rounded-2xl bg-ivory/80 dark:bg-dark-card border border-bone dark:border-dark-border">
+              <span className="text-[11px] text-muted dark:text-dark-muted block">Core Silage pH</span>
+              <span className="font-mono text-base font-bold text-ink dark:text-dark-ink">
                 {activeScenario.ph !== null ? activeScenario.ph.toFixed(1) : "N/A"}
               </span>
             </div>
-            <div className="p-3 rounded-xl bg-ivory border border-bone">
-              <span className="text-[11px] text-muted block">Internal Temp</span>
-              <span className="font-mono text-base font-bold text-ink">
+            <div className="p-3.5 rounded-2xl bg-ivory/80 dark:bg-dark-card border border-bone dark:border-dark-border">
+              <span className="text-[11px] text-muted dark:text-dark-muted block">Internal Temp</span>
+              <span className="font-mono text-base font-bold text-ink dark:text-dark-ink">
                 {activeScenario.internalTemp !== null ? `${activeScenario.internalTemp}°C` : "N/A"}
               </span>
             </div>
-            <div className="p-3 rounded-xl bg-ivory border border-bone">
-              <span className="text-[11px] text-muted block">Heating ΔT</span>
-              <span className="font-mono text-base font-bold text-ink">
+            <div className="p-3.5 rounded-2xl bg-ivory/80 dark:bg-dark-card border border-bone dark:border-dark-border">
+              <span className="text-[11px] text-muted dark:text-dark-muted block">Heating ΔT</span>
+              <span className="font-mono text-base font-bold text-ink dark:text-dark-ink">
                 +{activeScenario.deltaT}°C
               </span>
             </div>
-            <div className="p-3 rounded-xl bg-ivory border border-bone">
-              <span className="text-[11px] text-muted block">Dry Matter</span>
-              <span className="font-mono text-base font-bold text-ink">
+            <div className="p-3.5 rounded-2xl bg-ivory/80 dark:bg-dark-card border border-bone dark:border-dark-border">
+              <span className="text-[11px] text-muted dark:text-dark-muted block">Dry Matter</span>
+              <span className="font-mono text-base font-bold text-ink dark:text-dark-ink">
                 {activeScenario.dryMatter}% DM
               </span>
             </div>
@@ -244,15 +244,15 @@ export default function HeroDemoPage() {
         {/* Side-by-Side: Healthy Silage vs Spoiled Silage Anatomy */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="font-display text-xl font-bold text-ink">
+            <h2 className="font-display text-xl font-bold text-ink dark:text-dark-ink">
               Anatomy Comparison: Healthy vs Aerobically Spoiled
             </h2>
-            <span className="text-xs text-muted">Agronomic Quality Indicators</span>
+            <span className="text-xs text-muted dark:text-dark-muted">Agronomic Quality Indicators</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Healthy Silage Column */}
-            <div className="rounded-3xl p-6 bg-emerald-950 text-white shadow-card space-y-4 border border-emerald-700/50">
+            <div className="rounded-3xl p-6 sm:p-7 bg-emerald-950 dark:bg-[#0a1a12] text-white shadow-float space-y-4 border border-emerald-600/40">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-5 h-5 text-emerald-400" />
@@ -300,7 +300,7 @@ export default function HeroDemoPage() {
             </div>
 
             {/* Spoiled Silage Column */}
-            <div className="rounded-3xl p-6 bg-stone-900 text-white shadow-card space-y-4 border border-terracotta/50">
+            <div className="rounded-3xl p-6 sm:p-7 bg-stone-900 dark:bg-[#18110e] text-white shadow-float space-y-4 border border-terracotta/40">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <AlertTriangle className="w-5 h-5 text-terracotta" />
@@ -350,19 +350,19 @@ export default function HeroDemoPage() {
         </div>
 
         {/* Quick Launch Direct Action */}
-        <div className="p-6 rounded-3xl bg-forest text-white shadow-card flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="p-6 sm:p-8 rounded-3xl bg-forest dark:bg-[#12241b] text-white shadow-float flex flex-col sm:flex-row items-center justify-between gap-4 border border-forest-border/40 dark:border-emerald-500/20">
           <div className="space-y-1">
-            <h3 className="font-display font-bold text-xl">
+            <h3 className="font-display font-bold text-xl sm:text-2xl">
               Ready to test a real sample?
             </h3>
-            <p className="text-xs text-mist/90 max-w-lg">
+            <p className="text-xs sm:text-sm text-mist/90 dark:text-sage-light/80 max-w-lg">
               Perform a full offline test run with custom simulated probe values and live camera QA.
             </p>
           </div>
 
           <Link
             href="/test"
-            className="shrink-0 inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-white text-forest font-bold text-xs shadow-md hover:bg-mist transition-all"
+            className="shrink-0 inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-white dark:bg-dark-ink text-forest dark:text-dark-surface font-bold text-xs shadow-md hover:bg-mist transition-all"
           >
             <span>Begin Interactive Test Flow</span>
             <ArrowRight className="w-4 h-4 ml-1" />

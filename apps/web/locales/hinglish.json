@@ -39,9 +39,9 @@
     "storageAlerts": "Silage Pit Alerts",
     "capturePrompt": "Sample ki photo kheinchein",
     "captureHint": "Sample ko saaf jagah par rakhein aur acchi roshni mein photo lein",
-    "retakeBlur": "Hold camera steady.",
-    "retakeLighting": "Improve lighting.",
-    "retakeDistance": "Move closer."
+    "retakeBlur": "Camera steady rakhein, photo blur aayi hai.",
+    "retakeLighting": "Lighting improve karein, photo dark ya glare wali hai.",
+    "retakeDistance": "Camera thoda paas layein aur sample ko center karein."
   },
   "results": {
     "title": "Analysis Result",
@@ -52,24 +52,24 @@
     "inputCompleteness": "Input Completeness",
     "nutrition": {
       "title": "Nutrition Profile",
-      "notMeasured": "Not measured",
+      "notMeasured": "Not measured (bina NIR spectrometer ke)",
       "crudeProtein": "Crude Protein (CP)",
       "dryMatter": "Dry Matter (DM)",
       "ndf": "NDF Fiber",
       "adf": "ADF Fiber"
     },
     "claims": {
-      "ureaImageOnly": "Urea cannot be assessed from this image alone.",
-      "ureaAssayPositive": "Possible excess/non-declared urea — screening result. Confirmatory laboratory test recommended.",
-      "visibleMould": "Visible mould risk",
-      "spectralContamination": "Indicative spectral contamination risk",
+      "ureaImageOnly": "Kewal photo se urea test nahi ho sakta.",
+      "ureaAssayPositive": "Excess ya non-declared urea ka sandeh — screening result hai. Confirmatory lab test karwayein.",
+      "visibleMould": "Visible mould ka risk",
+      "spectralContamination": "Spectral contamination ka sanketik risk",
       "rapidAssay": "Rapid assay screening result",
       "labScreening": "Laboratory screening result",
       "confirmatoryLab": "Confirmatory laboratory result",
-      "sandSilica": "Suspected inorganic contamination — confirmatory laboratory test recommended.",
-      "outOfDomain": "Sample outside validated model range — laboratory confirmation recommended.",
-      "stripValidationFailed": "Unable to validate test image — retake required.",
-      "syntheticBanner": "Trained on synthetic demo data — NOT a validation of field accuracy"
+      "sandSilica": "Sand ya silica contamination ka sandeh — lab test karwayein.",
+      "outOfDomain": "Sample validated model range se bahar hai — lab test karwayein.",
+      "stripValidationFailed": "Test card validate nahi ho paya — dobara photo lein.",
+      "syntheticBanner": "Synthetic demo data par trained — real field accuracy ka claim nahi hai"
     },
     "silageRisks": {
       "airIngress": "Hawa ghusne ka risk",

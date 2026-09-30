@@ -7,10 +7,13 @@ import hinglish from "../locales/hinglish.json";
 import { Globe } from "lucide-react";
 
 export type Locale = "en" | "hi" | "hinglish";
+export type SupportedLanguage = Locale;
 
 interface I18nContextType {
   locale: Locale;
   setLocale: (l: Locale) => void;
+  language: Locale;
+  setLanguage: (l: Locale) => void;
   t: (key: string, fallback?: string) => string;
 }
 
@@ -23,6 +26,8 @@ const translations: Record<Locale, any> = {
 const I18nContext = createContext<I18nContextType>({
   locale: "en",
   setLocale: () => {},
+  language: "en",
+  setLanguage: () => {},
   t: (key) => key,
 });
 
@@ -66,7 +71,7 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <I18nContext.Provider value={{ locale, setLocale, t }}>
+    <I18nContext.Provider value={{ locale, setLocale, language: locale, setLanguage: setLocale, t }}>
       {children}
     </I18nContext.Provider>
   );

@@ -39,9 +39,9 @@
     "storageAlerts": "साइलेज गड्ढे की चेतावनियाँ",
     "capturePrompt": "नमूने की फ़ोटो लें",
     "captureHint": "नमूने को साफ सतह पर रखें और सीधी रोशनी में फोटो लें",
-    "retakeBlur": "Hold camera steady.",
-    "retakeLighting": "Improve lighting.",
-    "retakeDistance": "Move closer."
+    "retakeBlur": "कैमरा स्थिर रखें, तस्वीर धुंधली है।",
+    "retakeLighting": "रोशनी बेहतर करें, तस्वीर अंधेरी या बहुत चमकदार है।",
+    "retakeDistance": "कैमरा थोड़ा पास लाएं और नमूने को बीच में रखें।"
   },
   "results": {
     "title": "विश्लेषण परिणाम",
@@ -52,24 +52,24 @@
     "inputCompleteness": "इनपुट पूर्णता",
     "nutrition": {
       "title": "पोषण प्रोफ़ाइल",
-      "notMeasured": "Not measured",
+      "notMeasured": "मापा नहीं गया (बिना NIR स्पेक्ट्रोमीटर)",
       "crudeProtein": "क्रूड प्रोटीन (CP)",
       "dryMatter": "शुष्क पदार्थ (DM)",
       "ndf": "तटस्थ डिटर्जेंट फाइबर (NDF)",
       "adf": "अम्ल डिटर्जेंट फाइबर (ADF)"
     },
     "claims": {
-      "ureaImageOnly": "Urea cannot be assessed from this image alone.",
-      "ureaAssayPositive": "Possible excess/non-declared urea — screening result. Confirmatory laboratory test recommended.",
-      "visibleMould": "Visible mould risk",
-      "spectralContamination": "Indicative spectral contamination risk",
-      "rapidAssay": "Rapid assay screening result",
-      "labScreening": "Laboratory screening result",
-      "confirmatoryLab": "Confirmatory laboratory result",
-      "sandSilica": "Suspected inorganic contamination — confirmatory laboratory test recommended.",
-      "outOfDomain": "Sample outside validated model range — laboratory confirmation recommended.",
-      "stripValidationFailed": "Unable to validate test image — retake required.",
-      "syntheticBanner": "Trained on synthetic demo data — NOT a validation of field accuracy"
+      "ureaImageOnly": "केवल इस तस्वीर से यूरिया की जांच नहीं की जा सकती।",
+      "ureaAssayPositive": "अतिरिक्त या अघोषित यूरिया की संभावना — यह केवल प्रारंभिक जांच परिणाम है। प्रयोगशाला पुष्टि अनुशंसित है।",
+      "visibleMould": "दृश्यमान फफूंद (Mould) का जोखिम",
+      "spectralContamination": "स्पेक्ट्रल संदूषण का संकेतक जोखिम",
+      "rapidAssay": "रैपिड एस्से स्क्रीनिंग परिणाम",
+      "labScreening": "प्रयोगशाला स्क्रीनिंग परिणाम",
+      "confirmatoryLab": "पुष्टिकृत प्रयोगशाला परिणाम",
+      "sandSilica": "अकार्बनिक रेत/सिलिका संदूषण का संदेह — प्रयोगशाला पुष्टि अनुशंसित है।",
+      "outOfDomain": "नमूना मॉडल की मान्य सीमा से बाहर है — प्रयोगशाला पुष्टि अनुशंसित है।",
+      "stripValidationFailed": "परीक्षण छवि मान्य करने में असमर्थ — पुनः तस्वीर लें।",
+      "syntheticBanner": "सिंथेटिक डेमो डेटा पर प्रशिक्षित — यह वास्तविक क्षेत्रीय सटीकता का सत्यापन नहीं है"
     },
     "silageRisks": {
       "airIngress": "हवा रिसाव जोखिम",

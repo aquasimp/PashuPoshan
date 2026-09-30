@@ -251,25 +251,25 @@ function ProcessingContent() {
 
   return (
     <main className="flex-1 max-w-xl w-full mx-auto px-4 py-12 flex flex-col justify-center items-center space-y-8">
-      {/* Central Rotating Shield Icon */}
+      {/* Central Rotating Shield Icon with Liquid Glass Specular Shine */}
       <div className="relative">
-        <div className="w-24 h-24 rounded-3xl bg-forest/10 border-2 border-forest/20 flex items-center justify-center text-forest shadow-card">
-          <ShieldCheck className="w-12 h-12 text-forest animate-pulse" />
+        <div className="w-24 h-24 rounded-3xl glass-card border-2 border-forest/30 dark:border-emerald-500/40 flex items-center justify-center text-forest dark:text-emerald-400 shadow-float">
+          <ShieldCheck className="w-12 h-12 text-forest dark:text-emerald-400 animate-pulse" />
         </div>
-        <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-forest text-white flex items-center justify-center text-xs font-mono font-bold">
+        <div className="absolute -top-1.5 -right-1.5 w-7 h-7 rounded-full bg-forest dark:bg-emerald-600 text-white flex items-center justify-center text-xs font-mono font-bold shadow-md">
           <Sparkles className="w-3.5 h-3.5 text-amber-300" />
         </div>
       </div>
 
       {/* Title & Progress Header */}
       <div className="text-center space-y-2">
-        <span className="text-xs font-bold uppercase tracking-wider text-moss font-sans">
+        <span className="text-xs font-bold uppercase tracking-wider text-moss dark:text-emerald-400 font-sans">
           Analysing on device — Offline
         </span>
-        <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink">
+        <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink dark:text-dark-ink">
           FeedShield Multimodal Engine
         </h1>
-        <p className="text-xs text-muted font-mono">
+        <p className="text-xs text-muted dark:text-dark-muted font-mono">
           Sample Reference: {targetSampleId || "Generating ID..."}
         </p>
       </div>
@@ -277,19 +277,19 @@ function ProcessingContent() {
       {/* Progress Bar */}
       <div className="w-full space-y-1.5">
         <div className="flex justify-between text-xs font-mono font-medium">
-          <span className="text-muted">Inference Pipeline</span>
-          <span className="text-forest font-bold">{progressPercent}%</span>
+          <span className="text-muted dark:text-dark-muted">Inference Pipeline</span>
+          <span className="text-forest dark:text-emerald-400 font-bold">{progressPercent}%</span>
         </div>
-        <div className="h-2 w-full bg-bone rounded-full overflow-hidden">
+        <div className="h-2 w-full bg-bone dark:bg-dark-card rounded-full overflow-hidden">
           <div
-            className="h-full bg-forest rounded-full transition-all duration-300 ease-out"
+            className="h-full bg-forest dark:bg-emerald-500 rounded-full transition-all duration-300 ease-out"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
       </div>
 
       {/* 7-Step Restrained Motion Sequence */}
-      <div className="w-full bg-surface rounded-3xl border border-bone p-5 shadow-card space-y-3">
+      <div className="w-full glass-card rounded-3xl border border-bone dark:border-dark-border p-6 shadow-card space-y-3">
         {ANALYSIS_STEPS.map((step, idx) => {
           const isDone = completedSteps.includes(idx);
           const isCurrent = currentStepIndex === idx && !isDone;
@@ -298,21 +298,21 @@ function ProcessingContent() {
           return (
             <div
               key={step.id}
-              className={`flex items-center gap-3.5 p-2 rounded-xl transition-all ${
+              className={`flex items-center gap-3.5 p-2.5 rounded-xl transition-all ${
                 isCurrent
-                  ? "bg-forest/5 text-forest font-semibold"
+                  ? "bg-forest/10 dark:bg-emerald-500/15 text-forest dark:text-emerald-300 font-semibold"
                   : isDone
-                  ? "text-ink/80"
-                  : "text-muted/60 opacity-60"
+                  ? "text-ink/90 dark:text-dark-ink/90"
+                  : "text-muted/60 dark:text-dark-muted/50 opacity-60"
               }`}
             >
               <div
                 className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
                   isDone
-                    ? "bg-moss text-white"
+                    ? "bg-moss dark:bg-emerald-600 text-white"
                     : isCurrent
-                    ? "bg-forest text-white animate-spin"
-                    : "bg-bone text-muted"
+                    ? "bg-forest dark:bg-emerald-500 text-white animate-spin"
+                    : "bg-bone dark:bg-dark-card text-muted dark:text-dark-muted"
                 }`}
               >
                 {isDone ? (
@@ -329,7 +329,7 @@ function ProcessingContent() {
         })}
       </div>
 
-      <p className="text-[11px] text-muted text-center max-w-sm">
+      <p className="text-[11px] text-muted dark:text-dark-muted text-center max-w-sm">
         Processing entirely on local client engine using Dexie storage. No internet connection required.
       </p>
     </main>
@@ -338,9 +338,9 @@ function ProcessingContent() {
 
 export default function ProcessingPage() {
   return (
-    <div className="min-h-screen bg-ivory flex flex-col font-sans">
+    <div className="min-h-screen bg-ivory dark:bg-dark-bg text-ink dark:text-dark-ink flex flex-col font-sans transition-colors duration-200">
       <Navbar />
-      <Suspense fallback={<div className="p-8 text-center text-xs text-muted">Initializing engine...</div>}>
+      <Suspense fallback={<div className="p-8 text-center text-xs text-muted dark:text-dark-muted">Initializing engine...</div>}>
         <ProcessingContent />
       </Suspense>
     </div>

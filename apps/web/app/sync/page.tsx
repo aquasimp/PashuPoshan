@@ -117,27 +117,27 @@ export default function SyncCenterPage() {
   const syncedCount = outboxItems.filter((i) => i.status === "synced").length;
 
   return (
-    <div className="min-h-screen bg-ivory flex flex-col font-sans">
+    <div className="min-h-screen bg-ivory dark:bg-dark-bg text-ink dark:text-dark-ink flex flex-col font-sans transition-colors duration-200">
       <Navbar />
 
       <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-8 space-y-6">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-xs text-muted">
-          <Link href="/" className="hover:text-forest flex items-center gap-1">
+        <div className="flex items-center gap-2 text-xs text-muted dark:text-dark-muted">
+          <Link href="/" className="hover:text-forest dark:hover:text-dark-forest flex items-center gap-1 transition-colors">
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Home</span>
           </Link>
           <span>/</span>
-          <span className="text-ink font-medium">Sync Center</span>
+          <span className="text-ink dark:text-dark-ink font-medium">Sync Center</span>
         </div>
 
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink">
+            <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink dark:text-dark-ink">
               Offline Synchronization Hub
             </h1>
-            <p className="text-xs text-muted mt-0.5">
+            <p className="text-xs text-muted dark:text-dark-muted mt-0.5">
               Manage local outbox drafts and upload field analyses when cellular connection resumes.
             </p>
           </div>
@@ -146,47 +146,47 @@ export default function SyncCenterPage() {
             <div
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border ${
                 isOnline
-                  ? "bg-emerald-50 text-forest border-emerald-300"
-                  : "bg-amber-50 text-amber-800 border-amber-300"
+                  ? "bg-emerald-50 dark:bg-emerald-950/40 text-forest dark:text-emerald-300 border-emerald-300 dark:border-emerald-800"
+                  : "bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border-amber-300 dark:border-amber-800"
               }`}
             >
-              {isOnline ? <Wifi className="w-3.5 h-3.5 text-moss" /> : <WifiOff className="w-3.5 h-3.5 text-amber-700" />}
+              {isOnline ? <Wifi className="w-3.5 h-3.5 text-moss dark:text-dark-moss" /> : <WifiOff className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" />}
               <span>{isOnline ? "Network Connected" : "Operating Offline"}</span>
             </div>
           </div>
         </div>
 
         {/* Sync Action & Stats Card */}
-        <div className="bg-surface rounded-3xl p-6 border border-bone shadow-card space-y-5">
+        <div className="glass-card rounded-3xl p-6 space-y-5">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="p-4 rounded-2xl bg-ivory border border-bone">
-              <span className="text-xs text-muted block mb-1">Pending Outbox</span>
-              <span className="font-mono text-2xl font-bold text-amber-700">
+            <div className="p-4 rounded-2xl bg-surface/70 dark:bg-dark-card/60 border border-bone dark:border-dark-border">
+              <span className="text-xs text-muted dark:text-dark-muted block mb-1">Pending Outbox</span>
+              <span className="font-mono text-2xl font-bold text-amber-700 dark:text-amber-400">
                 {pendingCount}
               </span>
-              <span className="text-[10px] text-muted block mt-1">Saved on device</span>
+              <span className="text-[10px] text-muted dark:text-dark-muted block mt-1">Saved on device</span>
             </div>
 
-            <div className="p-4 rounded-2xl bg-ivory border border-bone">
-              <span className="text-xs text-muted block mb-1">Central Synced</span>
-              <span className="font-mono text-2xl font-bold text-forest">
+            <div className="p-4 rounded-2xl bg-surface/70 dark:bg-dark-card/60 border border-bone dark:border-dark-border">
+              <span className="text-xs text-muted dark:text-dark-muted block mb-1">Central Synced</span>
+              <span className="font-mono text-2xl font-bold text-forest dark:text-dark-forest">
                 {syncedCount}
               </span>
-              <span className="text-[10px] text-muted block mt-1">Confirmed on server</span>
+              <span className="text-[10px] text-muted dark:text-dark-muted block mt-1">Confirmed on server</span>
             </div>
 
-            <div className="p-4 rounded-2xl bg-ivory border border-bone">
-              <span className="text-xs text-muted block mb-1">Conflict Policy</span>
-              <span className="font-mono text-sm font-bold text-ink block">
+            <div className="p-4 rounded-2xl bg-surface/70 dark:bg-dark-card/60 border border-bone dark:border-dark-border">
+              <span className="text-xs text-muted dark:text-dark-muted block mb-1">Conflict Policy</span>
+              <span className="font-mono text-sm font-bold text-ink dark:text-dark-ink block">
                 Server Authoritative
               </span>
-              <span className="text-[10px] text-muted block mt-1">Client drafts preserved</span>
+              <span className="text-[10px] text-muted dark:text-dark-muted block mt-1">Client drafts preserved</span>
             </div>
           </div>
 
           {syncFeedback && (
-            <div className="p-3 rounded-xl bg-forest/10 border border-forest/20 text-xs text-forest font-medium flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-forest shrink-0" />
+            <div className="p-3 rounded-xl bg-forest/10 dark:bg-dark-forest/20 border border-forest/20 dark:border-dark-forest/30 text-xs text-forest dark:text-dark-forest font-medium flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-forest dark:text-dark-forest shrink-0" />
               <span>{syncFeedback}</span>
             </div>
           )}
@@ -196,32 +196,32 @@ export default function SyncCenterPage() {
               type="button"
               onClick={handleSyncNow}
               disabled={isSyncing}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-forest hover:bg-deep disabled:opacity-50 text-white font-bold text-xs shadow-md transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-forest hover:bg-deep dark:bg-dark-forest dark:hover:bg-forest disabled:opacity-50 text-white font-bold text-xs shadow-md transition-all"
               id="btn-sync-now"
             >
               <RefreshCw className={`w-4 h-4 ${isSyncing ? "animate-spin" : ""}`} />
               <span>{isSyncing ? "Synchronizing Outbox..." : "SYNC NOW (सिंक करें)"}</span>
             </button>
 
-            <span className="text-[11px] text-muted">
+            <span className="text-[11px] text-muted dark:text-dark-muted">
               Auto-sync runs in background when connectivity is detected.
             </span>
           </div>
         </div>
 
         {/* Side-by-Side: "Updated after Sync" Demonstration Section */}
-        <div className="bg-surface rounded-3xl p-6 border border-bone shadow-card space-y-4">
+        <div className="glass-card rounded-3xl p-6 space-y-4">
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-semibold text-sm text-ink">
+                <h3 className="font-semibold text-sm text-ink dark:text-dark-ink">
                   Updated after Sync Verification
                 </h3>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-forest font-mono">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-forest dark:text-emerald-300 font-mono">
                   Updated after Sync
                 </span>
               </div>
-              <p className="text-xs text-muted mt-0.5">
+              <p className="text-xs text-muted dark:text-dark-muted mt-0.5">
                 Demonstrates how FeedShield compares local offline heuristic drafts with centralized cloud lab results.
               </p>
             </div>
@@ -229,14 +229,14 @@ export default function SyncCenterPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
             {/* Left: Device Provisional */}
-            <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-2">
-              <span className="font-bold text-muted block uppercase text-[10px] tracking-wider">
+            <div className="p-4 rounded-2xl bg-surface/70 dark:bg-dark-card/60 border border-bone dark:border-dark-border space-y-2">
+              <span className="font-bold text-muted dark:text-dark-muted block uppercase text-[10px] tracking-wider">
                 1. Local Device Provisional Scan
               </span>
-              <p className="font-mono text-ink font-semibold">
+              <p className="font-mono text-ink dark:text-dark-ink font-semibold">
                 Maize Silage (FS-20260930-W402)
               </p>
-              <ul className="space-y-1 text-muted">
+              <ul className="space-y-1 text-muted dark:text-dark-muted">
                 <li>• Source: On-Device Heuristic Engine</li>
                 <li>• Risk Level: ATTENTION</li>
                 <li>• Action: BLEND (Local Recommendation)</li>
@@ -245,14 +245,14 @@ export default function SyncCenterPage() {
             </div>
 
             {/* Right: Server Authoritative */}
-            <div className="p-4 rounded-2xl bg-emerald-50/60 border border-emerald-300 space-y-2">
-              <span className="font-bold text-forest block uppercase text-[10px] tracking-wider">
+            <div className="p-4 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-300 dark:border-emerald-800 space-y-2">
+              <span className="font-bold text-forest dark:text-emerald-400 block uppercase text-[10px] tracking-wider">
                 2. Authoritative Central Verification
               </span>
-              <p className="font-mono text-ink font-semibold">
+              <p className="font-mono text-ink dark:text-dark-ink font-semibold">
                 Central Consensus (Server Synced)
               </p>
-              <ul className="space-y-1 text-forest">
+              <ul className="space-y-1 text-forest dark:text-emerald-300">
                 <li>• Source: Central Registry + Full Audit Log</li>
                 <li>• Risk Level: ATTENTION (Confirmed)</li>
                 <li>• Action: BLEND (Confirmed with Vet Notes)</li>
@@ -264,12 +264,12 @@ export default function SyncCenterPage() {
 
         {/* Outbox Items Queue */}
         <div className="space-y-3">
-          <h3 className="font-display font-bold text-lg text-ink">
+          <h3 className="font-display font-bold text-lg text-ink dark:text-dark-ink">
             Pending Outbox Items ({pendingCount})
           </h3>
 
           {outboxItems.length === 0 ? (
-            <div className="p-8 text-center bg-surface rounded-2xl border border-bone text-xs text-muted">
+            <div className="p-8 text-center glass-card rounded-2xl text-xs text-muted dark:text-dark-muted">
               Outbox is empty. All local evaluations are recorded.
             </div>
           ) : (
@@ -277,15 +277,15 @@ export default function SyncCenterPage() {
               {outboxItems.map((item) => (
                 <div
                   key={item.id}
-                  className="p-3.5 rounded-xl bg-surface border border-bone flex items-center justify-between text-xs"
+                  className="p-3.5 rounded-xl glass-card flex items-center justify-between text-xs"
                 >
                   <div className="flex items-center gap-3">
-                    <Clock className="w-4 h-4 text-muted" />
+                    <Clock className="w-4 h-4 text-muted dark:text-dark-muted" />
                     <div>
-                      <span className="font-mono font-bold text-ink">
+                      <span className="font-mono font-bold text-ink dark:text-dark-ink">
                         {item.payload?.sample?.id || item.id}
                       </span>
-                      <span className="text-[11px] text-muted block">
+                      <span className="text-[11px] text-muted dark:text-dark-muted block">
                         {item.entityType.toUpperCase()} · Queued at{" "}
                         {new Date(item.createdAt).toLocaleTimeString()}
                       </span>

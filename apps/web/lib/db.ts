@@ -83,24 +83,33 @@ export interface OutboxItem {
   createdAt: string;
 }
 
-export class PashuPoshanDatabase extends Dexie {
+export interface LocalSetting {
+  key: string;
+  value: any;
+  updatedAt: string;
+}
+
+export class FeedShieldDatabase extends Dexie {
   samples!: Table<LocalSample, string>;
   images!: Table<LocalImage, string>;
   analyses!: Table<LocalAnalysis, string>;
   advisories!: Table<LocalAdvisory, string>;
   outbox!: Table<OutboxItem, string>;
+  settings!: Table<LocalSetting, string>;
 
   constructor() {
-    super("PashuPoshanLocalDB");
+    super("FeedShieldLocalDB");
     this.version(1).stores({
       samples: "id, clientId, sampleType, syncStatus, collectedAt",
       images: "id, sampleId, isAcceptable",
       analyses: "id, sampleId, overallRisk, analyzedOnDevice, createdAt",
       advisories: "id, analysisId, decision",
       outbox: "id, clientId, entityType, status, createdAt",
+      settings: "key",
     });
   }
 }
 
-export const FeedShieldDatabase = PashuPoshanDatabase;
-export const db = new PashuPoshanDatabase();
+export const PashuPoshanDatabase = FeedShieldDatabase;
+export const db = new FeedShieldDatabase();
+

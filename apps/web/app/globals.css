@@ -4,119 +4,252 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   FEEDSHIELD DESIGN SYSTEM SEMANTIC TOKENS
+   Strict adherence to FeedShield_Polish_Pass_v2.md Section 4
+   ========================================================================== */
+
 :root {
-  --background: #FAF6EC;
-  --foreground: #23302A;
-  --surface: #FFFDF7;
-  --surface-raised: #FFFFFF;
-  --forest: #1F4D3A;
-  --bone: #F3EDDD;
-  --muted: #6E7A70;
+  /* Light Theme (Warm Editorial AgriTech) */
+  --bg-0: #FAF6EC;
+  --bg-1: #F3EDDD;
+  --glass-1: rgba(255, 253, 247, 0.62);
+  --glass-2: rgba(255, 253, 247, 0.78);
+  --glass-3: rgba(255, 253, 247, 0.88);
+  --glass-active: rgba(31, 77, 58, 0.14);
+  --edge: rgba(31, 77, 58, 0.12);
+  --edge-hi: rgba(255, 255, 255, 0.70);
+  --ink-1: #23302A;
+  --ink-2: #4B5A50;
+  --ink-3: #6E7A70;
+  --shadow-warm: 0 8px 30px -4px rgba(35, 48, 42, 0.10);
+
+  /* Shared Accents */
+  --primary: #1F4D3A;
+  --primary-hover: #143628;
+  --primary-text: #FFFFFF;
+  --amber-restrained: #C98A2B;
+  --terracotta-restrained: #B95C3A;
+  --emerald-restrained: #2D6A50;
 }
 
 .dark {
-  --background: #0E1813;
-  --foreground: #F5F2E9;
-  --surface: #16231D;
-  --surface-raised: #1C2D25;
-  --forest: #2D6A50;
-  --bone: #1E3128;
-  --muted: #97A59C;
+  /* Dark Theme (Pitch-Black Obsidian Base with 6 Depth Levels) */
+  --bg-0: #030303;
+  --bg-1: #0A0D0B;
+  --glass-1: rgba(15, 20, 17, 0.64);
+  --glass-2: rgba(22, 29, 24, 0.72);
+  --glass-3: rgba(30, 40, 33, 0.82);
+  --glass-active: rgba(58, 92, 70, 0.34);
+  --edge: rgba(236, 241, 230, 0.10);
+  --edge-hi: rgba(250, 246, 236, 0.16);
+  --ink-1: #F3EDDD;
+  --ink-2: #B9C2B6;
+  --ink-3: #8A958B;
+  --shadow-warm: 0 8px 32px 0 rgba(0, 0, 0, 0.55);
+
+  --primary: #2F6B52;
+  --primary-hover: #3A8264;
+  --primary-text: #F3EDDD;
+  --amber-restrained: #DDA245;
+  --terracotta-restrained: #D46D4B;
+  --emerald-restrained: #418E6F;
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-0);
+  color: var(--ink-1);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
+  position: relative;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-h1, h2, .font-display {
+/* Static Ambient Lighting Layer (Section 4.3) */
+.ambient-glow-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  opacity: 0.85;
+}
+
+:root .ambient-glow-layer {
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 10%, rgba(107, 143, 94, 0.08), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 85% 85%, rgba(169, 191, 160, 0.09), transparent 70%);
+}
+
+.dark .ambient-glow-layer {
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 15%, rgba(31, 77, 58, 0.18), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 85% 75%, rgba(45, 106, 80, 0.14), transparent 75%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(10, 25, 18, 0.25), transparent 80%);
+}
+
+h1, h2, h3, .font-display {
   font-family: 'Fraunces', Georgia, serif;
+  letter-spacing: -0.015em;
 }
 
 .font-hindi {
   font-family: 'Noto Sans Devanagari', sans-serif;
+  line-height: 1.6 !important;
 }
 
-/* Liquid Glass System Primitives */
+/* ==========================================================================
+   LIQUID GLASS SYSTEM UTILITIES & SURFACES
+   ========================================================================== */
+
 @layer components {
-  .glass-card {
-    background: rgba(255, 253, 247, 0.85);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(243, 237, 221, 0.85);
-    box-shadow: 0 8px 30px -4px rgba(31, 77, 58, 0.08), inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+  /* Level 1: Surface Card */
+  .glass-surface-1 {
+    background: var(--glass-1);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    border: 1px solid var(--edge);
+    box-shadow: var(--shadow-warm), inset 0 1px 0 0 var(--edge-hi);
   }
 
-  .dark .glass-card {
-    background: rgba(22, 35, 29, 0.85);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35), inset 0 1px 1px 0 rgba(255, 255, 255, 0.08);
+  /* Level 2: Elevated Card / Panel */
+  .glass-surface-2 {
+    background: var(--glass-2);
+    backdrop-filter: blur(16px) saturate(1.45);
+    -webkit-backdrop-filter: blur(16px) saturate(1.45);
+    border: 1px solid var(--edge);
+    box-shadow: 0 12px 40px -6px rgba(0, 0, 0, 0.25), inset 0 1px 0 0 var(--edge-hi);
+  }
+
+  /* Level 3: Nav / Modal / Sheet */
+  .glass-surface-3 {
+    background: var(--glass-3);
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    border: 1px solid var(--edge);
+    box-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 var(--edge-hi);
+  }
+
+  /* Active / Selected Item */
+  .glass-surface-active {
+    background: var(--glass-active);
+    border: 1px solid var(--emerald-restrained);
+    box-shadow: 0 0 12px 0 rgba(45, 106, 80, 0.2), inset 0 1px 0 0 var(--edge-hi);
+  }
+
+  /* Legacy aliases mapped to new tokens for zero regression */
+  .glass-card {
+    background: var(--glass-1);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    border: 1px solid var(--edge);
+    box-shadow: var(--shadow-warm), inset 0 1px 0 0 var(--edge-hi);
   }
 
   .glass-card-hero {
-    background: rgba(255, 253, 247, 0.92);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(31, 77, 58, 0.15);
-    box-shadow: 0 16px 48px -8px rgba(20, 54, 40, 0.14), inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.5);
-  }
-
-  .dark .glass-card-hero {
-    background: rgba(22, 35, 29, 0.92);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    box-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.5), inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.1);
+    background: var(--glass-2);
+    backdrop-filter: blur(18px) saturate(1.5);
+    -webkit-backdrop-filter: blur(18px) saturate(1.5);
+    border: 1px solid var(--edge);
+    box-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.35), inset 0 1.5px 0 0 var(--edge-hi);
   }
 
   .glass-pill {
-    background: rgba(255, 253, 247, 0.75);
+    background: var(--glass-1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(243, 237, 221, 0.8);
-    box-shadow: 0 4px 16px 0 rgba(35, 48, 42, 0.05);
-  }
-
-  .dark .glass-pill {
-    background: rgba(22, 35, 29, 0.75);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--edge);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.08), inset 0 1px 0 0 var(--edge-hi);
   }
 
   .glass-nav {
-    background: rgba(255, 253, 247, 0.88);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(243, 237, 221, 0.8);
-    box-shadow: 0 4px 20px -2px rgba(35, 48, 42, 0.05);
+    background: var(--glass-3);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    border-bottom: 1px solid var(--edge);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.15);
   }
 
-  .dark .glass-nav {
-    background: rgba(14, 24, 19, 0.88);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
-  }
-}
-
-/* Touch controls minimum 48px on mobile */
-@media (max-width: 640px) {
-  button, a.btn-touch, input[type="button"], input[type="submit"] {
+  /* Liquid Glass Button Primitives (Section 5.2) */
+  .btn-primary {
     min-height: 48px;
+    background: var(--primary);
+    color: var(--primary-text);
+    border: 1px solid var(--edge-hi);
+    box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.25);
+    border-radius: 1rem;
+    font-weight: 600;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.35);
+  }
+  .btn-primary:active {
+    transform: translateY(1px);
+  }
+
+  .btn-secondary {
+    min-height: 48px;
+    background: var(--glass-2);
+    color: var(--ink-1);
+    border: 1px solid var(--edge);
+    box-shadow: var(--shadow-warm), inset 0 1px 0 0 var(--edge-hi);
+    border-radius: 1rem;
+    font-weight: 500;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-secondary:hover {
+    background: var(--glass-3);
+    border-color: var(--edge-hi);
+    transform: translateY(-1px);
+  }
+  .btn-secondary:active {
+    transform: translateY(1px);
   }
 }
 
-/* Accessibility: Honor reduced motion */
+/* ==========================================================================
+   SOLID FALLBACKS & ACCESSIBILITY CONTROLS (Section 4.4)
+   ========================================================================== */
+
+/* 1. Browser lacks backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+  .glass-surface-1, .glass-surface-2, .glass-surface-3,
+  .glass-card, .glass-card-hero, .glass-pill, .glass-nav {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: var(--bg-1) !important;
+  }
+}
+
+/* 2. User or System Preference: Reduced Transparency */
+@media (prefers-reduced-transparency: reduce) {
+  .glass-surface-1, .glass-surface-2, .glass-surface-3,
+  .glass-card, .glass-card-hero, .glass-pill, .glass-nav {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: var(--bg-1) !important;
+  }
+}
+
+/* 3. In-App Visual Effects Setting: Reduced */
+.effects-reduced .glass-surface-1,
+.effects-reduced .glass-surface-2,
+.effects-reduced .glass-surface-3,
+.effects-reduced .glass-card,
+.effects-reduced .glass-card-hero,
+.effects-reduced .glass-pill,
+.effects-reduced .glass-nav {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background-color: var(--bg-1) !important;
+}
+
+/* 4. Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-delay: -1ms !important;
@@ -127,12 +260,23 @@ h1, h2, .font-display {
   }
 }
 
-/* Accessibility: Honor reduced transparency */
-@media (prefers-reduced-transparency: reduce) {
-  .backdrop-blur-md, .backdrop-blur-lg, .backdrop-blur-sm,
+/* 5. Mobile Touch Sizing (>=48px touch targets) */
+@media (max-width: 640px) {
+  button, a.btn-touch, input[type="button"], input[type="submit"] {
+    min-height: 48px;
+  }
+  /* Cap mobile blur to 14px per section 4.4 */
+  .glass-surface-1, .glass-surface-2, .glass-surface-3,
+  .glass-card, .glass-card-hero, .glass-nav {
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+  }
+}
+
+/* 6. High Contrast Mode Support */
+@media (forced-colors: active) {
+  .glass-surface-1, .glass-surface-2, .glass-surface-3,
   .glass-card, .glass-card-hero, .glass-pill, .glass-nav {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    background-color: var(--surface) !important;
+    border: 1px solid ButtonText !important;
   }
 }

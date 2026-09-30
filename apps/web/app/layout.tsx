@@ -4,21 +4,28 @@ import { I18nProvider } from "@/lib/i18n";
 import { ThemeProvider } from "@/lib/theme";
 
 export const metadata: Metadata = {
-  title: "PashuPoshan — AI-Powered Feed & Silage Intelligence",
+  title: "FeedShield — AI-Powered Feed & Silage Intelligence",
   description: "Smart AI-Enabled Rapid Feed and Silage Quality Testing System for Dairy Farmers (SIH26111)",
   manifest: "/manifest.json",
   icons: {
     icon: "/favicon.ico",
     apple: "/icon-192.png",
   },
+  openGraph: {
+    title: "FeedShield — AI-Powered Feed & Silage Intelligence",
+    description: "Smart AI-Enabled Rapid Feed and Silage Quality Testing System for Dairy Farmers (SIH26111)",
+    type: "website",
+    siteName: "FeedShield",
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1F4D3A",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FAF6EC" },
+    { media: "(prefers-color-scheme: dark)", color: "#030303" },
+  ],
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 };
 
 export default function RootLayout({
@@ -30,12 +37,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#1F4D3A" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                var stored = localStorage.getItem('pashuposhan-theme') || localStorage.getItem('feedshield-theme');
+                var stored = localStorage.getItem('feedshield-theme') || localStorage.getItem('pashuposhan-theme');
                 var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                 if (stored === 'dark' || (stored === 'system' && prefersDark) || (!stored && prefersDark)) {
                   document.documentElement.classList.add('dark');
@@ -44,12 +50,21 @@ export default function RootLayout({
                   document.documentElement.classList.remove('dark');
                   document.documentElement.style.colorScheme = 'light';
                 }
+
+                var storedEffects = localStorage.getItem('feedshield-effects');
+                var prefersReducedTrans = window.matchMedia('(prefers-reduced-transparency: reduce)').matches;
+                if (storedEffects === 'reduced' || (storedEffects === 'auto' && prefersReducedTrans) || (!storedEffects && prefersReducedTrans)) {
+                  document.documentElement.classList.add('effects-reduced');
+                } else {
+                  document.documentElement.classList.add('effects-full');
+                }
               } catch (e) {}
             `,
           }}
         />
       </head>
-      <body className="bg-ivory dark:bg-dark-bg text-ink dark:text-dark-ink min-h-screen selection:bg-moss/20 selection:text-forest transition-colors duration-200">
+      <body className="bg-bg-0 text-ink-1 min-h-screen selection:bg-moss/20 selection:text-forest transition-colors duration-200">
+        <div className="ambient-glow-layer" aria-hidden="true" />
         <ThemeProvider>
           <I18nProvider>
             {children}
@@ -62,10 +77,10 @@ export default function RootLayout({
                 window.addEventListener('load', function() {
                   navigator.serviceWorker.register('/sw.js').then(
                     function(registration) {
-                      console.log('PashuPoshan SW registered:', registration.scope);
+                      console.log('FeedShield SW registered:', registration.scope);
                     },
                     function(err) {
-                      console.log('PashuPoshan SW registration failed:', err);
+                      console.log('FeedShield SW registration failed:', err);
                     }
                   );
                 });

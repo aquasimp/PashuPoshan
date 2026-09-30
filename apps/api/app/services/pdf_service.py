@@ -39,11 +39,11 @@ def generate_qr_image_bytes(data: str) -> io.BytesIO:
 
 def generate_analysis_pdf(analysis_data: Dict[str, Any], lang: str = "en") -> str:
     """
-    Generates a bilingual, branded PashuPoshan Analysis & Quality Certificate PDF.
+    Generates a bilingual, branded FeedShield Analysis & Quality Certificate PDF.
     Saves to settings.REPORTS_DIR and returns the file path.
     """
     sample_id = analysis_data.get("sample_id", "FS-SAMPLE")
-    report_filename = f"PashuPoshan_Report_{sample_id}.pdf"
+    report_filename = f"FeedShield_Report_{sample_id}.pdf"
     report_path = os.path.join(settings.REPORTS_DIR, report_filename)
 
     doc = SimpleDocTemplate(
@@ -110,7 +110,7 @@ def generate_analysis_pdf(analysis_data: Dict[str, Any], lang: str = "en") -> st
     # 1. Header Section: FeedShield Branding + Sample ID & Date
     header_data = [
         [
-            Paragraph("<b>PashuPoshan</b> · Feed & Silage Intelligence", title_style),
+            Paragraph("<b>FeedShield</b> · Feed & Silage Intelligence", title_style),
             Paragraph(f"<b>Certificate ID:</b> {sample_id}<br/><b>Generated:</b> {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}", tagline_style),
         ],
         [
@@ -247,7 +247,7 @@ def generate_analysis_pdf(analysis_data: Dict[str, Any], lang: str = "en") -> st
     # 6. Verification QR & Cryptographic Authenticity Block
     result_hash = compute_result_hash(sample_id, overall_risk, action_decision, predictions)
     token = create_signed_token(sample_id, result_hash)
-    verify_url = f"https://pashuposhan.in/verify/{sample_id}?token={token}"
+    verify_url = f"https://feedshield.in/verify/{sample_id}?token={token}"
 
     qr_buf = generate_qr_image_bytes(verify_url)
     qr_img = RLImage(qr_buf, width=1.1 * inch, height=1.1 * inch)
@@ -277,7 +277,7 @@ def generate_analysis_pdf(analysis_data: Dict[str, Any], lang: str = "en") -> st
 
     # 7. Regulatory & Scientific Disclaimer (Mandatory per Claims Policy)
     disclaimer_text = (
-        "<b>SCIENTIFIC & LEGAL DISCLAIMER:</b> PashuPoshan provides rapid AI-enabled screening, estimation, "
+        "<b>SCIENTIFIC & LEGAL DISCLAIMER:</b> FeedShield provides rapid AI-enabled screening, estimation, "
         "and decision support. Screening results do not replace formal laboratory wet-chemistry analysis (e.g. Kjeldahl, HPLC). "
         "Any suspected adulteration, toxicosis, or out-of-domain sample must be referred to an accredited laboratory for confirmatory testing."
     )

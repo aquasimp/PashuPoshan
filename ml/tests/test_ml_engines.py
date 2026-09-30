@@ -95,3 +95,24 @@ def test_assay_reader_failure_path_refuses_number():
     urea_res = reader.read_urea_assay(bad_img)
     assert urea_res["screening_class"] == "INVALID"
     assert urea_res["message"] == "Unable to validate test image — retake required."
+
+
+def test_spectral_perturbation_changes_output():
+    """
+    Section 11 Requirement 8: Perturbation test.
+    Altering the input spectrum must produce different model output values,
+    proving chemometric predictions are dynamically inferred rather than hardcoded.
+    """
+    spec_a = generate_single_spectrum(dm_pct=30.0, cp_pct=8.0, ndf_pct=42.0, adf_pct=24.0)
+    spec_b = generate_single_spectrum(dm_pct=45.0, cp_pct=16.0, ndf_pct=58.0, adf_pct=34.0)
+
+    res_a = pipeline.predict_spectrum(WAVELENGTHS, spec_a)
+    res_b = pipeline.predict_spectrum(WAVELENGTHS, spec_b)
+
+    for env_a, env_b in zip(res_a, res_b):
+        assert env_a["target"] == env_b["target"]
+        assert env_a["value"] is not None
+        assert env_b["value"] is not None
+        # Assert perturbation causes non-zero difference
+        diff = abs(env_a["value"] - env_b["value"])
+        assert diff > 0.5, f"Perturbation failed for {env_a['target']}: diff is {diff}"

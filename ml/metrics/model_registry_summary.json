@@ -75,7 +75,7 @@
         "rpd": 1.012
       }
     },
-    "trained_at": "2026-09-30T08:25:21.816871"
+    "trained_at": "2026-09-30T11:49:15.817501"
   },
   {
     "model_name": "NIR Crude Protein (% DM) Chemometric Model",
@@ -153,7 +153,7 @@
         "rpd": 1.297
       }
     },
-    "trained_at": "2026-09-30T08:25:22.627611"
+    "trained_at": "2026-09-30T11:49:16.638350"
   },
   {
     "model_name": "NIR Neutral Detergent Fiber (% DM) Chemometric Model",
@@ -231,7 +231,7 @@
         "rpd": 1.699
       }
     },
-    "trained_at": "2026-09-30T08:25:23.488300"
+    "trained_at": "2026-09-30T11:49:17.487508"
   },
   {
     "model_name": "NIR Acid Detergent Fiber (% DM) Chemometric Model",
@@ -309,6 +309,6 @@
         "rpd": 1.905
       }
     },
-    "trained_at": "2026-09-30T08:25:24.329014"
+    "trained_at": "2026-09-30T11:49:18.410163"
   }
 ]

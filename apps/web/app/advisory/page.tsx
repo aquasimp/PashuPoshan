@@ -22,6 +22,8 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
+import { VoiceControl } from "@/components/ui/VoiceControl";
+import { LiquidGlassButton } from "@/components/ui/liquid-glass";
 import { db, LocalSample, LocalAnalysis, LocalAdvisory } from "@/lib/db";
 import { useI18n } from "@/lib/i18n";
 
@@ -35,15 +37,7 @@ function AdvisoryContent() {
   const [advisory, setAdvisory] = useState<LocalAdvisory | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Web Speech API Voice States
-  const [isPlayingVoice, setIsPlayingVoice] = useState(false);
-  const [speechSupported, setSpeechSupported] = useState(false);
-
   useEffect(() => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      setSpeechSupported(true);
-    }
-
     async function loadAdvisory() {
       if (!sampleId) {
         setLoading(false);
@@ -67,55 +61,7 @@ function AdvisoryContent() {
       }
     }
     loadAdvisory();
-
-    return () => {
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
-    };
   }, [sampleId]);
-
-  const toggleVoicePlayback = () => {
-    if (!speechSupported || !advisory) return;
-
-    if (isPlayingVoice) {
-      window.speechSynthesis.cancel();
-      setIsPlayingVoice(false);
-      return;
-    }
-
-    window.speechSynthesis.cancel();
-
-    // Construct spoken text in the selected locale
-    let textToSpeak = "";
-    if (locale === "hi") {
-      textToSpeak = `फ़ीडशील्ड सलाह। निर्णय: ${advisory.decision}। परिणाम: ${advisory.chain.result}। समस्या: ${advisory.chain.issue}। तुरंत कार्य: ${advisory.chain.action}। भंडारण सुरक्षा: ${advisory.chain.storage}। पशु स्वास्थ्य जोखिम: ${advisory.chain.risk}। अगला कदम: ${advisory.chain.nextStep}`;
-    } else if (locale === "hinglish") {
-      textToSpeak = `FeedShield advisory update. Decision hai: ${advisory.decision}. Result: ${advisory.chain.result}. Primary issue: ${advisory.chain.issue}. Action: ${advisory.chain.action}. Storage remediation: ${advisory.chain.storage}. Animal risk: ${advisory.chain.risk}. Next step: ${advisory.chain.nextStep}`;
-    } else {
-      textToSpeak = `FeedShield Advisory. Action Decision: ${advisory.decision}. Result summary: ${advisory.chain.result}. Primary issue: ${advisory.chain.issue}. Immediate action: ${advisory.chain.action}. Storage remediation: ${advisory.chain.storage}. Animal health risk: ${advisory.chain.risk}. Recommended next step: ${advisory.chain.nextStep}`;
-    }
-
-    const utterance = new SpeechSynthesisUtterance(textToSpeak);
-    utterance.rate = 0.95;
-    utterance.pitch = 1.0;
-
-    // Pick appropriate voice if available
-    const voices = window.speechSynthesis.getVoices();
-    if (locale === "hi") {
-      const hiVoice = voices.find((v) => v.lang.startsWith("hi"));
-      if (hiVoice) utterance.voice = hiVoice;
-    } else {
-      const enVoice = voices.find((v) => v.lang.startsWith("en-IN") || v.lang.startsWith("en"));
-      if (enVoice) utterance.voice = enVoice;
-    }
-
-    utterance.onstart = () => setIsPlayingVoice(true);
-    utterance.onend = () => setIsPlayingVoice(false);
-    utterance.onerror = () => setIsPlayingVoice(false);
-
-    window.speechSynthesis.speak(utterance);
-  };
 
   if (loading) {
     return (
@@ -205,61 +151,28 @@ function AdvisoryContent() {
       </div>
 
       {/* Voice Guidance Readout Player Card with Liquid Glass */}
-      <div className="glass-card rounded-3xl p-5 border border-bone dark:border-dark-border shadow-card flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="glass-surface-2 rounded-3xl p-5 sm:p-6 border border-edge shadow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div
-            className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors shadow-sm ${
-              isPlayingVoice ? "bg-terracotta text-white" : "bg-forest/10 dark:bg-emerald-500/10 text-forest dark:text-emerald-400"
-            }`}
-          >
-            {isPlayingVoice ? (
-              <Square className="w-5 h-5 fill-current" />
-            ) : (
-              <Volume2 className="w-6 h-6" />
-            )}
+          <div className="w-12 h-12 rounded-2xl bg-forest/10 dark:bg-emerald-500/10 border border-forest/20 dark:border-emerald-500/20 flex items-center justify-center text-forest dark:text-emerald-400 shrink-0">
+            <Volume2 className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="font-semibold text-sm text-ink dark:text-dark-ink">
+            <h3 className="font-semibold text-sm sm:text-base text-ink-1">
               {t("advisory.voiceReadout")}
             </h3>
-            <p className="text-xs text-muted dark:text-dark-muted">
-              Audio narration in Vernacular Voice ({locale.toUpperCase()})
+            <p className="text-xs text-ink-2">
+              Actionable guidance spoken in vernacular voice on-device. Never autoplays.
             </p>
           </div>
         </div>
 
-        {/* Animated Audio Wave bars when playing */}
-        {isPlayingVoice && (
-          <div className="flex items-center gap-1">
-            <span className="w-1 h-6 bg-forest dark:bg-emerald-400 rounded-full animate-bounce" />
-            <span className="w-1 h-8 bg-moss dark:bg-emerald-300 rounded-full animate-bounce [animation-delay:0.15s]" />
-            <span className="w-1 h-5 bg-forest dark:bg-emerald-400 rounded-full animate-bounce [animation-delay:0.3s]" />
-            <span className="w-1 h-7 bg-moss dark:bg-emerald-300 rounded-full animate-bounce [animation-delay:0.2s]" />
-          </div>
-        )}
-
-        <button
-          type="button"
-          onClick={toggleVoicePlayback}
-          className={`inline-flex items-center gap-2 px-5 py-3 rounded-2xl font-bold text-xs shadow-sm transition-all ${
-            isPlayingVoice
-              ? "bg-stone-800 text-white hover:bg-stone-900"
-              : "bg-forest dark:bg-emerald-600 text-white hover:bg-deep dark:hover:bg-emerald-700"
-          }`}
-          id="btn-voice-readout"
-        >
-          {isPlayingVoice ? (
-            <>
-              <Square className="w-3.5 h-3.5 fill-current" />
-              <span>Stop Voice</span>
-            </>
-          ) : (
-            <>
-              <Play className="w-3.5 h-3.5 fill-current" />
-              <span>Listen in {locale === "hi" ? "हिन्दी" : locale === "hinglish" ? "Hinglish" : "English"}</span>
-            </>
-          )}
-        </button>
+        <VoiceControl
+          textToSpeak={
+            advisory
+              ? `${sample?.cropOrFeedName || "Sample"}. Action Decision: ${advisory.decision}. ${advisory.chain.result}. ${advisory.chain.issue}. ${advisory.chain.action}. ${advisory.chain.storage}. ${advisory.chain.risk}. ${advisory.chain.nextStep}`
+              : ""
+          }
+        />
       </div>
 
       {/* 6-Step Actionable Advisory Chain */}
@@ -375,23 +288,28 @@ function AdvisoryContent() {
 
         <div className="flex items-center gap-3 w-full sm:w-auto">
           {analysis && (
-            <button
+            <LiquidGlassButton
               type="button"
+              variant="primary"
+              size="md"
+              icon={<Download className="w-4 h-4 text-emerald-300" />}
               onClick={() => {
                 window.open(`/api/v1/reports/${analysis.id}/pdf`, "_blank");
               }}
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-forest dark:bg-emerald-600 text-white text-xs font-bold shadow-sm hover:bg-deep dark:hover:bg-emerald-700 transition-all"
+              className="flex-1 sm:flex-initial min-h-[48px]"
             >
-              <Download className="w-4 h-4" />
-              <span>Download PDF</span>
-            </button>
+              <span>{t("common.actions.download")}</span>
+            </LiquidGlassButton>
           )}
 
-          <Link
-            href="/"
-            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl glass-card border border-bone dark:border-dark-border text-ink dark:text-dark-ink text-xs font-semibold hover:bg-bone dark:hover:bg-dark-card transition-all"
-          >
-            <span>Done</span>
+          <Link href="/" className="flex-1 sm:flex-initial">
+            <LiquidGlassButton
+              variant="secondary"
+              size="md"
+              className="w-full min-h-[48px]"
+            >
+              <span>Done</span>
+            </LiquidGlassButton>
           </Link>
         </div>
       </div>

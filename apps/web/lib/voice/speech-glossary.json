@@ -1,0 +1,43 @@
+{
+  "en": {
+    "°C": " degrees Celsius",
+    "deg C": " degrees Celsius",
+    "% DM": " percent dry matter",
+    "pH": "P H",
+    "NDF": "Neutral Detergent Fiber",
+    "ADF": "Acid Detergent Fiber",
+    "CP": "Crude Protein",
+    "ΔT": "temperature rise of ",
+    "+": "plus ",
+    "DEMO": "Demonstration screening note: ",
+    "ESTIMATED": "Estimated "
+  },
+  "hi": {
+    "°C": " डिग्री सेल्सियस",
+    "deg C": " डिग्री सेल्सियस",
+    "% DM": " प्रतिशत शुष्क पदार्थ",
+    "%": " प्रतिशत",
+    "pH": "पीएच",
+    "NDF": "तटस्थ डिटर्जेंट फाइबर",
+    "ADF": "अम्ल डिटर्जेंट फाइबर",
+    "CP": "क्रूड प्रोटीन",
+    "ΔT": "तापमान अंतर ",
+    "+": "प्लस ",
+    "DEMO": "डेमो सूचना: यह केवल प्रारंभिक स्क्रीनिंग परिणाम है। ",
+    "ESTIMATED": "अनुमानित "
+  },
+  "hinglish": {
+    "°C": " degree Celsius",
+    "deg C": " degree Celsius",
+    "% DM": " percent dry matter",
+    "%": " percent",
+    "pH": "pH",
+    "NDF": "NDF Fiber",
+    "ADF": "ADF Fiber",
+    "CP": "Crude Protein",
+    "ΔT": "temperature rise of ",
+    "+": "plus ",
+    "DEMO": "Demo note: yeh kewal screening result hai. ",
+    "ESTIMATED": "Estimated "
+  }
+}

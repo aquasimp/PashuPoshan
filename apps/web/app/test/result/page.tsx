@@ -27,6 +27,8 @@ import { EvidenceTag } from "@/components/ui/EvidenceTag";
 import { InputCompleteness } from "@/components/ui/InputCompleteness";
 import { DemoBadge } from "@/components/ui/DemoBadge";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { VoiceControl } from "@/components/ui/VoiceControl";
+import { LiquidGlassButton } from "@/components/ui/liquid-glass";
 import { db, LocalSample, LocalAnalysis, LocalAdvisory } from "@/lib/db";
 import { useI18n } from "@/lib/i18n";
 
@@ -317,36 +319,63 @@ function ResultContent() {
           </div>
         </div>
 
+        {/* Voice Readout Section - Localized Farmer Advisory */}
+        <div className="pt-4 border-t border-edge flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-3xl glass-surface-1 border border-edge">
+          <div className="space-y-1">
+            <h4 className="font-display font-bold text-base text-ink-1 flex items-center gap-2">
+              <Volume2 className="w-5 h-5 text-forest dark:text-emerald-400" />
+              <span>{t("advisory.title")} (Voice Readout)</span>
+            </h4>
+            <p className="text-xs text-ink-2 max-w-md leading-relaxed">
+              Listen to actionable farmer guidance in spoken Hindi or English on-device. Never autoplays.
+            </p>
+          </div>
+          <VoiceControl
+            textToSpeak={
+              advisory
+                ? `${sample.cropOrFeedName}. Action Decision: ${advisory.decision}. ${advisory.chain.result}. ${advisory.chain.action}. ${advisory.chain.storage}. ${advisory.chain.nextStep}`
+                : `${sample.cropOrFeedName}. Risk Level: ${analysis.overallRisk}. Action Decision: ${analysis.actionDecision}`
+            }
+          />
+        </div>
+
         {/* Action Buttons Bar */}
-        <div className="pt-4 border-t border-bone dark:border-dark-border flex flex-col sm:flex-row items-center gap-3">
-          <Link
-            href={`/advisory?id=${sample.id}`}
-            className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-forest dark:bg-emerald-600 hover:bg-deep dark:hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition-all"
-            id="btn-view-advisory"
-          >
-            <Volume2 className="w-5 h-5 text-mist" />
-            <span>{t("advisory.title")} & Voice Readout</span>
-            <ArrowRight className="w-4 h-4 ml-1" />
+        <div className="pt-4 border-t border-edge flex flex-col sm:flex-row items-center gap-3">
+          <Link href={`/advisory?id=${sample.id}`} className="w-full sm:w-auto flex-1">
+            <LiquidGlassButton
+              variant="primary"
+              size="lg"
+              icon={<Volume2 className="w-5 h-5 text-emerald-300" />}
+              className="w-full min-h-[48px]"
+              id="btn-view-advisory"
+            >
+              <span>{t("advisory.title")} &amp; Steps</span>
+            </LiquidGlassButton>
           </Link>
 
-          <Link
-            href={`/verify/${sample.id}`}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-4 rounded-2xl glass-card hover:bg-bone dark:hover:bg-dark-card text-ink dark:text-dark-ink font-semibold text-sm border border-bone dark:border-dark-border transition-all"
-          >
-            <QrCode className="w-4 h-4 text-forest dark:text-emerald-400" />
-            <span>Traceability QR</span>
+          <Link href={`/verify/${sample.id}`} className="w-full sm:w-auto">
+            <LiquidGlassButton
+              variant="secondary"
+              size="lg"
+              icon={<QrCode className="w-5 h-5 text-forest dark:text-emerald-400" />}
+              className="w-full min-h-[48px]"
+            >
+              <span>Traceability QR</span>
+            </LiquidGlassButton>
           </Link>
 
-          <button
+          <LiquidGlassButton
             type="button"
+            variant="secondary"
+            size="lg"
+            icon={<Download className="w-5 h-5 text-forest dark:text-emerald-400" />}
             onClick={() => {
               window.open(`/api/v1/reports/${analysis.id}/pdf`, "_blank");
             }}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-4 rounded-2xl glass-card hover:bg-bone dark:hover:bg-dark-card text-ink dark:text-dark-ink font-semibold text-sm border border-bone dark:border-dark-border transition-all"
+            className="w-full sm:w-auto min-h-[48px]"
           >
-            <Download className="w-4 h-4 text-forest dark:text-emerald-400" />
             <span>PDF Report</span>
-          </button>
+          </LiquidGlassButton>
         </div>
       </div>
     </main>

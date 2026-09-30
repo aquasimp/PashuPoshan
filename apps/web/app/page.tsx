@@ -64,20 +64,20 @@ export default function FarmerHomePage() {
 
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-6 space-y-6">
         {/* Top Node Header & Offline Sync Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl glass-card border border-bone dark:border-dark-border shadow-subtle">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-3xl glass-surface-2 border border-edge shadow-subtle">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-forest/10 dark:bg-emerald-500/10 flex items-center justify-center text-forest dark:text-emerald-400">
+            <div className="w-10 h-10 rounded-2xl bg-forest/10 dark:bg-emerald-500/10 border border-forest/20 dark:border-emerald-500/20 flex items-center justify-center text-forest dark:text-emerald-400">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="font-semibold text-ink dark:text-dark-ink text-base">
+                <h2 className="font-semibold text-ink-1 text-base">
                   Kisan Dairy Testing Node #1
                 </h2>
                 <DemoBadge label="SIMULATED" size="sm" />
               </div>
-              <p className="text-xs text-muted dark:text-dark-muted">
-                Anand Cooperative Milk Union · District Dairy Cluster
+              <p className="text-xs text-ink-3">
+                Kisan Pragati Cooperative Union (Fictional Demo Cluster)
               </p>
             </div>
           </div>
@@ -86,14 +86,14 @@ export default function FarmerHomePage() {
             {pendingSync > 0 ? (
               <Link
                 href="/sync"
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-700/60 text-xs font-medium hover:bg-amber-100 transition-colors"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-300 border border-amber-500/30 text-xs font-medium hover:bg-amber-500/20 transition-colors"
               >
-                <HardDrive className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" />
+                <HardDrive className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                 <span>{pendingSync} tests pending sync</span>
                 <span className="underline font-bold">Sync Now</span>
               </Link>
             ) : (
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-forest dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 text-xs font-medium">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-forest dark:text-emerald-300 border border-emerald-500/20 text-xs font-medium">
                 <span className="w-2 h-2 rounded-full bg-moss animate-pulse" />
                 <span>Local DB Ready · Offline Active</span>
               </div>
@@ -102,42 +102,46 @@ export default function FarmerHomePage() {
         </div>
 
         {/* Hero 1-Tap CTA Section with Liquid Glass Specular Styling */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-forest via-forest to-deep dark:from-[#13241b] dark:via-[#193225] dark:to-[#0f1d16] text-white p-6 sm:p-9 shadow-float border border-forest-border/40 dark:border-emerald-500/20">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-forest via-forest to-deep dark:from-[#0a1711] dark:via-[#0e2118] dark:to-[#050b08] text-white p-6 sm:p-9 shadow-float border border-forest-border/40 dark:border-emerald-500/20">
           {/* Subtle Ambient Radial Highlight */}
           <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-400/10 dark:bg-emerald-400/5 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-2xl space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 dark:bg-white/5 backdrop-blur-md text-xs font-medium text-mist border border-white/15 dark:border-white/10 shadow-glass">
               <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-              <span>Rapid Screening & Silage Intelligence (SIH26111)</span>
+              <span>Rapid Multi-Modal Screening · Problem Statement SIH26111</span>
             </div>
 
             <h1 className="font-display text-2xl sm:text-4xl font-bold tracking-tight leading-tight">
-              Test your feed. <br />
-              <span className="text-mist dark:text-sage-light font-normal">Understand risk. Act with confidence.</span>
+              Instant Silage &amp; Cattle Feed <br />
+              <span className="text-mist dark:text-sage-light font-normal">Quality Intelligence</span>
             </h1>
 
             <p className="text-sm sm:text-base text-mist/90 dark:text-sage-light/80 max-w-xl font-sans leading-relaxed">
-              Instant AI evaluation of corn & sorghum silage fermentation, moisture, core bunker heating, and cattle feed integrity directly on your smartphone.
+              Multi-modal rapid on-farm screening fusing optical imaging, core silage temperature, and pH sensing with full offline capability.
+            </p>
+
+            <p className="text-xs text-mist/75 dark:text-sage-light/65 max-w-lg leading-relaxed">
+              Provides immediate actionable risk guidance on low-cost smartphones. Confirmatory laboratory testing is recommended for suspect or non-declared adulterant batches.
             </p>
 
             <div className="pt-2 flex flex-wrap items-center gap-4">
               <Link
                 href="/test"
-                className="inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-2xl bg-white dark:bg-dark-ink text-forest dark:text-dark-surface font-bold text-base shadow-float hover:bg-mist hover:scale-[1.02] active:scale-[0.98] transition-all"
+                className="inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-2xl bg-white dark:bg-dark-ink text-forest dark:text-dark-surface font-bold text-base shadow-float hover:bg-mist hover:scale-[1.02] active:scale-[0.98] transition-all min-h-[48px]"
                 id="btn-start-new-test"
               >
-                <PlusCircle className="w-5 h-5 text-forest dark:text-dark-surface" />
-                <span>{t("farmer.startTest")}</span>
-                <ArrowRight className="w-4 h-4 ml-1" />
+                <PlusCircle className="w-5 h-5 text-forest dark:text-dark-surface shrink-0" />
+                <span className="text-balance leading-normal">{t("farmer.startTest")}</span>
+                <ArrowRight className="w-4 h-4 ml-1 shrink-0" />
               </Link>
 
               <Link
                 href="/demo/hero"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white/10 dark:bg-white/5 hover:bg-white/20 text-white font-medium text-sm border border-white/20 dark:border-white/15 backdrop-blur-md transition-all"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white/10 dark:bg-white/5 hover:bg-white/20 text-white font-medium text-sm border border-white/20 dark:border-white/15 backdrop-blur-md transition-all min-h-[48px]"
               >
-                <span>Compare Healthy vs Spoiled</span>
-                <ChevronRight className="w-4 h-4" />
+                <span className="text-balance leading-normal">Healthy vs Spoiled Demo</span>
+                <ChevronRight className="w-4 h-4 shrink-0" />
               </Link>
             </div>
           </div>
@@ -148,30 +152,31 @@ export default function FarmerHomePage() {
           </div>
         </div>
 
-        {/* Active Pit Warnings / Storage Alerts */}
-        <div className="bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 rounded-3xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 backdrop-blur-md">
+        {/* Active Pit Warnings / Storage Alerts (Honest ESTIMATED Claim + DEMO Badge) */}
+        <div className="bg-amber-500/10 dark:bg-amber-950/25 border border-amber-500/30 dark:border-amber-600/30 rounded-3xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 backdrop-blur-md">
           <div className="flex items-start gap-3.5">
-            <div className="p-2.5 rounded-2xl bg-amber-100 dark:bg-amber-900/50 text-amber-900 dark:text-amber-200 shrink-0">
-              <AlertTriangle className="w-5 h-5 text-amber-700 dark:text-amber-400" />
+            <div className="p-2.5 rounded-2xl bg-amber-500/20 text-amber-800 dark:text-amber-200 shrink-0">
+              <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-400 font-sans">
-                  {t("farmer.storageAlerts")}
+              <div className="flex items-center gap-2 flex-wrap">
+                <DemoBadge label="DEMO" size="sm" />
+                <span className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 font-sans">
+                  {t("farmer.storageAlerts")} · Fictional Dairy Cooperative
                 </span>
                 <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
               </div>
-              <p className="text-sm font-semibold text-ink dark:text-dark-ink mt-0.5">
-                Bunker Pit #2 (Sorghum): Aerobic Core Heating Detected (+12°C above ambient)
+              <p className="text-sm font-semibold text-ink-1 mt-0.5">
+                Bunker Pit #2 (Sorghum): Aerobic Core Heating ESTIMATED (+8.2°C above ambient)
               </p>
-              <p className="text-xs text-muted dark:text-dark-muted mt-0.5 leading-relaxed">
+              <p className="text-xs text-ink-2 mt-0.5 leading-relaxed">
                 Shoulder air ingress identified. Recommended action: Trim deteriorating shoulder and blend with dry fodder.
               </p>
             </div>
           </div>
           <Link
             href="/test/result?id=FS-20260930-W402"
-            className="shrink-0 text-xs font-bold text-amber-900 dark:text-amber-300 hover:text-ink dark:hover:text-white flex items-center gap-1.5 underline px-3.5 py-2 rounded-xl bg-amber-100/80 dark:bg-amber-900/40 hover:bg-amber-100 transition-colors"
+            className="shrink-0 text-xs font-bold text-amber-800 dark:text-amber-300 hover:text-ink-1 flex items-center gap-1.5 underline px-3.5 py-2 rounded-xl bg-amber-500/15 dark:bg-amber-900/40 hover:bg-amber-500/25 transition-colors min-h-[44px]"
           >
             <span>Inspect Pit Alert</span>
             <ArrowRight className="w-3.5 h-3.5" />

@@ -18,6 +18,7 @@ import {
   Clock,
   FlaskConical,
 } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 interface ModelEntry {
   model_name: string;
@@ -52,6 +53,7 @@ interface FieldPendingItem {
 }
 
 export default function ModelRegistryPage() {
+  const { t } = useI18n();
   const [models, setModels] = useState<ModelEntry[]>([]);
   const [fieldPending, setFieldPending] = useState<FieldPendingItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -341,6 +343,22 @@ export default function ModelRegistryPage() {
             </div>
             <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-stone-200 dark:bg-stone-800 text-stone-700 dark:text-stone-300">
               STATUS: PENDING
+            </span>
+          </div>
+
+          {/* Section 11 Item 7: Mandatory 4 Localized Pending Chips */}
+          <div className="flex flex-wrap items-center gap-2 pt-1 pb-1">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/30">
+              {t("models.pending.realFieldNir")}
+            </span>
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/30">
+              {t("models.pending.realIndianFeedImage")}
+            </span>
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/30">
+              {t("models.pending.realUrea")}
+            </span>
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/30">
+              {t("models.pending.realExternal")}
             </span>
           </div>
 

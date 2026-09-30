@@ -112,7 +112,7 @@ export const Navbar: React.FC = () => {
               </div>
               <div className="flex flex-col">
                 <span className="font-display font-bold text-base sm:text-lg text-ink-1 tracking-tight leading-none">
-                  FeedShield
+                  PashuPoshan
                 </span>
                 <span className="text-[10px] text-ink-3 hidden sm:block tracking-wide">
                   AI Feed &amp; Silage
@@ -314,7 +314,7 @@ export const Navbar: React.FC = () => {
       <Sheet
         isOpen={isMobileSheetOpen}
         onClose={() => setIsMobileSheetOpen(false)}
-        title="More FeedShield Modules"
+        title="More PashuPoshan Modules"
       >
         <div className="space-y-2">
           <Link
@@ -414,7 +414,7 @@ export const Navbar: React.FC = () => {
           </Link>
 
           <div className="pt-4 mt-2 border-t border-edge flex items-center justify-between text-xs text-ink-3">
-            <span className="font-mono">SIH26111 · FeedShield</span>
+            <span className="font-mono">SIH26111 · PashuPoshan</span>
             <span className="font-sans">Offline-first AI System</span>
           </div>
         </div>

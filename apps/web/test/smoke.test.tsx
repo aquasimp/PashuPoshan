@@ -55,6 +55,6 @@ describe("PashuPoshan Design System Smoke Tests", () => {
       </I18nProvider>
     );
 
-    expect(screen.getByText("FeedShield")).toBeInTheDocument();
+    expect(screen.getByText("PashuPoshan")).toBeInTheDocument();
   });
 });

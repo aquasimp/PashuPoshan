@@ -40,7 +40,7 @@ const TOUR_STEPS = [
     badge: "MULTIMODAL ARCHITECTURE",
     title: "Sensor + Optical + NIR Late Fusion",
     summary:
-      "FeedShield does not rely on a single fragile modality. It integrates smartphone cameras for surface quality, probe sensors for core pH and thermal differential (ΔT), and NIR spectroscopy for molecular absorption bands.",
+      "PashuPoshan does not rely on a single fragile modality. It integrates smartphone cameras for surface quality, probe sensors for core pH and thermal differential (ΔT), and NIR spectroscopy for molecular absorption bands.",
     highlights: [
       "Core probe: pH + thermal rise (Internal - Ambient ΔT)",
       "Image QA: Real-time blur, lighting, and framing validation",
@@ -82,7 +82,7 @@ const TOUR_STEPS = [
     badge: "OFFLINE FIRST",
     title: "Zero Connectivity Dexie PWA",
     summary:
-      "Rural dairy sheds rarely have stable cellular networks. FeedShield operates 100% offline using IndexedDB via Dexie. Results are signed locally with 'Analysed on device — Offline' and synced when connected.",
+      "Rural dairy sheds rarely have stable cellular networks. PashuPoshan operates 100% offline using IndexedDB via Dexie. Results are signed locally with 'Analysed on device — Offline' and synced when connected.",
     highlights: [
       "Offline background service worker and local cache",
       "Idempotent outbox with conflict resolution ladder",
@@ -110,7 +110,7 @@ const TOUR_STEPS = [
     badge: "LONG-TERM INNOVATION",
     title: "Field Data Collection & Indian Dataset",
     summary:
-      "FeedShield includes a dedicated field data collection module. Over time, extension workers and cooperative nodes build India's premier multimodal dataset linking images, spectra, and ground-truth wet chemistry.",
+      "PashuPoshan includes a dedicated field data collection module. Over time, extension workers and cooperative nodes build India's premier multimodal dataset linking images, spectra, and ground-truth wet chemistry.",
     highlights: [
       "Decentralized shared-node testing model for KVKs and milk unions",
       "Model registry with continuous calibration metrics (RMSEP, R², RPD)",

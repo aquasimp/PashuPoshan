@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "FeedShield",
+    "appName": "PashuPoshan",
     "tagline": "Test karein. Samjhein. Action lein.",
     "subtitle": "AI-Powered pashu aahar aur silage intelligence",
     "sihId": "SIH26111",
@@ -142,7 +142,7 @@
     "autoRead": "Screen khulne par apne aap sunein"
   },
   "models": {
-    "title": "FeedShield Intelligence Models",
+    "title": "PashuPoshan Intelligence Models",
     "subtitle": "Chemometric NIR calibration aur optical visual analysis pipelines.",
     "disclaimer": "Pipeline synthetic demo data par verified hai — real field accuracy ka validation nahi hai.",
     "pending": {

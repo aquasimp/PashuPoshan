@@ -4,7 +4,7 @@ import { I18nProvider } from "@/lib/i18n";
 import { ThemeProvider } from "@/lib/theme";
 
 export const metadata: Metadata = {
-  title: "FeedShield — AI-Powered Feed & Silage Intelligence",
+  title: "PashuPoshan — AI-Powered Feed & Silage Intelligence",
   description: "Smart AI-Enabled Rapid Feed and Silage Quality Testing System for Dairy Farmers (SIH26111)",
   manifest: "/manifest.json",
   icons: {
@@ -12,10 +12,10 @@ export const metadata: Metadata = {
     apple: "/icon-192.png",
   },
   openGraph: {
-    title: "FeedShield — AI-Powered Feed & Silage Intelligence",
+    title: "PashuPoshan — AI-Powered Feed & Silage Intelligence",
     description: "Smart AI-Enabled Rapid Feed and Silage Quality Testing System for Dairy Farmers (SIH26111)",
     type: "website",
-    siteName: "FeedShield",
+    siteName: "PashuPoshan",
   },
 };
 

@@ -131,7 +131,7 @@ export default function AdminCommandPage() {
               <DemoBadge label="SYSTEM HEALTH: OPTIMAL" size="sm" />
             </div>
             <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink-1 tracking-tight mt-1">
-              FeedShield Intelligence Command Center
+              PashuPoshan Intelligence Command Center
             </h1>
             <p className="text-xs text-muted dark:text-dark-muted">
               Model performance calibration, field dataset telemetry, and multi-node sync analytics.

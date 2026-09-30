@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "FeedShield",
+    "appName": "PashuPoshan",
     "tagline": "Test. Understand. Act.",
     "subtitle": "AI-Powered Feed & Silage Intelligence",
     "sihId": "SIH26111",
@@ -142,7 +142,7 @@
     "autoRead": "Auto-read advisories on load"
   },
   "models": {
-    "title": "FeedShield Intelligence Models",
+    "title": "PashuPoshan Intelligence Models",
     "subtitle": "Chemometric NIR calibration and optical visual analysis pipelines.",
     "disclaimer": "Pipeline verified on synthetic demo data — NOT a validation of field accuracy.",
     "pending": {

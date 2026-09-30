@@ -1,0 +1,24 @@
+# FeedShield Forbidden Claims List
+# Any occurrence of these phrases in UI strings, i18n bundles, docs, or PDF templates is a build violation.
+rgb measures protein
+rgb measures fibre
+rgb measures fiber
+rgb measures minerals
+rgb detects aflatoxin
+rgb detects urea directly
+detects urea directly
+detects aflatoxin directly
+nir universally replaces laboratories
+nir replaces all laboratory testing
+one model works for every indian feed
+universal calibration for all feeds
+no visible mould means no mycotoxin
+no visible mold means no mycotoxin
+ambient humidity equals silage moisture
+humidity equals silage moisture
+generic gas sensors quantify fermentation gases
+high cross-validation accuracy proves field accuracy
+bis compliance certified without lab
+screening result is a confirmed laboratory result
+guaranteed 100% accurate field test
+instant universal laboratory

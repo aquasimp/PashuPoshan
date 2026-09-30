@@ -1,0 +1,78 @@
+{
+  "model_name": "NIR Neutral Detergent Fiber (% DM) Chemometric Model",
+  "version": "nir-ndf-plsr-v1.0",
+  "target_variable": "ndf_pct",
+  "display_name": "Neutral Detergent Fiber (% DM)",
+  "hash": "6cf27173934247af",
+  "data_provenance": "synthetic_demo",
+  "synthetic_disclaimer": "Trained on synthetic demo data \u2014 NOT a validation of field accuracy",
+  "training_samples": 964,
+  "test_samples": 236,
+  "spectral_bands": 381,
+  "wavelength_range_nm": [
+    920.0,
+    1680.0
+  ],
+  "champion_model": "PLSRegression",
+  "metrics": {
+    "mae": 3.773,
+    "rmse": 4.908,
+    "r2": 0.7258,
+    "bias": 0.237,
+    "rpd": 1.91
+  },
+  "candidate_comparisons": {
+    "PLSR": {
+      "mae": 3.773,
+      "rmse": 4.908,
+      "r2": 0.7258,
+      "bias": 0.237,
+      "rpd": 1.91
+    },
+    "SVR": {
+      "mae": 0.271,
+      "rmse": 0.393,
+      "r2": 0.9982,
+      "bias": 0.0054,
+      "rpd": 23.859
+    },
+    "RandomForest": {
+      "mae": 2.689,
+      "rmse": 3.429,
+      "r2": 0.8662,
+      "bias": 0.2383,
+      "rpd": 2.733
+    }
+  },
+  "performance_by_crop_type": {
+    "compound_feed": {
+      "mae": 4.948,
+      "rmse": 6.346,
+      "r2": -1.1314,
+      "bias": 1.6045,
+      "rpd": 0.685
+    },
+    "maize_silage": {
+      "mae": 3.07,
+      "rmse": 3.824,
+      "r2": 0.6035,
+      "bias": 0.5247,
+      "rpd": 1.588
+    },
+    "green_fodder": {
+      "mae": 6.845,
+      "rmse": 7.56,
+      "r2": -1.5582,
+      "bias": -6.7799,
+      "rpd": 0.625
+    },
+    "sorghum_silage": {
+      "mae": 2.751,
+      "rmse": 3.604,
+      "r2": 0.6536,
+      "bias": 1.1946,
+      "rpd": 1.699
+    }
+  },
+  "trained_at": "2026-09-30T06:07:24.675741"
+}

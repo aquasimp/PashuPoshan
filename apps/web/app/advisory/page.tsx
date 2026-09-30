@@ -1,0 +1,411 @@
+"use client";
+
+import React, { useState, useEffect, Suspense } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import {
+  Volume2,
+  VolumeX,
+  Play,
+  Square,
+  ArrowLeft,
+  ArrowRight,
+  ShieldCheck,
+  AlertTriangle,
+  Download,
+  Share2,
+  Stethoscope,
+  Sparkles,
+  Info,
+  CheckCircle2,
+  Layers,
+  RefreshCw,
+} from "lucide-react";
+import { Navbar } from "@/components/layout/Navbar";
+import { db, LocalSample, LocalAnalysis, LocalAdvisory } from "@/lib/db";
+import { useI18n } from "@/lib/i18n";
+
+function AdvisoryContent() {
+  const searchParams = useSearchParams();
+  const sampleId = searchParams.get("id");
+  const { t, locale } = useI18n();
+
+  const [sample, setSample] = useState<LocalSample | null>(null);
+  const [analysis, setAnalysis] = useState<LocalAnalysis | null>(null);
+  const [advisory, setAdvisory] = useState<LocalAdvisory | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Web Speech API Voice States
+  const [isPlayingVoice, setIsPlayingVoice] = useState(false);
+  const [speechSupported, setSpeechSupported] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      setSpeechSupported(true);
+    }
+
+    async function loadAdvisory() {
+      if (!sampleId) {
+        setLoading(false);
+        return;
+      }
+      try {
+        const s = await db.samples.get(sampleId);
+        if (s) {
+          setSample(s);
+          const a = await db.analyses.where("sampleId").equals(sampleId).first();
+          if (a) {
+            setAnalysis(a);
+            const adv = await db.advisories.where("analysisId").equals(a.id).first();
+            if (adv) setAdvisory(adv);
+          }
+        }
+      } catch (err) {
+        console.error("Error loading advisory from Dexie:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadAdvisory();
+
+    return () => {
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, [sampleId]);
+
+  const toggleVoicePlayback = () => {
+    if (!speechSupported || !advisory) return;
+
+    if (isPlayingVoice) {
+      window.speechSynthesis.cancel();
+      setIsPlayingVoice(false);
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    // Construct spoken text in the selected locale
+    let textToSpeak = "";
+    if (locale === "hi") {
+      textToSpeak = `फ़ीडशील्ड सलाह। निर्णय: ${advisory.decision}। परिणाम: ${advisory.chain.result}। समस्या: ${advisory.chain.issue}। तुरंत कार्य: ${advisory.chain.action}। भंडारण सुरक्षा: ${advisory.chain.storage}। पशु स्वास्थ्य जोखिम: ${advisory.chain.risk}। अगला कदम: ${advisory.chain.nextStep}`;
+    } else if (locale === "hinglish") {
+      textToSpeak = `FeedShield advisory update. Decision hai: ${advisory.decision}. Result: ${advisory.chain.result}. Primary issue: ${advisory.chain.issue}. Action: ${advisory.chain.action}. Storage remediation: ${advisory.chain.storage}. Animal risk: ${advisory.chain.risk}. Next step: ${advisory.chain.nextStep}`;
+    } else {
+      textToSpeak = `FeedShield Advisory. Action Decision: ${advisory.decision}. Result summary: ${advisory.chain.result}. Primary issue: ${advisory.chain.issue}. Immediate action: ${advisory.chain.action}. Storage remediation: ${advisory.chain.storage}. Animal health risk: ${advisory.chain.risk}. Recommended next step: ${advisory.chain.nextStep}`;
+    }
+
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    utterance.rate = 0.95;
+    utterance.pitch = 1.0;
+
+    // Pick appropriate voice if available
+    const voices = window.speechSynthesis.getVoices();
+    if (locale === "hi") {
+      const hiVoice = voices.find((v) => v.lang.startsWith("hi"));
+      if (hiVoice) utterance.voice = hiVoice;
+    } else {
+      const enVoice = voices.find((v) => v.lang.startsWith("en-IN") || v.lang.startsWith("en"));
+      if (enVoice) utterance.voice = enVoice;
+    }
+
+    utterance.onstart = () => setIsPlayingVoice(true);
+    utterance.onend = () => setIsPlayingVoice(false);
+    utterance.onerror = () => setIsPlayingVoice(false);
+
+    window.speechSynthesis.speak(utterance);
+  };
+
+  if (loading) {
+    return (
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-12 text-center space-y-4">
+        <RefreshCw className="w-8 h-8 animate-spin mx-auto text-forest" />
+        <p className="text-xs text-muted">Retrieving actionable advisory...</p>
+      </main>
+    );
+  }
+
+  if (!sample || !advisory) {
+    return (
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-12 text-center space-y-4">
+        <AlertTriangle className="w-10 h-10 text-amber-600 mx-auto" />
+        <h2 className="font-display text-xl font-bold text-ink">Advisory Not Available</h2>
+        <p className="text-xs text-muted">No synthesized advisory found for this sample.</p>
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-forest text-white text-xs font-semibold"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Return Home</span>
+        </Link>
+      </main>
+    );
+  }
+
+  const decision = advisory.decision;
+  const decisionTheme =
+    decision === "FEED"
+      ? {
+          bg: "bg-emerald-600",
+          text: "text-white",
+          sub: "Safe for herd consumption according to standard ration guidelines.",
+          tag: "APPROVED FOR FEEDING",
+        }
+      : decision === "BLEND"
+      ? {
+          bg: "bg-amber-600",
+          text: "text-white",
+          sub: "Do not feed pure. Dilute with dry forage or safe silage (max 30%).",
+          tag: "RESTRICTED BLEND ONLY",
+        }
+      : decision === "RE-TEST"
+      ? {
+          bg: "bg-blue-600",
+          text: "text-white",
+          sub: "Sensor reading indeterminate or out of calibration. Retake sample.",
+          tag: "RE-TEST REQUIRED",
+        }
+      : {
+          bg: "bg-terracotta",
+          text: "text-white",
+          sub: "Severe spoilage or mycotoxin risk. Discard immediately.",
+          tag: "DO NOT FEED · DISCARD",
+        };
+
+  return (
+    <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-8 space-y-6">
+      {/* Breadcrumb */}
+      <div className="flex items-center gap-2 text-xs text-muted">
+        <Link href={`/test/result?id=${sample.id}`} className="hover:text-forest flex items-center gap-1">
+          <ArrowLeft className="w-3.5 h-3.5" />
+          <span>Back to Result</span>
+        </Link>
+        <span>/</span>
+        <span className="text-ink font-medium">Actionable Advisory</span>
+      </div>
+
+      {/* Decision Banner Card */}
+      <div className={`rounded-3xl p-6 sm:p-8 ${decisionTheme.bg} ${decisionTheme.text} shadow-card space-y-3`}>
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-mono font-bold uppercase tracking-wider bg-white/20 px-3 py-1 rounded-full">
+            {decisionTheme.tag}
+          </span>
+          <span className="text-xs font-mono opacity-80">{sample.id}</span>
+        </div>
+
+        <div>
+          <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">
+            Decision: {advisory.decision}
+          </h1>
+          <p className="text-sm opacity-90 mt-1 max-w-xl font-sans">
+            {decisionTheme.sub}
+          </p>
+        </div>
+      </div>
+
+      {/* Voice Guidance Readout Player Card */}
+      <div className="bg-surface rounded-3xl p-5 border border-bone shadow-card flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div
+            className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${
+              isPlayingVoice ? "bg-terracotta text-white" : "bg-forest/10 text-forest"
+            }`}
+          >
+            {isPlayingVoice ? (
+              <Square className="w-5 h-5 fill-current" />
+            ) : (
+              <Volume2 className="w-6 h-6" />
+            )}
+          </div>
+          <div>
+            <h3 className="font-semibold text-sm text-ink">
+              {t("advisory.voiceReadout")}
+            </h3>
+            <p className="text-xs text-muted">
+              Audio narration in Vernacular Voice ({locale.toUpperCase()})
+            </p>
+          </div>
+        </div>
+
+        {/* Animated Audio Wave bars when playing */}
+        {isPlayingVoice && (
+          <div className="flex items-center gap-1">
+            <span className="w-1 h-6 bg-forest rounded-full animate-bounce" />
+            <span className="w-1 h-8 bg-moss rounded-full animate-bounce [animation-delay:0.15s]" />
+            <span className="w-1 h-5 bg-forest rounded-full animate-bounce [animation-delay:0.3s]" />
+            <span className="w-1 h-7 bg-moss rounded-full animate-bounce [animation-delay:0.2s]" />
+          </div>
+        )}
+
+        <button
+          type="button"
+          onClick={toggleVoicePlayback}
+          className={`inline-flex items-center gap-2 px-5 py-3 rounded-2xl font-bold text-xs shadow-sm transition-all ${
+            isPlayingVoice
+              ? "bg-stone-800 text-white hover:bg-stone-900"
+              : "bg-forest text-white hover:bg-deep"
+          }`}
+          id="btn-voice-readout"
+        >
+          {isPlayingVoice ? (
+            <>
+              <Square className="w-3.5 h-3.5 fill-current" />
+              <span>Stop Voice</span>
+            </>
+          ) : (
+            <>
+              <Play className="w-3.5 h-3.5 fill-current" />
+              <span>Listen in {locale === "hi" ? "हिन्दी" : locale === "hinglish" ? "Hinglish" : "English"}</span>
+            </>
+          )}
+        </button>
+      </div>
+
+      {/* 6-Step Actionable Advisory Chain */}
+      <div className="space-y-3">
+        <h2 className="font-display text-xl font-bold text-ink">
+          6-Step Advisory Protocol
+        </h2>
+        <p className="text-xs text-muted">
+          Sequential guidance designed for immediate farm-level action and veterinary risk mitigation.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+          {/* Step 1: Result */}
+          <div className="p-5 rounded-2xl bg-surface border border-bone shadow-card space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-forest font-mono">
+                1. {t("advisory.steps.result")}
+              </span>
+              <CheckCircle2 className="w-4 h-4 text-forest" />
+            </div>
+            <p className="text-xs font-semibold text-ink leading-relaxed">
+              {advisory.chain.result}
+            </p>
+          </div>
+
+          {/* Step 2: Issue */}
+          <div className="p-5 rounded-2xl bg-surface border border-bone shadow-card space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700 font-mono">
+                2. {t("advisory.steps.issue")}
+              </span>
+              <AlertTriangle className="w-4 h-4 text-amber-700" />
+            </div>
+            <p className="text-xs font-semibold text-ink leading-relaxed">
+              {advisory.chain.issue}
+            </p>
+          </div>
+
+          {/* Step 3: Immediate Action */}
+          <div className="p-5 rounded-2xl bg-surface border-2 border-forest/30 shadow-card space-y-2 md:col-span-2">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-forest font-mono">
+                3. {t("advisory.steps.action")} (Today's Feeding)
+              </span>
+              <Sparkles className="w-4 h-4 text-forest" />
+            </div>
+            <p className="text-sm font-bold text-forest leading-relaxed">
+              {advisory.chain.action}
+            </p>
+          </div>
+
+          {/* Step 4: Storage Remediation */}
+          <div className="p-5 rounded-2xl bg-surface border border-bone shadow-card space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-muted font-mono">
+                4. {t("advisory.steps.storage")}
+              </span>
+              <Layers className="w-4 h-4 text-muted" />
+            </div>
+            <p className="text-xs font-semibold text-ink leading-relaxed">
+              {advisory.chain.storage}
+            </p>
+          </div>
+
+          {/* Step 5: Animal Health Risk */}
+          <div className="p-5 rounded-2xl bg-surface border border-bone shadow-card space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-terracotta font-mono">
+                5. {t("advisory.steps.risk")}
+              </span>
+              <Stethoscope className="w-4 h-4 text-terracotta" />
+            </div>
+            <p className="text-xs font-semibold text-ink leading-relaxed">
+              {advisory.chain.risk}
+            </p>
+          </div>
+
+          {/* Step 6: Recommended Next Step */}
+          <div className="p-5 rounded-2xl bg-surface border border-bone shadow-card space-y-2 md:col-span-2">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-forest font-mono">
+                6. {t("advisory.steps.nextStep")}
+              </span>
+              <ArrowRight className="w-4 h-4 text-forest" />
+            </div>
+            <p className="text-xs font-semibold text-ink leading-relaxed">
+              {advisory.chain.nextStep}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Veterinarian Referral Note */}
+      <div className="p-4 rounded-2xl bg-mist/30 border border-mist flex items-start gap-3 text-xs text-forest">
+        <Stethoscope className="w-5 h-5 text-forest shrink-0 mt-0.5" />
+        <div className="space-y-1">
+          <h4 className="font-bold">Veterinary Consultation Recommendation</h4>
+          <p className="leading-relaxed text-forest/90">
+            If milk yield suddenly declines or cows exhibit loose dung, fever, or depressed appetite after silage ration introduction, notify your dairy cooperative veterinary field officer immediately.
+          </p>
+        </div>
+      </div>
+
+      {/* Action Footer */}
+      <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <Link
+          href={`/test/result?id=${sample.id}`}
+          className="text-xs font-semibold text-forest hover:underline flex items-center gap-1.5"
+        >
+          <ArrowLeft className="w-3.5 h-3.5" />
+          <span>Back to Quality Gauge</span>
+        </Link>
+
+        <div className="flex items-center gap-3 w-full sm:w-auto">
+          {analysis && (
+            <button
+              type="button"
+              onClick={() => {
+                window.open(`/api/v1/reports/${analysis.id}/pdf`, "_blank");
+              }}
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-forest text-white text-xs font-bold shadow-sm hover:bg-deep transition-all"
+            >
+              <Download className="w-4 h-4" />
+              <span>Download PDF</span>
+            </button>
+          )}
+
+          <Link
+            href="/"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-surface border border-bone text-ink text-xs font-semibold hover:bg-bone transition-all"
+          >
+            <span>Done</span>
+          </Link>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+export default function AdvisoryPage() {
+  return (
+    <div className="min-h-screen bg-ivory flex flex-col font-sans">
+      <Navbar />
+      <Suspense fallback={<div className="p-8 text-center text-xs text-muted">Loading advisory...</div>}>
+        <AdvisoryContent />
+      </Suspense>
+    </div>
+  );
+}

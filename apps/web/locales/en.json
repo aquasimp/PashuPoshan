@@ -1,0 +1,107 @@
+{
+  "common": {
+    "appName": "FeedShield",
+    "tagline": "Test. Understand. Act.",
+    "syncStatus": {
+      "savedOnDevice": "Saved on device",
+      "queued": "Queued",
+      "syncing": "Syncing...",
+      "synced": "Synced",
+      "failed": "Sync failed",
+      "syncNow": "SYNC NOW",
+      "updatedAfterSync": "Updated after Sync"
+    },
+    "roles": {
+      "farmer": "Dairy Farmer",
+      "cooperative_manager": "Cooperative Manager",
+      "veterinarian": "Veterinarian",
+      "admin": "Platform Admin"
+    },
+    "actions": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "next": "Next",
+      "back": "Back",
+      "submit": "Submit",
+      "retake": "Retake",
+      "download": "Download PDF",
+      "share": "Share QR",
+      "verify": "Verify Authenticity"
+    }
+  },
+  "farmer": {
+    "homeTitle": "Feed & Silage Quality",
+    "welcome": "Welcome back",
+    "startTest": "Start New Test",
+    "testSilage": "Silage Fermentation Test",
+    "testFeed": "Cattle Feed / Fodder Test",
+    "recentTests": "Recent Sample Tests",
+    "storageAlerts": "Active Pit Warnings",
+    "capturePrompt": "Capture Sample Photograph",
+    "captureHint": "Place sample on clean plain surface with uniform daylight",
+    "retakeBlur": "Hold camera steady.",
+    "retakeLighting": "Improve lighting.",
+    "retakeDistance": "Move closer."
+  },
+  "results": {
+    "title": "Analysis Result",
+    "overallQuality": "Overall Quality",
+    "good": "GOOD",
+    "attention": "ATTENTION",
+    "highRisk": "HIGH RISK",
+    "inputCompleteness": "Input Completeness",
+    "nutrition": {
+      "title": "Nutritional Profile",
+      "notMeasured": "Not measured",
+      "crudeProtein": "Crude Protein",
+      "dryMatter": "Dry Matter",
+      "ndf": "Neutral Detergent Fiber (NDF)",
+      "adf": "Acid Detergent Fiber (ADF)"
+    },
+    "claims": {
+      "ureaImageOnly": "Urea cannot be assessed from this image alone.",
+      "ureaAssayPositive": "Possible excess/non-declared urea — screening result. Confirmatory laboratory test recommended.",
+      "visibleMould": "Visible mould risk",
+      "spectralContamination": "Indicative spectral contamination risk",
+      "rapidAssay": "Rapid assay screening result",
+      "labScreening": "Laboratory screening result",
+      "confirmatoryLab": "Confirmatory laboratory result",
+      "sandSilica": "Suspected inorganic contamination — confirmatory laboratory test recommended.",
+      "outOfDomain": "Sample outside validated model range — laboratory confirmation recommended.",
+      "stripValidationFailed": "Unable to validate test image — retake required.",
+      "syntheticBanner": "Trained on synthetic demo data — NOT a validation of field accuracy"
+    },
+    "silageRisks": {
+      "airIngress": "Air Ingress Risk",
+      "heating": "Aerobic Heating Risk",
+      "spoilage": "Spoilage Hazard",
+      "fermentation": "Fermentation Failure Risk",
+      "mould": "Mould Proliferation Risk"
+    }
+  },
+  "advisory": {
+    "title": "Actionable Advisory",
+    "decision": "Action Decision",
+    "decisions": {
+      "FEED": "FEED",
+      "BLEND": "BLEND",
+      "RE_TEST": "RE-TEST",
+      "DISCARD": "DISCARD"
+    },
+    "voiceReadout": "Listen to Advisory",
+    "steps": {
+      "result": "Result Summary",
+      "issue": "Primary Issue",
+      "action": "Immediate Action",
+      "storage": "Storage Remediation",
+      "risk": "Animal Health Risk",
+      "nextStep": "Recommended Next Step"
+    }
+  },
+  "admin": {
+    "dashboard": "System Analytics",
+    "models": "Model Registry & Calibration",
+    "dataCollection": "Field Data Collection",
+    "storage": "Storage Units & Bunker Telemetry"
+  }
+}

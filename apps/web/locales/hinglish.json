@@ -1,0 +1,107 @@
+{
+  "common": {
+    "appName": "FeedShield",
+    "tagline": "Test karein. Samjhein. Action lein.",
+    "syncStatus": {
+      "savedOnDevice": "Device par saved",
+      "queued": "Queue mein hai",
+      "syncing": "Sync ho raha hai...",
+      "synced": "Synced",
+      "failed": "Sync fail hua",
+      "syncNow": "SYNC NOW",
+      "updatedAfterSync": "Updated after Sync"
+    },
+    "roles": {
+      "farmer": "Kisan Bhai",
+      "cooperative_manager": "Cooperative Manager",
+      "veterinarian": "Doctor Sahab (Vet)",
+      "admin": "Admin"
+    },
+    "actions": {
+      "save": "Save karein",
+      "cancel": "Cancel",
+      "next": "Aage badhein",
+      "back": "Wapas",
+      "submit": "Submit karein",
+      "retake": "Dobara photo lein",
+      "download": "PDF Report download karein",
+      "share": "QR share karein",
+      "verify": "Asliyat verify karein"
+    }
+  },
+  "farmer": {
+    "homeTitle": "Pashu Aahar aur Silage Quality",
+    "welcome": "Namaste",
+    "startTest": "Naya Test Shuru Karein",
+    "testSilage": "Silage Fermentation Test",
+    "testFeed": "Pashu Aahar / Chara Test",
+    "recentTests": "Haal ke tests",
+    "storageAlerts": "Silage Pit Alerts",
+    "capturePrompt": "Sample ki photo kheinchein",
+    "captureHint": "Sample ko saaf jagah par rakhein aur acchi roshni mein photo lein",
+    "retakeBlur": "Hold camera steady.",
+    "retakeLighting": "Improve lighting.",
+    "retakeDistance": "Move closer."
+  },
+  "results": {
+    "title": "Analysis Result",
+    "overallQuality": "Overall Quality",
+    "good": "Badiya (GOOD)",
+    "attention": "Dhyan dein (ATTENTION)",
+    "highRisk": "Khatra (HIGH RISK)",
+    "inputCompleteness": "Input Completeness",
+    "nutrition": {
+      "title": "Nutrition Profile",
+      "notMeasured": "Not measured",
+      "crudeProtein": "Crude Protein (CP)",
+      "dryMatter": "Dry Matter (DM)",
+      "ndf": "NDF Fiber",
+      "adf": "ADF Fiber"
+    },
+    "claims": {
+      "ureaImageOnly": "Urea cannot be assessed from this image alone.",
+      "ureaAssayPositive": "Possible excess/non-declared urea — screening result. Confirmatory laboratory test recommended.",
+      "visibleMould": "Visible mould risk",
+      "spectralContamination": "Indicative spectral contamination risk",
+      "rapidAssay": "Rapid assay screening result",
+      "labScreening": "Laboratory screening result",
+      "confirmatoryLab": "Confirmatory laboratory result",
+      "sandSilica": "Suspected inorganic contamination — confirmatory laboratory test recommended.",
+      "outOfDomain": "Sample outside validated model range — laboratory confirmation recommended.",
+      "stripValidationFailed": "Unable to validate test image — retake required.",
+      "syntheticBanner": "Trained on synthetic demo data — NOT a validation of field accuracy"
+    },
+    "silageRisks": {
+      "airIngress": "Hawa ghusne ka risk",
+      "heating": "Garam hone ka risk",
+      "spoilage": "Kharab hone ka risk",
+      "fermentation": "Fermentation failure risk",
+      "mould": "Fafund phailne ka risk"
+    }
+  },
+  "advisory": {
+    "title": "Kisan Salah",
+    "decision": "Decision",
+    "decisions": {
+      "FEED": "Khilayein (FEED)",
+      "BLEND": "Milakar dein (BLEND)",
+      "RE_TEST": "Dobara test karein (RE-TEST)",
+      "DISCARD": "Phenk dein (DISCARD)"
+    },
+    "voiceReadout": "Awaaz mein salah sunein",
+    "steps": {
+      "result": "Result summary",
+      "issue": "Mukhya samasya",
+      "action": "Abhi kya karein",
+      "storage": "Gaddhe ka dhyan",
+      "risk": "Pashu swasthya risk",
+      "nextStep": "Agla kadam"
+    }
+  },
+  "admin": {
+    "dashboard": "System Analytics",
+    "models": "Model Registry",
+    "dataCollection": "Field Data Collection",
+    "storage": "Storage Pit Monitoring"
+  }
+}

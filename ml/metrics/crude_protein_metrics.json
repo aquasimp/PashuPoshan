@@ -1,0 +1,78 @@
+{
+  "model_name": "NIR Crude Protein (% DM) Chemometric Model",
+  "version": "nir-crude_protein-plsr-v1.0",
+  "target_variable": "crude_protein_pct",
+  "display_name": "Crude Protein (% DM)",
+  "hash": "eca77604108b29e8",
+  "data_provenance": "synthetic_demo",
+  "synthetic_disclaimer": "Trained on synthetic demo data \u2014 NOT a validation of field accuracy",
+  "training_samples": 964,
+  "test_samples": 236,
+  "spectral_bands": 381,
+  "wavelength_range_nm": [
+    920.0,
+    1680.0
+  ],
+  "champion_model": "PLSRegression",
+  "metrics": {
+    "mae": 1.084,
+    "rmse": 1.465,
+    "r2": 0.907,
+    "bias": 0.0676,
+    "rpd": 3.278
+  },
+  "candidate_comparisons": {
+    "PLSR": {
+      "mae": 1.084,
+      "rmse": 1.465,
+      "r2": 0.907,
+      "bias": 0.0676,
+      "rpd": 3.278
+    },
+    "SVR": {
+      "mae": 0.069,
+      "rmse": 0.087,
+      "r2": 0.9997,
+      "bias": 0.0031,
+      "rpd": 55.225
+    },
+    "RandomForest": {
+      "mae": 0.765,
+      "rmse": 1.032,
+      "r2": 0.9538,
+      "bias": 0.1047,
+      "rpd": 4.654
+    }
+  },
+  "performance_by_crop_type": {
+    "compound_feed": {
+      "mae": 1.826,
+      "rmse": 2.128,
+      "r2": 0.534,
+      "bias": 0.4467,
+      "rpd": 1.465
+    },
+    "maize_silage": {
+      "mae": 0.681,
+      "rmse": 0.838,
+      "r2": 0.4486,
+      "bias": 0.2326,
+      "rpd": 1.347
+    },
+    "green_fodder": {
+      "mae": 2.095,
+      "rmse": 2.498,
+      "r2": -0.0014,
+      "bias": -2.0951,
+      "rpd": 0.999
+    },
+    "sorghum_silage": {
+      "mae": 0.711,
+      "rmse": 0.929,
+      "r2": 0.4052,
+      "bias": 0.2835,
+      "rpd": 1.297
+    }
+  },
+  "trained_at": "2026-09-30T06:07:23.855113"
+}

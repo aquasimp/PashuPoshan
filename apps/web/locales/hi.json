@@ -1,0 +1,107 @@
+{
+  "common": {
+    "appName": "FeedShield (फ़ीडशील्ड)",
+    "tagline": "जांचें। समझें। सही कदम उठाएं।",
+    "syncStatus": {
+      "savedOnDevice": "डिवाइस पर सुरक्षित",
+      "queued": "कतार में",
+      "syncing": "सिंक हो रहा है...",
+      "synced": "सिंक हो गया",
+      "failed": "सिंक विफल",
+      "syncNow": "अभी सिंक करें",
+      "updatedAfterSync": "सिंक के बाद अपडेट हुआ"
+    },
+    "roles": {
+      "farmer": "डेयरी किसान",
+      "cooperative_manager": "सहकारी प्रबंधक",
+      "veterinarian": "पशु चिकित्सक",
+      "admin": "प्रणाली व्यवस्थापक"
+    },
+    "actions": {
+      "save": "सहेजें",
+      "cancel": "रद्द करें",
+      "next": "आगे बढ़ें",
+      "back": "पीछे जाएं",
+      "submit": "जमा करें",
+      "retake": "फिर से फोटो लें",
+      "download": "पीडीएफ रिपोर्ट डाउनलोड करें",
+      "share": "क्यूआर साझा करें",
+      "verify": "प्रमाणिकता जांचें"
+    }
+  },
+  "farmer": {
+    "homeTitle": "पशु आहार एवं साइलेज गुणवत्ता",
+    "welcome": "नमस्ते",
+    "startTest": "नया टेस्ट शुरू करें",
+    "testSilage": "साइलेज किण्वन टेस्ट",
+    "testFeed": "पशु आहार / चारा टेस्ट",
+    "recentTests": "हाल के परीक्षण",
+    "storageAlerts": "साइलेज गड्ढे की चेतावनियाँ",
+    "capturePrompt": "नमूने की फ़ोटो लें",
+    "captureHint": "नमूने को साफ सतह पर रखें और सीधी रोशनी में फोटो लें",
+    "retakeBlur": "Hold camera steady.",
+    "retakeLighting": "Improve lighting.",
+    "retakeDistance": "Move closer."
+  },
+  "results": {
+    "title": "विश्लेषण परिणाम",
+    "overallQuality": "समग्र गुणवत्ता",
+    "good": "उत्तम (GOOD)",
+    "attention": "ध्यान दें (ATTENTION)",
+    "highRisk": "उच्च जोखिम (HIGH RISK)",
+    "inputCompleteness": "इनपुट पूर्णता",
+    "nutrition": {
+      "title": "पोषण प्रोफ़ाइल",
+      "notMeasured": "Not measured",
+      "crudeProtein": "क्रूड प्रोटीन (CP)",
+      "dryMatter": "शुष्क पदार्थ (DM)",
+      "ndf": "तटस्थ डिटर्जेंट फाइबर (NDF)",
+      "adf": "अम्ल डिटर्जेंट फाइबर (ADF)"
+    },
+    "claims": {
+      "ureaImageOnly": "Urea cannot be assessed from this image alone.",
+      "ureaAssayPositive": "Possible excess/non-declared urea — screening result. Confirmatory laboratory test recommended.",
+      "visibleMould": "Visible mould risk",
+      "spectralContamination": "Indicative spectral contamination risk",
+      "rapidAssay": "Rapid assay screening result",
+      "labScreening": "Laboratory screening result",
+      "confirmatoryLab": "Confirmatory laboratory result",
+      "sandSilica": "Suspected inorganic contamination — confirmatory laboratory test recommended.",
+      "outOfDomain": "Sample outside validated model range — laboratory confirmation recommended.",
+      "stripValidationFailed": "Unable to validate test image — retake required.",
+      "syntheticBanner": "Trained on synthetic demo data — NOT a validation of field accuracy"
+    },
+    "silageRisks": {
+      "airIngress": "हवा रिसाव जोखिम",
+      "heating": "गर्म होने का जोखिम",
+      "spoilage": "सड़ने का खतरा",
+      "fermentation": "किण्वन विफलता जोखिम",
+      "mould": "फफूंद फैलाव जोखिम"
+    }
+  },
+  "advisory": {
+    "title": "कार्य योजना व सलाह",
+    "decision": "कार्य निर्णय",
+    "decisions": {
+      "FEED": "खिलाएं (FEED)",
+      "BLEND": "मिलाकर दें (BLEND)",
+      "RE_TEST": "पुनः जांचें (RE-TEST)",
+      "DISCARD": "नष्ट करें (DISCARD)"
+    },
+    "voiceReadout": "सलाह सुनें (आवाज़ में)",
+    "steps": {
+      "result": "परिणाम सारांश",
+      "issue": "प्रमुख समस्या",
+      "action": "तत्काल कार्रवाई",
+      "storage": "भंडारण सुधार",
+      "risk": "पशु स्वास्थ्य जोखिम",
+      "nextStep": "अनुशंसित अगला कदम"
+    }
+  },
+  "admin": {
+    "dashboard": "सिस्टम एनालिटिक्स",
+    "models": "मॉडल रजिस्ट्री और अंशांकन",
+    "dataCollection": "क्षेत्रीय डेटा संग्रह",
+    "storage": "साइलेज बंकर और गड्ढे की निगरानी"
+  }
+}

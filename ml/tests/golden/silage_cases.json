@@ -1,0 +1,522 @@
+[
+  {
+    "id": "CASE-01-OPTIMAL-MAIZE",
+    "description": "Optimal healthy maize silage with low pH and stable ambient temperature",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 3.9,
+      "internal_temp": 24.5,
+      "ambient_temp": 24.0,
+      "dry_matter_pct": 34.0,
+      "visible_mould_pct": 0.0
+    },
+    "expected": {
+      "air_ingress_risk": "low",
+      "heating_risk": "low",
+      "spoilage_risk": "low",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "low",
+      "sensor_health_warning": "normal",
+      "overall_risk": "GOOD",
+      "action_decision": "FEED"
+    }
+  },
+  {
+    "id": "CASE-02-AEROBIC-HEATING-CRITICAL",
+    "description": "Severe aerobic heating due to air ingress (delta > 10C)",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 4.1,
+      "internal_temp": 39.0,
+      "ambient_temp": 25.0,
+      "dry_matter_pct": 33.0,
+      "visible_mould_pct": 2.0
+    },
+    "expected": {
+      "air_ingress_risk": "high",
+      "heating_risk": "high",
+      "spoilage_risk": "high",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "moderate",
+      "sensor_health_warning": "normal",
+      "overall_risk": "HIGH RISK",
+      "action_decision": "DISCARD"
+    }
+  },
+  {
+    "id": "CASE-03-FERMENTATION-FAILURE",
+    "description": "Fermentation failure with alkaline / poorly acidified pH",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 5.4,
+      "internal_temp": 26.0,
+      "ambient_temp": 24.0,
+      "dry_matter_pct": 32.0,
+      "visible_mould_pct": 0.5
+    },
+    "expected": {
+      "air_ingress_risk": "low",
+      "heating_risk": "low",
+      "spoilage_risk": "high",
+      "fermentation_failure_risk": "high",
+      "mould_risk": "low",
+      "sensor_health_warning": "normal",
+      "overall_risk": "HIGH RISK",
+      "action_decision": "DISCARD"
+    }
+  },
+  {
+    "id": "CASE-04-WILTED-DRY-TOLERANCE",
+    "description": "Drier wilted silage (DM 52%) safely tolerating elevated pH (4.45)",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 4.45,
+      "internal_temp": 25.0,
+      "ambient_temp": 24.0,
+      "dry_matter_pct": 52.0,
+      "visible_mould_pct": 0.0
+    },
+    "expected": {
+      "air_ingress_risk": "low",
+      "heating_risk": "low",
+      "spoilage_risk": "low",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "low",
+      "sensor_health_warning": "normal",
+      "overall_risk": "GOOD",
+      "action_decision": "FEED"
+    }
+  },
+  {
+    "id": "CASE-05-WET-CLOSTRIDIAL-RISK",
+    "description": "Very wet silage (DM 22%) with pH 4.6 indicating clostridial secondary fermentation",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 4.6,
+      "internal_temp": 27.0,
+      "ambient_temp": 24.0,
+      "dry_matter_pct": 22.0,
+      "visible_mould_pct": 0.0
+    },
+    "expected": {
+      "air_ingress_risk": "low",
+      "heating_risk": "low",
+      "spoilage_risk": "high",
+      "fermentation_failure_risk": "high",
+      "mould_risk": "low",
+      "sensor_health_warning": "normal",
+      "overall_risk": "HIGH RISK",
+      "action_decision": "DISCARD"
+    }
+  },
+  {
+    "id": "CASE-06-EXTENSIVE-SURFACE-MOULD",
+    "description": "Silage with severe surface mold colonies (> 5%)",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 4.0,
+      "internal_temp": 25.0,
+      "ambient_temp": 24.0,
+      "dry_matter_pct": 35.0,
+      "visible_mould_pct": 8.5
+    },
+    "expected": {
+      "air_ingress_risk": "low",
+      "heating_risk": "low",
+      "spoilage_risk": "high",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "high",
+      "sensor_health_warning": "normal",
+      "overall_risk": "HIGH RISK",
+      "action_decision": "DISCARD"
+    }
+  },
+  {
+    "id": "CASE-07-MODERATE-HEATING-BLEND",
+    "description": "Moderate heat buildup (delta = 6.5C) suggesting face feeding needs speedup",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 4.1,
+      "internal_temp": 31.5,
+      "ambient_temp": 25.0,
+      "dry_matter_pct": 34.0,
+      "visible_mould_pct": 0.5
+    },
+    "expected": {
+      "air_ingress_risk": "moderate",
+      "heating_risk": "moderate",
+      "spoilage_risk": "moderate",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "low",
+      "sensor_health_warning": "normal",
+      "overall_risk": "ATTENTION",
+      "action_decision": "BLEND"
+    }
+  },
+  {
+    "id": "CASE-08-MISSING-AMBIENT-TEMP",
+    "description": "Missing ambient temperature results in indeterminate heating risk",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 4.0,
+      "internal_temp": 32.0,
+      "dry_matter_pct": 34.0
+    },
+    "expected": {
+      "air_ingress_risk": "indeterminate",
+      "heating_risk": "indeterminate",
+      "spoilage_risk": "low",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "indeterminate",
+      "sensor_health_warning": "normal",
+      "overall_risk": "GOOD",
+      "action_decision": "FEED"
+    }
+  },
+  {
+    "id": "CASE-09-MISSING-PH",
+    "description": "Missing pH input produces indeterminate fermentation risk",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "internal_temp": 24.0,
+      "ambient_temp": 23.5,
+      "dry_matter_pct": 34.0
+    },
+    "expected": {
+      "air_ingress_risk": "low",
+      "heating_risk": "low",
+      "spoilage_risk": "low",
+      "fermentation_failure_risk": "indeterminate",
+      "mould_risk": "indeterminate",
+      "sensor_health_warning": "normal",
+      "overall_risk": "GOOD",
+      "action_decision": "FEED"
+    }
+  },
+  {
+    "id": "CASE-10-SENSOR-FAULT-PH-EXTREME",
+    "description": "Broken pH probe reading 1.2 triggering sensor fault warning and RE-TEST",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 1.2,
+      "internal_temp": 25.0,
+      "ambient_temp": 24.0
+    },
+    "expected": {
+      "air_ingress_risk": "low",
+      "heating_risk": "low",
+      "spoilage_risk": "low",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "indeterminate",
+      "sensor_health_warning": "fault_detected",
+      "overall_risk": "ATTENTION",
+      "action_decision": "RE_TEST"
+    }
+  },
+  {
+    "id": "CASE-11-SENSOR-FAULT-TEMP-EXTREME",
+    "description": "Broken temperature probe reading 92C triggering sensor fault",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 4.0,
+      "internal_temp": 92.0,
+      "ambient_temp": 24.0
+    },
+    "expected": {
+      "air_ingress_risk": "high",
+      "heating_risk": "high",
+      "spoilage_risk": "high",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "indeterminate",
+      "sensor_health_warning": "fault_detected",
+      "overall_risk": "ATTENTION",
+      "action_decision": "RE_TEST"
+    }
+  },
+  {
+    "id": "CASE-12-OPTIMAL-SORGHUM",
+    "description": "Optimal healthy sorghum silage (pH 4.1 in normal range 3.9-4.4)",
+    "inputs": {
+      "crop_type": "sorghum_silage",
+      "ph": 4.1,
+      "internal_temp": 26.0,
+      "ambient_temp": 25.0,
+      "dry_matter_pct": 30.0,
+      "visible_mould_pct": 0.0
+    },
+    "expected": {
+      "air_ingress_risk": "low",
+      "heating_risk": "low",
+      "spoilage_risk": "low",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "low",
+      "sensor_health_warning": "normal",
+      "overall_risk": "GOOD",
+      "action_decision": "FEED"
+    }
+  },
+  {
+    "id": "CASE-13-SORGHUM-HIGH-PH",
+    "description": "Sorghum silage with pH 4.9 exceeding critical stability ceiling (4.8)",
+    "inputs": {
+      "crop_type": "sorghum_silage",
+      "ph": 4.9,
+      "internal_temp": 25.5,
+      "ambient_temp": 24.0,
+      "dry_matter_pct": 28.0
+    },
+    "expected": {
+      "air_ingress_risk": "low",
+      "heating_risk": "low",
+      "spoilage_risk": "high",
+      "fermentation_failure_risk": "high",
+      "mould_risk": "indeterminate",
+      "sensor_health_warning": "normal",
+      "overall_risk": "HIGH RISK",
+      "action_decision": "DISCARD"
+    }
+  },
+  {
+    "id": "CASE-14-OPTIMAL-GRASS-LEGUME",
+    "description": "Grass legume silage properly fermented at pH 4.5",
+    "inputs": {
+      "crop_type": "grass_legume_silage",
+      "ph": 4.5,
+      "internal_temp": 22.0,
+      "ambient_temp": 21.0,
+      "dry_matter_pct": 38.0
+    },
+    "expected": {
+      "air_ingress_risk": "low",
+      "heating_risk": "low",
+      "spoilage_risk": "low",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "indeterminate",
+      "sensor_health_warning": "normal",
+      "overall_risk": "GOOD",
+      "action_decision": "FEED"
+    }
+  },
+  {
+    "id": "CASE-15-GRASS-LEGUME-CRITICAL-PH",
+    "description": "Grass legume silage exceeding critical ceiling (> 5.2)",
+    "inputs": {
+      "crop_type": "grass_legume_silage",
+      "ph": 5.4,
+      "internal_temp": 23.0,
+      "ambient_temp": 22.0
+    },
+    "expected": {
+      "air_ingress_risk": "low",
+      "heating_risk": "low",
+      "spoilage_risk": "high",
+      "fermentation_failure_risk": "high",
+      "mould_risk": "indeterminate",
+      "sensor_health_warning": "normal",
+      "overall_risk": "HIGH RISK",
+      "action_decision": "DISCARD"
+    }
+  },
+  {
+    "id": "CASE-16-ALL-INPUTS-MISSING",
+    "description": "Zero sensor telemetry inputs results in indeterminate across all risks",
+    "inputs": {},
+    "expected": {
+      "air_ingress_risk": "indeterminate",
+      "heating_risk": "indeterminate",
+      "spoilage_risk": "indeterminate",
+      "fermentation_failure_risk": "indeterminate",
+      "mould_risk": "indeterminate",
+      "sensor_health_warning": "normal",
+      "overall_risk": "ATTENTION",
+      "action_decision": "RE_TEST"
+    }
+  },
+  {
+    "id": "CASE-17-ELEVATED-RATE-OF-HEATING",
+    "description": "Heating rate rising at 2.2C/day without ambient temp triggers heating warning",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 4.1,
+      "heating_rate": 2.2
+    },
+    "expected": {
+      "air_ingress_risk": "moderate",
+      "heating_risk": "moderate",
+      "spoilage_risk": "moderate",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "indeterminate",
+      "sensor_health_warning": "normal",
+      "overall_risk": "ATTENTION",
+      "action_decision": "BLEND"
+    }
+  },
+  {
+    "id": "CASE-18-PROLONGED-OPEN-FACE",
+    "description": "Open pit face for 14 days with moderate heating accelerates to high air ingress",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 4.1,
+      "internal_temp": 31.0,
+      "ambient_temp": 25.0,
+      "days_open": 14
+    },
+    "expected": {
+      "air_ingress_risk": "high",
+      "heating_risk": "moderate",
+      "spoilage_risk": "high",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "indeterminate",
+      "sensor_health_warning": "normal",
+      "overall_risk": "HIGH RISK",
+      "action_decision": "DISCARD"
+    }
+  },
+  {
+    "id": "CASE-19-MILD-MOULD-BLEND",
+    "description": "Small visible mould patches (2.5%) recommend discarding top layer and blending core",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 4.0,
+      "internal_temp": 25.0,
+      "ambient_temp": 24.0,
+      "visible_mould_pct": 2.5
+    },
+    "expected": {
+      "air_ingress_risk": "low",
+      "heating_risk": "low",
+      "spoilage_risk": "moderate",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "moderate",
+      "sensor_health_warning": "normal",
+      "overall_risk": "ATTENTION",
+      "action_decision": "BLEND"
+    }
+  },
+  {
+    "id": "CASE-20-MODERATE-PH-ELEVATION",
+    "description": "Maize silage with pH 4.35 (just above optimal 4.2 but below critical 4.6)",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 4.35,
+      "internal_temp": 25.0,
+      "ambient_temp": 24.0,
+      "dry_matter_pct": 34.0
+    },
+    "expected": {
+      "air_ingress_risk": "low",
+      "heating_risk": "low",
+      "spoilage_risk": "moderate",
+      "fermentation_failure_risk": "moderate",
+      "mould_risk": "indeterminate",
+      "sensor_health_warning": "normal",
+      "overall_risk": "ATTENTION",
+      "action_decision": "BLEND"
+    }
+  },
+  {
+    "id": "CASE-21-COMBINED-SECONDARY-HEAT-AND-HIGH-PH",
+    "description": "Compound hazard of elevated pH (4.4) and heat (delta 6C) promotes mould sporulation",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 4.4,
+      "internal_temp": 31.0,
+      "ambient_temp": 25.0,
+      "dry_matter_pct": 33.0
+    },
+    "expected": {
+      "air_ingress_risk": "moderate",
+      "heating_risk": "moderate",
+      "spoilage_risk": "moderate",
+      "fermentation_failure_risk": "moderate",
+      "mould_risk": "moderate",
+      "sensor_health_warning": "normal",
+      "overall_risk": "ATTENTION",
+      "action_decision": "BLEND"
+    }
+  },
+  {
+    "id": "CASE-22-PERFECT-TOWER-SILAGE",
+    "description": "Pristine tower silo silage with deep lactic preservation (pH 3.8)",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 3.8,
+      "internal_temp": 20.0,
+      "ambient_temp": 19.5,
+      "dry_matter_pct": 36.0,
+      "visible_mould_pct": 0.0
+    },
+    "expected": {
+      "air_ingress_risk": "low",
+      "heating_risk": "low",
+      "spoilage_risk": "low",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "low",
+      "sensor_health_warning": "normal",
+      "overall_risk": "GOOD",
+      "action_decision": "FEED"
+    }
+  },
+  {
+    "id": "CASE-23-DEFAULT-CROP-FALLBACK",
+    "description": "Unspecified fodder crop falling back to safe default benchmarks",
+    "inputs": {
+      "crop_type": "unspecified_grass",
+      "ph": 4.1,
+      "internal_temp": 26.0,
+      "ambient_temp": 25.5
+    },
+    "expected": {
+      "air_ingress_risk": "low",
+      "heating_risk": "low",
+      "spoilage_risk": "low",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "indeterminate",
+      "sensor_health_warning": "normal",
+      "overall_risk": "GOOD",
+      "action_decision": "FEED"
+    }
+  },
+  {
+    "id": "CASE-24-SUMMER-HEATWAVE-BASELINE",
+    "description": "High ambient temperature (42C) where internal is 43C (delta = 1C) is NOT heating",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 3.9,
+      "internal_temp": 43.0,
+      "ambient_temp": 42.0,
+      "dry_matter_pct": 34.0
+    },
+    "expected": {
+      "air_ingress_risk": "low",
+      "heating_risk": "low",
+      "spoilage_risk": "low",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "indeterminate",
+      "sensor_health_warning": "normal",
+      "overall_risk": "GOOD",
+      "action_decision": "FEED"
+    }
+  },
+  {
+    "id": "CASE-25-WINTER-COLD-DIFFERENTIAL",
+    "description": "Low ambient (8C) where internal is 20C (delta = 12C) indicates critical heating",
+    "inputs": {
+      "crop_type": "maize_silage",
+      "ph": 4.0,
+      "internal_temp": 20.0,
+      "ambient_temp": 8.0,
+      "dry_matter_pct": 33.0
+    },
+    "expected": {
+      "air_ingress_risk": "high",
+      "heating_risk": "high",
+      "spoilage_risk": "high",
+      "fermentation_failure_risk": "low",
+      "mould_risk": "indeterminate",
+      "sensor_health_warning": "normal",
+      "overall_risk": "HIGH RISK",
+      "action_decision": "DISCARD"
+    }
+  }
+]

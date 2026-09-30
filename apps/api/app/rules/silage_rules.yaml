@@ -1,0 +1,53 @@
+version: "1.0.0"
+description: "FeedShield Scientific Silage Quality & Fermentation Risk Rules"
+last_updated: "2026-09-30"
+
+crop_ph_benchmarks:
+  maize_silage:
+    normal_min_ph: 3.7
+    normal_max_ph: 4.2
+    critical_high_ph: 4.6
+    source: "Kung et al. (2018), Silage Review: Interpretation of chemical characteristics of silage"
+    status: "verified"
+  sorghum_silage:
+    normal_min_ph: 3.9
+    normal_max_ph: 4.4
+    critical_high_ph: 4.8
+    source: "McDonald et al. (1991), The Biochemistry of Silage"
+    status: "verified"
+  grass_legume_silage:
+    normal_min_ph: 4.3
+    normal_max_ph: 4.8
+    critical_high_ph: 5.2
+    source: "USDA Silage Quality Standards (2015)"
+    status: "verified"
+  default:
+    normal_min_ph: 3.8
+    normal_max_ph: 4.3
+    critical_high_ph: 4.7
+    status: "needs_expert_review"
+
+temperature_rules:
+  warning_delta_c: 5.0
+  critical_delta_c: 10.0
+  heating_rate_warning_c_per_day: 1.5
+  source: "Holmes & Muck (2007), Silage bunker management and aerobic stability"
+  status: "verified"
+
+dry_matter_interactions:
+  wet_threshold_pct: 30.0
+  wilted_dry_threshold_pct: 45.0
+  wet_clostridial_ph_risk: 4.5
+  dry_ph_tolerance_bump: 0.35
+  source: "Pahlow et al. (2003), Microbiology of Ensiling"
+  status: "verified"
+
+sensor_validity_bounds:
+  ph_min: 2.5
+  ph_max: 9.0
+  internal_temp_min_c: -5.0
+  internal_temp_max_c: 75.0
+  ambient_temp_min_c: -10.0
+  ambient_temp_max_c: 55.0
+  dm_min_pct: 10.0
+  dm_max_pct: 90.0

@@ -1,0 +1,78 @@
+{
+  "model_name": "NIR Dry Matter (% DM) Chemometric Model",
+  "version": "nir-moisture_dm-plsr-v1.0",
+  "target_variable": "dry_matter_pct",
+  "display_name": "Dry Matter (% DM)",
+  "hash": "85451c8cea9a36a0",
+  "data_provenance": "synthetic_demo",
+  "synthetic_disclaimer": "Trained on synthetic demo data \u2014 NOT a validation of field accuracy",
+  "training_samples": 964,
+  "test_samples": 236,
+  "spectral_bands": 381,
+  "wavelength_range_nm": [
+    920.0,
+    1680.0
+  ],
+  "champion_model": "PLSRegression",
+  "metrics": {
+    "mae": 4.06,
+    "rmse": 5.359,
+    "r2": 0.9496,
+    "bias": -0.0413,
+    "rpd": 4.452
+  },
+  "candidate_comparisons": {
+    "PLSR": {
+      "mae": 4.06,
+      "rmse": 5.359,
+      "r2": 0.9496,
+      "bias": -0.0413,
+      "rpd": 4.452
+    },
+    "SVR": {
+      "mae": 0.119,
+      "rmse": 0.191,
+      "r2": 0.9999,
+      "bias": -0.0163,
+      "rpd": 124.786
+    },
+    "RandomForest": {
+      "mae": 3.229,
+      "rmse": 4.386,
+      "r2": 0.9662,
+      "bias": -0.2273,
+      "rpd": 5.44
+    }
+  },
+  "performance_by_crop_type": {
+    "compound_feed": {
+      "mae": 3.518,
+      "rmse": 4.597,
+      "r2": -2.4132,
+      "bias": -0.21,
+      "rpd": 0.541
+    },
+    "maize_silage": {
+      "mae": 3.396,
+      "rmse": 4.267,
+      "r2": 0.2963,
+      "bias": -1.0724,
+      "rpd": 1.192
+    },
+    "green_fodder": {
+      "mae": 10.306,
+      "rmse": 10.882,
+      "r2": -15.7969,
+      "bias": 10.3064,
+      "rpd": 0.244
+    },
+    "sorghum_silage": {
+      "mae": 3.259,
+      "rmse": 4.306,
+      "r2": 0.0237,
+      "bias": -2.0738,
+      "rpd": 1.012
+    }
+  },
+  "trained_at": "2026-09-30T06:07:23.121403"
+}

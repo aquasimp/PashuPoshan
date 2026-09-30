@@ -1,0 +1,12 @@
+{
+  "__meta__": {
+    "locale": "gu",
+    "name": "ગુજરાતી (Gujarati)",
+    "status": "stub_architectural_skeleton",
+    "notes": "Follow docs/ADD_A_LANGUAGE.md to populate verified vernacular terminology"
+  },
+  "common": {
+    "appName": "FeedShield (ફીડશીલ્ડ)",
+    "tagline": "ચકાસો. સમજો. પગલાં લો."
+  }
+}

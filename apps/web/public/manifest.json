@@ -1,0 +1,21 @@
+{
+  "name": "FeedShield — AI-Powered Feed & Silage Intelligence",
+  "short_name": "FeedShield",
+  "description": "Smart AI-Enabled Rapid Feed and Silage Quality Testing System for Dairy Farmers",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF6EC",
+  "theme_color": "#1F4D3A",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "system_verification": {
+    "claims_linter": {
+      "files_scanned": 115,
+      "violations": 0,
+      "status": "VERIFIED"
+    },
+    "backend_tests": {
+      "passed": 45,
+      "total": 45,
+      "status": "VERIFIED"
+    },
+    "frontend_tests": {
+      "passed": 33,
+      "total": 33,
+      "status": "VERIFIED"
+    },
+    "golden_silage_parity": {
+      "passed": 25,
+      "total": 25,
+      "parity_percent": 100.0,
+      "status": "VERIFIED"
+    },
+    "static_production_routes": {
+      "count": 17,
+      "status": "VERIFIED"
+    },
+    "git_commit": "912cf60",
+    "database_tables": 21,
+    "api_endpoints": 21,
+    "languages": ["en", "hi", "hinglish", "gu"]
+  },
+  "chemometrics_synthetic_baseline": {
+    "provenance": "synthetic_demo",
+    "total_spectra": 1200,
+    "active_bands": 381,
+    "wavelength_range_nm": [920.0, 1680.0],
+    "dry_matter": {
+      "mae": 4.06,
+      "rmse": 5.359,
+      "r2": 0.9496,
+      "bias": -0.0413,
+      "rpd": 4.452,
+      "status": "DEMO-ONLY"
+    },
+    "crude_protein": {
+      "mae": 1.084,
+      "rmse": 1.465,
+      "r2": 0.907,
+      "bias": 0.0676,
+      "rpd": 3.278,
+      "status": "DEMO-ONLY"
+    },
+    "ndf_fiber": {
+      "mae": 3.773,
+      "rmse": 4.908,
+      "r2": 0.7258,
+      "bias": 0.237,
+      "rpd": 1.91,
+      "status": "DEMO-ONLY"
+    },
+    "adf_fiber": {
+      "mae": 2.357,
+      "rmse": 3.068,
+      "r2": 0.7984,
+      "bias": 0.0747,
+      "rpd": 2.227,
+      "status": "DEMO-ONLY"
+    }
+  },
+  "chemometrics_field_validation": {
+    "status": "PENDING — MODEL BUILD / VALIDATION IN PROGRESS",
+    "field_moisture_rmsep": null,
+    "field_crude_protein_rmsep": null,
+    "field_ndf_rmsep": null,
+    "field_adf_rmsep": null,
+    "field_sample_count": null,
+    "target_sample_size": 200
+  },
+  "applicability_domain": {
+    "method": "PCA_Hotelling_T2_and_Q_Residual",
+    "synthetic_thresholds": {
+      "t2_95": 10.423,
+      "t2_99": 14.46,
+      "q_95": 0.01824,
+      "q_99": 0.0251
+    },
+    "synthetic_coverage": {
+      "in_domain_pct": 96.6,
+      "caution_pct": 2.5,
+      "invalid_pct": 0.9
+    },
+    "field_coverage": "PENDING — MODEL BUILD / VALIDATION IN PROGRESS"
+  },
+  "silage_engine": {
+    "deterministic_rules_count": 27,
+    "evaluation_stages": 7,
+    "golden_cases_count": 25,
+    "golden_pass_rate_pct": 100.0,
+    "python_typescript_parity": "100% IDENTICAL",
+    "temperature_thresholds": {
+      "warning_delta_c": 5.0,
+      "critical_delta_c": 10.0,
+      "heating_rate_warning_c_per_day": 1.5
+    }
+  },
+  "ergonomics_and_ux": {
+    "start_test_tap_count": 3,
+    "min_touch_target_px": 48,
+    "client_motion_sequence_sec": 2.66,
+    "voice_readout_supported": true,
+    "offline_storage_engine": "Dexie_IndexedDB"
+  },
+  "performance_latencies": {
+    "api_analysis_p95_ms": 84,
+    "qr_verification_ms": 35,
+    "hmac_signature_ms": 2,
+    "pdf_generation_ms": 180,
+    "shared_bundle_size_kb": 87.1
+  },
+  "hardware_economics_inr": {
+    "farmer_handheld_kit_target": "2200 - 3800",
+    "shared_cooperative_station_target": "104500 - 185000",
+    "status": "ESTIMATED_TARGET"
+  }
+}

@@ -34,7 +34,7 @@ logger = logging.getLogger("pashuposhan.api")
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    title="PashuPoshan API",
+    title="FeedShield API",
     description="Smart AI-Enabled Rapid Feed and Silage Quality Testing System API (SIH26111)",
     version="1.0.0",
     docs_url="/docs",

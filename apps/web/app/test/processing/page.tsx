@@ -267,7 +267,7 @@ function ProcessingContent() {
           Analysing on device — Offline
         </span>
         <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink dark:text-dark-ink">
-          PashuPoshan Multimodal Engine
+          FeedShield Multimodal Engine
         </h1>
         <p className="text-xs text-muted dark:text-dark-muted font-mono">
           Sample Reference: {targetSampleId || "Generating ID..."}

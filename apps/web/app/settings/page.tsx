@@ -254,7 +254,7 @@ export default function SettingsPage() {
         {/* 4. System & Problem Statement Traceability */}
         <GlassCard variant="frosted" className="p-5 text-xs space-y-2 text-muted dark:text-dark-muted">
           <div className="flex items-center justify-between text-ink dark:text-dark-ink font-semibold">
-            <span>PashuPoshan System Version</span>
+            <span>FeedShield System Version</span>
             <span className="font-mono text-xs">v1.0.0 (Release Candidate)</span>
           </div>
           <div className="flex items-center justify-between">

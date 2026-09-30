@@ -222,7 +222,7 @@ export default function SyncCenterPage() {
                 </span>
               </div>
               <p className="text-xs text-muted dark:text-dark-muted mt-0.5">
-                Demonstrates how PashuPoshan compares local offline heuristic drafts with centralized cloud lab results.
+                Demonstrates how FeedShield compares local offline heuristic drafts with centralized cloud lab results.
               </p>
             </div>
           </div>

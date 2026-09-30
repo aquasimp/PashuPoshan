@@ -64,7 +64,7 @@ export default function PublicVerifyPage() {
         <div className="text-center space-y-1">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-forest/10 dark:bg-dark-forest/20 text-forest dark:text-dark-forest text-xs font-semibold">
             <Lock className="w-3.5 h-3.5" />
-            <span>PashuPoshan Cryptographic Verification Protocol</span>
+            <span>FeedShield Cryptographic Verification Protocol</span>
           </div>
           <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink dark:text-dark-ink">
             Traceability &amp; Integrity Seal

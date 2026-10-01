@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "PashuPoshan",
+    "appName": "FeedShield",
     "tagline": "Test. Understand. Act.",
     "subtitle": "AI-Powered Feed & Silage Intelligence",
     "sihId": "SIH26111",
@@ -142,7 +142,7 @@
     "autoRead": "Auto-read advisories on load"
   },
   "models": {
-    "title": "PashuPoshan Intelligence Models",
+    "title": "FeedShield Intelligence Models",
     "subtitle": "Chemometric NIR calibration and optical visual analysis pipelines.",
     "disclaimer": "Pipeline verified on synthetic demo data — NOT a validation of field accuracy.",
     "pending": {
@@ -157,5 +157,43 @@
     "models": "Model Registry & Calibration",
     "dataCollection": "Field Data Collection",
     "storage": "Storage Units & Bunker Telemetry"
+  },
+  "carousel": {
+    "recentTestsTitle": "Recent Sample Tests",
+    "recentTestsSubtitle": "Horizontally scroll to review recent silage and feed concentrate evaluations",
+    "heroScenariosTitle": "Hero Demo Scenarios",
+    "heroScenariosSubtitle": "Explore validated baseline vs failure modes across Indian dairy feed types",
+    "storageAlertsTitle": "Active Storage Telemetry Alerts",
+    "storageAlertsSubtitle": "Real-time bunker pit sensors and temperature differential warnings",
+    "scrollLeft": "Scroll left",
+    "scrollRight": "Scroll right",
+    "previous": "Previous",
+    "next": "Next",
+    "viewAll": "View all",
+    "quickView": "Quick View",
+    "viewResult": "View Result",
+    "noItems": "No items recorded yet",
+    "loading": "Loading samples..."
+  },
+  "drawer": {
+    "open": "Open details",
+    "close": "Close",
+    "sampleDetails": "Sample Inspection Details",
+    "riskDetails": "Risk & Storage Advisory",
+    "filterTitle": "Filter Test Samples",
+    "quickActions": "Quick Actions",
+    "provenance": "Scientific Provenance",
+    "contributingFactors": "Contributing Risk Factors",
+    "recommendedAction": "Recommended Immediate Action",
+    "labNote": "Confirmatory laboratory test recommended for suspect adulteration or severe spoilage.",
+    "viewFullResult": "Open Full Result Page",
+    "applyFilters": "Apply Filters",
+    "resetFilters": "Reset All",
+    "sampleId": "Sample ID",
+    "cropType": "Crop / Feed Type",
+    "collectedAt": "Date Tested",
+    "decision": "Action Decision",
+    "keyMetrics": "Measured & Estimated Metrics",
+    "viewDetails": "View Full Analysis"
   }
 }

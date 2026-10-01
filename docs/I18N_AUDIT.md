@@ -4,15 +4,15 @@ Generated at: i18n_audit.py
 
 ## Summary Statistics
 
-- **Total English Keys:** 125
-- **Total Hindi Keys:** 125
-- **Total Hinglish Keys:** 125
+- **Total English Keys:** 159
+- **Total Hindi Keys:** 159
+- **Total Hinglish Keys:** 159
 - **Missing in Hindi:** 0
 - **Missing in Hinglish:** 0
 - **Placeholder Mismatches:** 0
 - **Script Violations:** 0
 - **Banned Term Violations:** 0
-- **High Length Ratio (>1.6x):** 48
+- **High Length Ratio (>1.6x):** 54
 
 ### Strings With High Length Expansion (>1.6x)
 | Key | Locale | En Len | Target Len | Ratio |

@@ -21,6 +21,13 @@ import { EvidenceTag } from "@/components/ui/EvidenceTag";
 import { DemoBadge } from "@/components/ui/DemoBadge";
 import { db } from "@/lib/db";
 import { ensureDemoDataLoaded } from "@/lib/seedLocalDb";
+import {
+  ProductCarousel,
+  CarouselItem,
+  SmoothDrawer,
+  drawerItemVariants,
+} from "@/components/ui/liquid-glass";
+import { motion } from "framer-motion";
 
 const DEMO_SCENARIOS = [
   {
@@ -103,6 +110,44 @@ const DEMO_SCENARIOS = [
 export default function HeroDemoPage() {
   const [activeScenario, setActiveScenario] = useState(DEMO_SCENARIOS[0]);
   const [resetMessage, setResetMessage] = useState<string | null>(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [inspectedScenario, setInspectedScenario] = useState<(typeof DEMO_SCENARIOS)[0] | null>(null);
+
+  const scenarioCarouselItems: CarouselItem[] = DEMO_SCENARIOS.map((sc) => {
+    const metrics = [];
+    if (sc.ph !== null) {
+      metrics.push({ label: "pH", value: sc.ph.toFixed(1), unit: "pH" });
+    }
+    if (sc.internalTemp !== null) {
+      metrics.push({ label: "Core Temp", value: `${sc.internalTemp}°C` });
+      metrics.push({ label: "ΔT", value: `+${sc.deltaT}°C` });
+    }
+    if (sc.dryMatter !== null) {
+      metrics.push({ label: "DM", value: `${sc.dryMatter}%` });
+    }
+
+    const isCurrent = activeScenario.id === sc.id;
+
+    return {
+      id: sc.id,
+      title: sc.crop,
+      subtitle: sc.name,
+      sampleType: sc.type,
+      status: sc.risk as any,
+      decision: sc.decision as any,
+      evidenceTag: "DEMO",
+      isDemo: true,
+      metrics,
+      badge: isCurrent ? "Active Benchmark" : undefined,
+      onClick: () => {
+        setActiveScenario(sc);
+        setInspectedScenario(sc);
+        setIsDrawerOpen(true);
+      },
+      actionLabel: "Inspect Details",
+      secondaryActionLabel: isCurrent ? "Selected" : "Select Case",
+    };
+  });
 
   const handleResetDemo = async () => {
     try {
@@ -168,7 +213,24 @@ export default function HeroDemoPage() {
           </div>
         )}
 
-        {/* 5 Scenario Selector Tabs */}
+        {/* 5 Scenario Horizontal Carousel */}
+        <div className="space-y-2">
+          <ProductCarousel
+            title="Benchmark Scenario Suite"
+            subtitle="Horizontally browse 5 pre-configured ground-truth and failure cases"
+            items={scenarioCarouselItems}
+            onItemClick={(item) => {
+              const sc = DEMO_SCENARIOS.find((s) => s.id === item.id);
+              if (sc) {
+                setActiveScenario(sc);
+                setInspectedScenario(sc);
+                setIsDrawerOpen(true);
+              }
+            }}
+          />
+        </div>
+
+        {/* 5 Scenario Quick Selector Tabs */}
         <div className="glass-card p-3 rounded-2xl border border-bone dark:border-dark-border shadow-card flex flex-wrap gap-2">
           {DEMO_SCENARIOS.map((sc) => {
             const isActive = activeScenario.id === sc.id;
@@ -368,6 +430,122 @@ export default function HeroDemoPage() {
             <ArrowRight className="w-4 h-4 ml-1" />
           </Link>
         </div>
+
+        {/* Scenario Inspection Smooth Drawer */}
+        <SmoothDrawer
+          isOpen={isDrawerOpen && inspectedScenario !== null}
+          onClose={() => setIsDrawerOpen(false)}
+          title={inspectedScenario?.crop}
+          subtitle={inspectedScenario?.name}
+          icon={
+            inspectedScenario?.type === "silage" ? (
+              <Thermometer className="w-5 h-5 text-forest dark:text-emerald-400" />
+            ) : (
+              <Layers className="w-5 h-5 text-amber-500" />
+            )
+          }
+          badge={
+            inspectedScenario && (
+              <>
+                <DemoBadge label="DEMO" size="sm" />
+                <StatusChip status={inspectedScenario.risk as any} size="sm" />
+                <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-forest/10 dark:bg-emerald-500/10 text-forest dark:text-emerald-300 border border-forest/20">
+                  ACTION: {inspectedScenario.decision}
+                </span>
+              </>
+            )
+          }
+          primaryAction={{
+            label: "Activate Benchmark Case",
+            onClick: () => {
+              if (inspectedScenario) {
+                setActiveScenario(inspectedScenario);
+                setIsDrawerOpen(false);
+              }
+            },
+          }}
+          secondaryAction={{
+            label: "Close",
+            onClick: () => setIsDrawerOpen(false),
+          }}
+        >
+          {inspectedScenario && (
+            <>
+              <motion.div
+                variants={drawerItemVariants}
+                className="p-4 rounded-2xl bg-bg-1/80 dark:bg-bg-1/90 border border-edge space-y-2"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono uppercase tracking-wider text-ink-3">
+                    Scenario Dynamics
+                  </span>
+                  <StatusChip status={inspectedScenario.risk as any} size="sm" />
+                </div>
+                <p className="text-xs sm:text-sm text-ink-1 leading-relaxed">
+                  {inspectedScenario.summary}
+                </p>
+              </motion.div>
+
+              <motion.div variants={drawerItemVariants} className="space-y-2">
+                <h4 className="text-xs font-bold text-ink-2 uppercase tracking-wider font-mono">
+                  Benchmark Sensor Parameters
+                </h4>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                  {inspectedScenario.ph !== null && (
+                    <div className="p-3 rounded-2xl glass-surface-1 border border-edge">
+                      <span className="text-[11px] text-ink-3 block font-mono">Core pH</span>
+                      <span className="text-base font-bold text-ink-1">{inspectedScenario.ph.toFixed(1)} pH</span>
+                      <div className="mt-1">
+                        <EvidenceTag tag="DEMO" size="sm" />
+                      </div>
+                    </div>
+                  )}
+                  {inspectedScenario.internalTemp !== null && (
+                    <div className="p-3 rounded-2xl glass-surface-1 border border-edge">
+                      <span className="text-[11px] text-ink-3 block font-mono">Internal Temp</span>
+                      <span className="text-base font-bold text-ink-1">{inspectedScenario.internalTemp}°C</span>
+                      <div className="mt-1">
+                        <EvidenceTag tag="DEMO" size="sm" />
+                      </div>
+                    </div>
+                  )}
+                  {inspectedScenario.deltaT > 0 && (
+                    <div className="p-3 rounded-2xl glass-surface-1 border border-edge">
+                      <span className="text-[11px] text-ink-3 block font-mono">Thermal Differential (ΔT)</span>
+                      <span className="text-base font-bold text-amber-700 dark:text-amber-400">+{inspectedScenario.deltaT}°C</span>
+                      <div className="mt-1">
+                        <EvidenceTag tag="ESTIMATED" size="sm" />
+                      </div>
+                    </div>
+                  )}
+                  {inspectedScenario.dryMatter !== null && (
+                    <div className="p-3 rounded-2xl glass-surface-1 border border-edge">
+                      <span className="text-[11px] text-ink-3 block font-mono">Dry Matter</span>
+                      <span className="text-base font-bold text-ink-1">{inspectedScenario.dryMatter}%</span>
+                      <div className="mt-1">
+                        <EvidenceTag tag="DEMO" size="sm" />
+                      </div>
+                    </div>
+                  )}
+                  <div className="p-3 rounded-2xl glass-surface-1 border border-edge">
+                    <span className="text-[11px] text-ink-3 block font-mono">Mould Exposure</span>
+                    <span className="text-base font-bold text-ink-1">{inspectedScenario.mouldPct}%</span>
+                    <div className="mt-1">
+                      <EvidenceTag tag="DETECTED" size="sm" />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                variants={drawerItemVariants}
+                className="p-3 rounded-2xl bg-forest/5 dark:bg-emerald-500/10 border border-forest/15 dark:border-emerald-500/20 text-xs text-ink-2 leading-relaxed"
+              >
+                Confirmatory laboratory test recommended for suspect adulteration or severe spoilage.
+              </motion.div>
+            </>
+          )}
+        </SmoothDrawer>
       </main>
     </div>
   );

@@ -25,6 +25,14 @@ import { GlassCard } from "@/components/ui/GlassCard";
 import { db, LocalSample, LocalAnalysis } from "@/lib/db";
 import { ensureDemoDataLoaded } from "@/lib/seedLocalDb";
 import { useI18n } from "@/lib/i18n";
+import {
+  ProductCarousel,
+  CarouselItem,
+  SmoothDrawer,
+  SampleDetailDrawer,
+  drawerItemVariants,
+} from "@/components/ui/liquid-glass";
+import { motion } from "framer-motion";
 
 export default function FarmerHomePage() {
   const { t } = useI18n();
@@ -32,6 +40,9 @@ export default function FarmerHomePage() {
   const [analyses, setAnalyses] = useState<Record<string, LocalAnalysis>>({});
   const [loading, setLoading] = useState<boolean>(true);
   const [pendingSync, setPendingSync] = useState<number>(0);
+  const [selectedSample, setSelectedSample] = useState<LocalSample | null>(null);
+  const [isSampleDrawerOpen, setIsSampleDrawerOpen] = useState(false);
+  const [isAlertDrawerOpen, setIsAlertDrawerOpen] = useState(false);
 
   useEffect(() => {
     async function loadData() {
@@ -57,6 +68,51 @@ export default function FarmerHomePage() {
     }
     loadData();
   }, []);
+
+  // Transform local samples into rich carousel items
+  const carouselItems: CarouselItem[] = samples.map((sample) => {
+    const analysis = analyses[sample.id];
+    const dateStr = new Date(sample.collectedAt).toLocaleDateString(undefined, {
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const metrics = [];
+    if (sample.metadata?.ph !== undefined) {
+      metrics.push({ label: "pH", value: sample.metadata.ph, unit: "pH" });
+    }
+    if (sample.metadata?.internalTemp !== undefined) {
+      metrics.push({ label: "Core Temp", value: `${sample.metadata.internalTemp}°C` });
+    }
+    if (sample.metadata?.dryMatter !== undefined) {
+      metrics.push({ label: "DM", value: `${sample.metadata.dryMatter}%` });
+    } else if (sample.metadata?.visibleMouldPct !== undefined) {
+      metrics.push({ label: "Mould", value: `${sample.metadata.visibleMouldPct}%` });
+    }
+
+    return {
+      id: sample.id,
+      title: sample.cropOrFeedName,
+      subtitle: sample.physicalForm || (sample.sampleType === "silage" ? "Fermented Silage" : "Feed Concentrate"),
+      sampleType: sample.sampleType,
+      physicalForm: sample.physicalForm,
+      date: dateStr,
+      status: analysis?.overallRisk,
+      decision: analysis?.actionDecision,
+      evidenceTag: (analysis?.predictions?.[0]?.evidenceTag as any) || "DEMO",
+      isDemo: true,
+      metrics,
+      href: `/test/result?id=${sample.id}`,
+      onClick: () => {
+        setSelectedSample(sample);
+        setIsSampleDrawerOpen(true);
+      },
+      actionLabel: t("carousel.quickView"),
+      secondaryActionLabel: t("carousel.viewResult"),
+    };
+  });
 
   return (
     <div className="min-h-screen bg-ivory dark:bg-dark-bg text-ink dark:text-dark-ink flex flex-col font-sans transition-colors duration-200">
@@ -174,13 +230,14 @@ export default function FarmerHomePage() {
               </p>
             </div>
           </div>
-          <Link
-            href="/test/result?id=FS-20260930-W402"
+          <button
+            type="button"
+            onClick={() => setIsAlertDrawerOpen(true)}
             className="shrink-0 text-xs font-bold text-amber-800 dark:text-amber-300 hover:text-ink-1 flex items-center gap-1.5 underline px-3.5 py-2 rounded-xl bg-amber-500/15 dark:bg-amber-900/40 hover:bg-amber-500/25 transition-colors min-h-[44px]"
           >
             <span>Inspect Pit Alert</span>
             <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          </button>
         </div>
 
         {/* 2-Column Quick Test Select Grid */}
@@ -240,102 +297,28 @@ export default function FarmerHomePage() {
           </Link>
         </div>
 
-        {/* Recent Sample Tests Section */}
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <h2 className="font-display text-xl font-bold text-ink dark:text-dark-ink">
-                {t("farmer.recentTests")}
-              </h2>
-              <span className="text-xs px-2.5 py-0.5 rounded-full bg-bone dark:bg-dark-card text-muted dark:text-dark-muted font-medium">
-                {samples.length} recorded
-              </span>
-            </div>
-            <Link
-              href="/history"
-              className="text-xs font-semibold text-forest dark:text-emerald-400 hover:text-deep dark:hover:text-emerald-300 flex items-center gap-1 hover:underline"
-            >
-              <span>View All History</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
-          {loading ? (
-            <div className="p-8 text-center glass-card rounded-3xl border border-bone dark:border-dark-border">
-              <RefreshCw className="w-6 h-6 animate-spin mx-auto text-muted dark:text-dark-muted mb-2" />
-              <p className="text-xs text-muted dark:text-dark-muted">Loading local samples...</p>
-            </div>
-          ) : samples.length === 0 ? (
-            <div className="p-8 text-center glass-card rounded-3xl border border-bone dark:border-dark-border">
-              <p className="text-sm text-muted dark:text-dark-muted">No test samples saved yet.</p>
-              <Link
-                href="/test"
-                className="mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-forest dark:bg-emerald-600 text-white text-xs font-medium"
-              >
-                <span>Perform your first test</span>
-              </Link>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-              {samples.map((sample) => {
-                const analysis = analyses[sample.id];
-                const dateStr = new Date(sample.collectedAt).toLocaleDateString(undefined, {
-                  month: "short",
-                  day: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                });
-
-                return (
-                  <Link
-                    key={sample.id}
-                    href={`/test/result?id=${sample.id}`}
-                    className="p-4 rounded-2xl glass-card border border-bone dark:border-dark-border hover:border-moss/60 dark:hover:border-emerald-500/50 shadow-subtle hover:shadow-card transition-all flex flex-col justify-between group"
-                  >
-                    <div>
-                      <div className="flex items-start justify-between gap-2">
-                        <div>
-                          <span className="text-[11px] font-mono font-medium text-muted dark:text-dark-muted block">
-                            {sample.id}
-                          </span>
-                          <h4 className="font-semibold text-sm text-ink dark:text-dark-ink group-hover:text-forest dark:group-hover:text-emerald-300 transition-colors mt-0.5">
-                            {sample.cropOrFeedName}
-                          </h4>
-                        </div>
-                        {analysis && (
-                          <div className="flex items-center gap-1.5 shrink-0">
-                            <StatusChip status={analysis.overallRisk} size="sm" />
-                            <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-forest/10 dark:bg-emerald-500/10 text-forest dark:text-emerald-300">
-                              {analysis.actionDecision}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="flex items-center gap-2 text-xs text-muted dark:text-dark-muted mt-2">
-                        <Calendar className="w-3.5 h-3.5" />
-                        <span>{dateStr}</span>
-                        <span>•</span>
-                        <span className="capitalize">{sample.physicalForm || sample.sampleType}</span>
-                      </div>
-                    </div>
-
-                    <div className="mt-3 pt-2.5 border-t border-bone/60 dark:border-dark-border flex items-center justify-between text-xs">
-                      <div className="flex items-center gap-1.5">
-                        {analysis?.predictions?.[0] && (
-                          <EvidenceTag tag={analysis.predictions[0].evidenceTag} />
-                        )}
-                      </div>
-                      <span className="text-forest dark:text-emerald-400 font-medium flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                        <span>Details</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
-                      </span>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          )}
+        {/* Recent Sample Tests Carousel Section */}
+        <div className="space-y-2">
+          <ProductCarousel
+            title={t("farmer.recentTests")}
+            subtitle={t("carousel.recentTestsSubtitle")}
+            items={carouselItems}
+            loading={loading}
+            viewAllHref="/history"
+            viewAllLabel="View All History"
+            onItemClick={(item) => {
+              const found = samples.find((s) => s.id === item.id);
+              if (found) {
+                setSelectedSample(found);
+                setIsSampleDrawerOpen(true);
+              }
+            }}
+            emptyMessage="No test samples saved yet."
+            emptyAction={{
+              label: "Perform your first test",
+              href: "/test",
+            }}
+          />
         </div>
 
         {/* Quick Utility Actions Footer */}
@@ -376,6 +359,86 @@ export default function FarmerHomePage() {
             <span className="text-[10px] text-muted dark:text-dark-muted">Judges Showcase</span>
           </Link>
         </div>
+
+        {/* 1. Sample Details Smooth Drawer */}
+        <SampleDetailDrawer
+          sample={selectedSample}
+          analysis={selectedSample ? analyses[selectedSample.id] : null}
+          isOpen={isSampleDrawerOpen}
+          onClose={() => setIsSampleDrawerOpen(false)}
+        />
+
+        {/* 2. Pit Storage Alert Smooth Drawer */}
+        <SmoothDrawer
+          isOpen={isAlertDrawerOpen}
+          onClose={() => setIsAlertDrawerOpen(false)}
+          title="Bunker Pit #2 Heating Alert"
+          subtitle="Sorghum Silage • Aerobic Core Heating Detected (+8.2°C)"
+          icon={<AlertTriangle className="w-5 h-5 text-amber-500" />}
+          badge={
+            <>
+              <DemoBadge label="DEMO" size="sm" />
+              <StatusChip status="ATTENTION" size="sm" />
+              <EvidenceTag tag="ESTIMATED" size="sm" />
+            </>
+          }
+          primaryAction={{
+            label: "Inspect Pit Result",
+            href: "/test/result?id=FS-20260930-W402",
+          }}
+          secondaryAction={{
+            label: t("drawer.close"),
+            onClick: () => setIsAlertDrawerOpen(false),
+          }}
+        >
+          <motion.div
+            variants={drawerItemVariants}
+            className="p-4 rounded-2xl bg-amber-500/10 dark:bg-amber-950/30 border border-amber-500/30 space-y-2"
+          >
+            <div className="flex items-center gap-2 text-xs font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider font-mono">
+              <span>Active Thermal Sensor Anomaly</span>
+            </div>
+            <p className="text-xs sm:text-sm font-semibold text-ink-1 leading-snug">
+              Core temperature probe recorded +8.2°C above ambient baseline (38.0°C vs 26.0°C).
+            </p>
+          </motion.div>
+
+          <motion.div variants={drawerItemVariants} className="space-y-2">
+            <h4 className="text-xs font-bold text-ink-2 uppercase tracking-wider font-mono">
+              {t("drawer.contributingFactors")}
+            </h4>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="p-3 rounded-2xl glass-surface-1 border border-edge">
+                <span className="text-[11px] text-ink-3 block font-mono">Internal Temp</span>
+                <span className="text-base font-bold text-amber-700 dark:text-amber-400">38.0°C</span>
+                <span className="text-[10px] text-ink-3 block mt-0.5">Ambient: 26.0°C</span>
+              </div>
+              <div className="p-3 rounded-2xl glass-surface-1 border border-edge">
+                <span className="text-[11px] text-ink-3 block font-mono">Silage pH</span>
+                <span className="text-base font-bold text-ink-1">5.4 pH</span>
+                <span className="text-[10px] text-ink-3 block mt-0.5">Target: &lt; 4.2 pH</span>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div variants={drawerItemVariants} className="space-y-2">
+            <h4 className="text-xs font-bold text-ink-2 uppercase tracking-wider font-mono">
+              {t("drawer.recommendedAction")}
+            </h4>
+            <div className="p-3.5 rounded-2xl bg-bg-1/80 border border-edge space-y-1.5 text-xs text-ink-1 leading-relaxed">
+              <p>1. <strong>Trim shoulder:</strong> Remove deteriorating, heated outer layer (5–10 cm) along the bunker edge.</p>
+              <p>2. <strong>Blend with dry fodder:</strong> Dilute unaffected core silage with dry fodder before feeding cattle.</p>
+              <p>3. <strong>Check tarp seal:</strong> Inspect bunker plastic sheeting for punctures and reseal with gravel bags to prevent oxygen ingress.</p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={drawerItemVariants}
+            className="p-3 rounded-2xl bg-forest/5 dark:bg-emerald-500/10 border border-forest/15 dark:border-emerald-500/20 text-xs text-ink-2 leading-relaxed"
+          >
+            {t("drawer.labNote")}
+          </motion.div>
+        </SmoothDrawer>
       </main>
     </div>
   );

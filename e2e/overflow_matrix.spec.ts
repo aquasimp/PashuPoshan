@@ -6,6 +6,7 @@ const ROUTES = [
   "/demo/tour",
   "/models",
   "/design-system",
+  "/history",
   "/sync",
   "/admin",
 ];

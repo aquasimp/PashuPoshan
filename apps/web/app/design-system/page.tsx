@@ -17,14 +17,23 @@ import {
   LiquidGlassPill,
   Modal,
   Sheet,
+  ProductCarousel,
+  CarouselItem,
+  SmoothDrawer,
+  SampleDetailDrawer,
+  drawerItemVariants,
 } from "@/components/ui/liquid-glass";
-import { ArrowLeft, Sparkles, Layers, Sliders, ShieldCheck } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowLeft, Sparkles, Layers, Sliders, ShieldCheck, Eye, Activity, Info, AlertTriangle } from "lucide-react";
 
 export default function DesignSystemPage() {
   const { t } = useI18n();
   const [selectedTag, setSelectedTag] = useState<string>("PREDICTED");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isSmoothDrawerOpen, setIsSmoothDrawerOpen] = useState(false);
+  const [isSampleDrawerOpen, setIsSampleDrawerOpen] = useState(false);
+  const [carouselStateTab, setCarouselStateTab] = useState<"standard" | "loading" | "empty" | "error">("standard");
 
   const evidenceTags: EvidenceTagType[] = [
     "DETECTED",
@@ -70,6 +79,85 @@ export default function DesignSystemPage() {
     { name: "primary", hex: "#2F6B52", text: "text-white" },
     { name: "amber", hex: "#DDA245", text: "text-black" },
     { name: "ink-1", hex: "#F3EDDD", text: "text-black" },
+  ];
+
+  const demoDrawerSample = {
+    id: "DEMO-DS-01",
+    clientId: "client-ds-01",
+    cropOrFeedName: "Corn Silage Pit Alpha (High-Density Pack)",
+    sampleType: "silage" as const,
+    physicalForm: "chopped",
+    collectedAt: "2026-10-02T10:30:00.000Z",
+    updatedAt: "2026-10-02T10:30:00.000Z",
+    notes: "Demonstration benchmark sample showing liquid-glass bottom-sheet telemetry integration.",
+    syncStatus: "SYNCED" as const,
+    photoUri: "/images/silage-good.svg",
+  };
+
+  const demoDrawerAnalysis = {
+    id: "analysis-ds-01",
+    sampleId: "DEMO-DS-01",
+    evaluatedAt: "2026-10-02T10:30:05.000Z",
+    overallRisk: "ATTENTION",
+    actionDecision: "AERATION_CHECK",
+    fliegScore: 78,
+    silagePh: 4.1,
+    spoilageProbability: 0.18,
+    aflatoxinRiskLevel: "LOW",
+    confidenceInterval: "MODERATE",
+    modelSignature: "sha256-demo-ensemble-v2.1",
+    recommendationSummary: "Maintain airtight cover; inspect edge compaction to minimize secondary fermentation.",
+  };
+
+  const carouselItemsLong: CarouselItem[] = [
+    {
+      id: "DS-ITEM-01",
+      title: "Corn Silage Pit Alpha (Long English: High Quality Fermentation Assessment)",
+      subtitle: "SILAGE • Oct 2, 2026",
+      qualityStatus: "EXCELLENT",
+      riskState: "NORMAL",
+      evidenceTag: "PREDICTED",
+      isDemo: true,
+      imageSrc: "/images/silage-good.svg",
+      actionLabel: "Inspect Analysis",
+      onAction: () => setIsSampleDrawerOpen(true),
+    },
+    {
+      id: "DS-ITEM-02",
+      title: "मक्के का साइलेज — अत्यधिक नमी और एरोबिक हीटिंग का जोखिम (Long Hindi String Verification)",
+      subtitle: "साइलेज • 02 अक्टूबर 2026",
+      qualityStatus: "WARNING",
+      riskState: "ATTENTION",
+      evidenceTag: "DETECTED",
+      isDemo: true,
+      imageSrc: "/images/silage-heating.svg",
+      actionLabel: "जाँचें (Inspect)",
+      onAction: () => setIsSampleDrawerOpen(true),
+    },
+    {
+      id: "DS-ITEM-03",
+      title: "Commercial Cattle Feed Pellet Batch #449 (Hinglish: Storage me dampness detect hui hai, aerobic heating precaution required)",
+      subtitle: "FEED • Oct 1, 2026",
+      qualityStatus: "CRITICAL",
+      riskState: "HIGH RISK",
+      evidenceTag: "SENSOR-MEASURED",
+      isDemo: true,
+      imageSrc: "/images/feed-sample.svg",
+      actionLabel: "Quick View",
+      onAction: () => setIsSampleDrawerOpen(true),
+    },
+    {
+      id: "DS-ITEM-04",
+      title: "Sorghum Trench Silage Layer 3 (Optimal Moisture Pack)",
+      subtitle: "SILAGE • Sep 29, 2026",
+      qualityStatus: "GOOD",
+      riskState: "NORMAL",
+      evidenceTag: "ESTIMATED",
+      isDemo: true,
+      imageSrc: "/images/silage-good.svg",
+      actionLabel: "Quick View",
+      onAction: () => setIsSampleDrawerOpen(true),
+    },
   ];
 
   return (
@@ -299,7 +387,7 @@ export default function DesignSystemPage() {
         </section>
 
         {/* 6. Sync Badges */}
-        <section className="space-y-4 pb-8">
+        <section className="space-y-4">
           <h2 className="text-xl font-display font-semibold text-ink-1">
             6. Offline &amp; Sync Status Indicators
           </h2>
@@ -307,6 +395,96 @@ export default function DesignSystemPage() {
             {syncStatuses.map((st) => (
               <SyncStatusBadge key={st} status={st} size="md" />
             ))}
+          </div>
+        </section>
+
+        {/* 7. Liquid Glass Product Carousel */}
+        <section className="space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h2 className="text-xl font-display font-semibold text-ink-1">
+                7. Product Carousel Component
+              </h2>
+              <p className="text-xs text-ink-2">
+                Horizontal snap scrolling, responsive card width, keyboard controls, localized typography (EN / Hindi / Hinglish), DEMO badges, and scientific evidence tags.
+              </p>
+            </div>
+
+            {/* State Switcher */}
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-bg-1 border border-edge text-xs">
+              {(
+                [
+                  { key: "standard", label: "Standard / Multi-lang" },
+                  { key: "loading", label: "Loading" },
+                  { key: "empty", label: "Empty" },
+                  { key: "error", label: "Error" },
+                ] as const
+              ).map((tab) => (
+                <button
+                  key={tab.key}
+                  type="button"
+                  onClick={() => setCarouselStateTab(tab.key)}
+                  className={`px-2.5 py-1 rounded-lg font-medium transition-all ${
+                    carouselStateTab === tab.key
+                      ? "bg-forest dark:bg-dark-forest text-white shadow-sm"
+                      : "text-muted hover:text-ink-1"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="p-4 sm:p-6 glass-surface-1 rounded-3xl border border-edge">
+            {carouselStateTab === "standard" && (
+              <ProductCarousel
+                items={carouselItemsLong}
+                onCardClick={(item) => setIsSampleDrawerOpen(true)}
+              />
+            )}
+            {carouselStateTab === "loading" && (
+              <ProductCarousel items={[]} loading={true} />
+            )}
+            {carouselStateTab === "empty" && (
+              <ProductCarousel items={[]} />
+            )}
+            {carouselStateTab === "error" && (
+              <ProductCarousel
+                items={[]}
+                error="Failed to stream field telemetry feed. Local IndexedDB cache remains intact."
+              />
+            )}
+          </div>
+        </section>
+
+        {/* 8. Smooth Bottom-Sheet Drawer */}
+        <section className="space-y-4 pb-12">
+          <div>
+            <h2 className="text-xl font-display font-semibold text-ink-1">
+              8. Smooth Bottom-Sheet Drawer Component
+            </h2>
+            <p className="text-xs text-ink-2">
+              Spring-physics bottom-sheet with Framer Motion, staggered item entrance, mobile swipe-to-dismiss, focus trapping, Escape key handling, and Level 3 Liquid Glass.
+            </p>
+          </div>
+
+          <div className="p-6 glass-surface-1 rounded-3xl border border-edge flex flex-wrap items-center gap-4">
+            <LiquidGlassButton
+              variant="primary"
+              onClick={() => setIsSmoothDrawerOpen(true)}
+            >
+              <Activity className="w-4 h-4 mr-2" />
+              <span>Open Generic SmoothDrawer</span>
+            </LiquidGlassButton>
+
+            <LiquidGlassButton
+              variant="secondary"
+              onClick={() => setIsSampleDrawerOpen(true)}
+            >
+              <Eye className="w-4 h-4 mr-2" />
+              <span>Open SampleDetailDrawer Preset</span>
+            </LiquidGlassButton>
           </div>
         </section>
       </main>
@@ -358,6 +536,67 @@ export default function DesignSystemPage() {
           </div>
         </div>
       </Sheet>
+
+      {/* Generic SmoothDrawer Demonstration */}
+      <SmoothDrawer
+        isOpen={isSmoothDrawerOpen}
+        onClose={() => setIsSmoothDrawerOpen(false)}
+        title="Field Advisory Protocol"
+        description="Active management recommendations for detected aerobic heating"
+        footer={
+          <div className="flex gap-2 w-full">
+            <button
+              type="button"
+              onClick={() => setIsSmoothDrawerOpen(false)}
+              className="flex-1 py-2.5 rounded-xl border border-edge glass-surface-2 text-ink-1 text-xs font-semibold hover:bg-surface/80"
+            >
+              Dismiss
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsSmoothDrawerOpen(false)}
+              className="flex-1 py-2.5 rounded-xl bg-forest dark:bg-dark-forest text-white text-xs font-bold shadow-sm"
+            >
+              Acknowledge Advisory
+            </button>
+          </div>
+        }
+      >
+        <motion.div variants={drawerItemVariants} className="space-y-3">
+          <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-800 dark:text-amber-200 flex items-start gap-2.5">
+            <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+            <div>
+              <p className="font-bold">Contributing Risk Factors</p>
+              <p className="text-[11px] mt-0.5 opacity-90">
+                Core silo face temperature measured 41.8°C with elevated volatile organic signatures. High packing porosity detected.
+              </p>
+            </div>
+          </div>
+
+          <div className="p-3.5 rounded-2xl glass-surface-2 border border-edge space-y-2 text-xs">
+            <div className="flex items-center justify-between">
+              <span className="text-muted">Evidence Provenance:</span>
+              <EvidenceTag tag="SENSOR-MEASURED" size="sm" />
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-muted">Scientific Status:</span>
+              <span className="font-mono font-bold text-amber-600 dark:text-amber-400">ATTENTION</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-muted">Confirmatory Action:</span>
+              <span className="font-semibold text-ink-1">Thermocouple grid logging</span>
+            </div>
+          </div>
+        </motion.div>
+      </SmoothDrawer>
+
+      {/* Preset SampleDetailDrawer Demonstration */}
+      <SampleDetailDrawer
+        sample={demoDrawerSample}
+        analysis={demoDrawerAnalysis}
+        isOpen={isSampleDrawerOpen}
+        onClose={() => setIsSampleDrawerOpen(false)}
+      />
     </div>
   );
 }

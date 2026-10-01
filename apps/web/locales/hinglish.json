@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "PashuPoshan",
+    "appName": "FeedShield",
     "tagline": "Test karein. Samjhein. Action lein.",
     "subtitle": "AI-Powered pashu aahar aur silage intelligence",
     "sihId": "SIH26111",
@@ -142,7 +142,7 @@
     "autoRead": "Screen khulne par apne aap sunein"
   },
   "models": {
-    "title": "PashuPoshan Intelligence Models",
+    "title": "FeedShield Intelligence Models",
     "subtitle": "Chemometric NIR calibration aur optical visual analysis pipelines.",
     "disclaimer": "Pipeline synthetic demo data par verified hai — real field accuracy ka validation nahi hai.",
     "pending": {
@@ -157,5 +157,43 @@
     "models": "Model Registry",
     "dataCollection": "Field Data Collection",
     "storage": "Storage Pit Monitoring"
+  },
+  "carousel": {
+    "recentTestsTitle": "Haal ke tests",
+    "recentTestsSubtitle": "Haal ke silage aur feed tests ko horizontally scroll karke dekhein",
+    "heroScenariosTitle": "Hero Demo Scenarios",
+    "heroScenariosSubtitle": "Indian dairy feeds ke validated baseline aur defect patterns check karein",
+    "storageAlertsTitle": "Active Storage Telemetry Alerts",
+    "storageAlertsSubtitle": "Real-time bunker pit sensors aur temperature difference alerts",
+    "scrollLeft": "Left scroll karein",
+    "scrollRight": "Right scroll karein",
+    "previous": "Pichla",
+    "next": "Agla",
+    "viewAll": "Sabhi dekhein",
+    "quickView": "Quick View",
+    "viewResult": "Result Dekhein",
+    "noItems": "Abhi tak koi test record nahi hua hai",
+    "loading": "Samples load ho rahe hain..."
+  },
+  "drawer": {
+    "open": "Details kholein",
+    "close": "Band karein",
+    "sampleDetails": "Sample Inspection Details",
+    "riskDetails": "Risk aur Storage Advisory",
+    "filterTitle": "Test Samples Filter Karein",
+    "quickActions": "Quick Actions",
+    "provenance": "Scientific Provenance",
+    "contributingFactors": "Major Risk Factors",
+    "recommendedAction": "Recommended Immediate Action",
+    "labNote": "Suspect milaawat ya severe spoilage ke liye confirmatory lab test recommended hai.",
+    "viewFullResult": "Pura Result Page Kholein",
+    "applyFilters": "Filters Apply Karein",
+    "resetFilters": "Reset Karein",
+    "sampleId": "Sample ID",
+    "cropType": "Crop / Feed Type",
+    "collectedAt": "Test Date",
+    "decision": "Action Decision",
+    "keyMetrics": "Measured aur Estimated Metrics",
+    "viewDetails": "Full Analysis Dekhein"
   }
 }

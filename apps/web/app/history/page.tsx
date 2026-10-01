@@ -22,15 +22,29 @@ import { EvidenceTag } from "@/components/ui/EvidenceTag";
 import { SyncStatusBadge } from "@/lib/sync";
 import { db, LocalSample, LocalAnalysis } from "@/lib/db";
 import { ensureDemoDataLoaded } from "@/lib/seedLocalDb";
+import { useI18n } from "@/lib/i18n";
+import {
+  ProductCarousel,
+  CarouselItem,
+  SmoothDrawer,
+  SampleDetailDrawer,
+  drawerItemVariants,
+} from "@/components/ui/liquid-glass";
+import { motion } from "framer-motion";
+import { Eye } from "lucide-react";
 
 export default function HistoryPage() {
   const router = useRouter();
+  const { t } = useI18n();
   const [samples, setSamples] = useState<LocalSample[]>([]);
   const [analyses, setAnalyses] = useState<Record<string, LocalAnalysis>>({});
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeFilter, setActiveFilter] = useState<"all" | "silage" | "feed" | "high_risk" | "unsynced">("all");
   const [selectedForCompare, setSelectedForCompare] = useState<string[]>([]);
+  const [selectedSample, setSelectedSample] = useState<LocalSample | null>(null);
+  const [isSampleDrawerOpen, setIsSampleDrawerOpen] = useState(false);
+  const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
 
   useEffect(() => {
     async function loadData() {
@@ -83,6 +97,28 @@ export default function HistoryPage() {
     return true;
   });
 
+  const carouselItems: CarouselItem[] = samples.slice(0, 10).map((s) => {
+    const a = analyses[s.id];
+    const risk = a?.overallRisk || "GOOD";
+    return {
+      id: s.id,
+      title: s.cropOrFeedName,
+      subtitle: `${s.sampleType.toUpperCase()} • ${new Date(s.collectedAt).toLocaleDateString(undefined, { month: "short", day: "numeric" })}`,
+      sampleType: s.sampleType,
+      physicalForm: s.physicalForm,
+      status: a?.overallRisk,
+      decision: a?.actionDecision,
+      evidenceTag: (a?.predictions?.[0]?.evidenceTag as any) || (a ? "PREDICTED" : "USER-ENTERED"),
+      isDemo: s.id.startsWith("DEMO-") || Boolean(s.metadata?.notes?.includes("DEMO")),
+      image: s.metadata?.photoUri || (s.sampleType === "silage" ? "/images/silage-good.svg" : "/images/feed-sample.svg"),
+      actionLabel: t("carousel.quickView") || "Quick View",
+      onClick: () => {
+        setSelectedSample(s);
+        setIsSampleDrawerOpen(true);
+      },
+    };
+  });
+
   return (
     <div className="min-h-screen bg-ivory dark:bg-dark-bg text-ink dark:text-dark-ink flex flex-col font-sans transition-colors duration-200">
       <Navbar />
@@ -123,6 +159,23 @@ export default function HistoryPage() {
           </div>
         </div>
 
+        {/* Quick Scan Carousel */}
+        {samples.length > 0 && (
+          <ProductCarousel
+            title={t("carousel.recentTestsTitle")}
+            subtitle="Swipe horizontally to scan recent field logs or tap quick view."
+            items={carouselItems}
+            loading={loading}
+            onCardClick={(item) => {
+              const s = samples.find((x) => x.id === item.id);
+              if (s) {
+                setSelectedSample(s);
+                setIsSampleDrawerOpen(true);
+              }
+            }}
+          />
+        )}
+
         {/* Search & Filter Bar */}
         <div className="glass-card p-4 rounded-2xl flex flex-col sm:flex-row gap-3 items-center justify-between">
           <div className="relative w-full sm:w-72">
@@ -136,7 +189,8 @@ export default function HistoryPage() {
             />
           </div>
 
-          <div className="flex flex-wrap items-center gap-1.5 w-full sm:w-auto text-xs">
+          {/* Desktop Filter Tabs */}
+          <div className="hidden sm:flex flex-wrap items-center gap-1.5 w-full sm:w-auto text-xs">
             <button
               type="button"
               onClick={() => setActiveFilter("all")}
@@ -192,6 +246,21 @@ export default function HistoryPage() {
             >
               Unsynced
             </button>
+          </div>
+
+          {/* Mobile Filter Button */}
+          <div className="flex sm:hidden w-full justify-between items-center pt-1">
+            <button
+              type="button"
+              onClick={() => setIsFilterDrawerOpen(true)}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-bone dark:border-dark-border text-xs font-medium bg-surface/80 dark:bg-dark-card text-ink dark:text-dark-ink"
+            >
+              <Filter className="w-3.5 h-3.5 text-forest dark:text-dark-forest" />
+              <span>Filter: <strong className="capitalize">{activeFilter === "all" ? "All" : activeFilter.replace("_", " ")}</strong></span>
+            </button>
+            <span className="text-[11px] text-muted dark:text-dark-muted font-mono">
+              {filteredSamples.length} records
+            </span>
           </div>
         </div>
 
@@ -265,15 +334,29 @@ export default function HistoryPage() {
                   </div>
 
                   {/* Badges & Actions */}
-                  <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0 pt-2 sm:pt-0 border-t sm:border-0 border-bone dark:border-dark-border">
+                  <div className="flex items-center justify-between sm:justify-end gap-2 shrink-0 pt-2 sm:pt-0 border-t sm:border-0 border-bone dark:border-dark-border">
                     {a && (
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 mr-1">
                         <StatusChip status={a.overallRisk} size="sm" />
                         <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-forest/10 dark:bg-dark-forest/20 text-forest dark:text-dark-forest">
                           {a.actionDecision}
                         </span>
                       </div>
                     )}
+
+                    {/* Quick View Drawer trigger */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedSample(s);
+                        setIsSampleDrawerOpen(true);
+                      }}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-forest/10 hover:bg-forest text-forest hover:text-white dark:bg-dark-forest/20 dark:hover:bg-dark-forest dark:text-dark-forest dark:hover:text-white text-xs font-semibold transition-all"
+                      title="Quick preview details"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">Quick View</span>
+                    </button>
 
                     <Link
                       href={`/test/result?id=${s.id}`}
@@ -289,6 +372,59 @@ export default function HistoryPage() {
           </div>
         )}
       </main>
+
+      {/* Sample Detail Drawer */}
+      <SampleDetailDrawer
+        sample={selectedSample}
+        analysis={selectedSample ? analyses[selectedSample.id] : undefined}
+        isOpen={isSampleDrawerOpen}
+        onClose={() => setIsSampleDrawerOpen(false)}
+      />
+
+      {/* Mobile Filter Drawer */}
+      <SmoothDrawer
+        isOpen={isFilterDrawerOpen}
+        onClose={() => setIsFilterDrawerOpen(false)}
+        title="Filter Timeline"
+        description="Select a category to narrow down your feed and silage history"
+        footer={
+          <button
+            type="button"
+            onClick={() => setIsFilterDrawerOpen(false)}
+            className="w-full py-2.5 rounded-xl bg-forest hover:bg-deep dark:bg-dark-forest dark:hover:bg-forest text-white font-bold text-xs transition-colors"
+          >
+            Apply Filters
+          </button>
+        }
+      >
+        <motion.div variants={drawerItemVariants} className="space-y-2">
+          {(
+            [
+              { key: "all", label: `All Samples (${samples.length})` },
+              { key: "silage", label: "Silage Only" },
+              { key: "feed", label: "Commercial Feed" },
+              { key: "high_risk", label: "High Risk / Discard" },
+              { key: "unsynced", label: "Unsynced Local Data" },
+            ] as const
+          ).map((opt) => (
+            <button
+              key={opt.key}
+              type="button"
+              onClick={() => {
+                setActiveFilter(opt.key);
+                setIsFilterDrawerOpen(false);
+              }}
+              className={`w-full text-left px-4 py-3 rounded-xl border text-xs font-semibold transition-all ${
+                activeFilter === opt.key
+                  ? "bg-forest/15 dark:bg-dark-forest/25 text-forest dark:text-dark-forest border-forest/30 dark:border-dark-forest/40"
+                  : "glass-surface-1 border-bone dark:border-dark-border text-ink dark:text-dark-ink hover:bg-surface/60"
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </motion.div>
+      </SmoothDrawer>
     </div>
   );
 }

@@ -4,3 +4,5 @@ export * from "./LiquidGlassPanel";
 export * from "./LiquidGlassButton";
 export * from "./LiquidGlassPill";
 export * from "./Modal";
+export * from "./ProductCarousel";
+export * from "./SmoothDrawer";

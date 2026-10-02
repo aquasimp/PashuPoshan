@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { I18nProvider } from "@/lib/i18n";
 import { ThemeProvider } from "@/lib/theme";
+import { NativeBridge } from "@/components/NativeBridge";
 
 export const metadata: Metadata = {
   title: "PashuPoshan — AI-Powered Feed & Silage Intelligence",
@@ -67,13 +68,14 @@ export default function RootLayout({
         <div className="ambient-glow-layer" aria-hidden="true" />
         <ThemeProvider>
           <I18nProvider>
+            <NativeBridge />
             {children}
           </I18nProvider>
         </ThemeProvider>
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              if ('serviceWorker' in navigator) {
+              if ('serviceWorker' in navigator && !window.Capacitor?.isNativePlatform?.()) {
                 window.addEventListener('load', function() {
                   navigator.serviceWorker.register('/sw.js').then(
                     function(registration) {

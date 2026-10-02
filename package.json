@@ -8,7 +8,9 @@
     "start": "pnpm --filter web start",
     "test": "pnpm --filter web test",
     "test:claims": "python ml/claims_lint.py",
-    "lint": "pnpm --filter web lint"
+    "lint": "pnpm --filter web lint",
+    "android:sync": "pnpm --filter web android:sync",
+    "android:build": "pnpm --filter web android:build"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",

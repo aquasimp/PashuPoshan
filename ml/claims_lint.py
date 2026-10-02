@@ -22,6 +22,9 @@ EXEMPT_PATHS = {
     ".git",
     "node_modules",
     ".next",
+    "out",
+    "android",
+    "build",
     ".venv",
     "venv",
     "__pycache__"
@@ -59,17 +62,29 @@ def run_lint():
     violations = []
     scanned_count = 0
 
-    for file_path in ROOT_DIR.rglob("*"):
-        if file_path.is_file() and should_scan(file_path):
-            scanned_count += 1
-            try:
-                content = file_path.read_text(encoding="utf-8", errors="ignore").lower()
-                for phrase in forbidden:
-                    if phrase in content:
-                        rel = file_path.relative_to(ROOT_DIR)
-                        violations.append((rel, phrase))
-            except Exception as e:
-                print(f"Warning reading {file_path}: {e}")
+    import os
+    for root, dirs, files in os.walk(ROOT_DIR):
+        # Prune exempt directories from recursion
+        dirs[:] = [
+            d for d in dirs
+            if d not in EXEMPT_PATHS and not any(
+                str(Path(root, d).relative_to(ROOT_DIR)).replace("\\", "/") == e or
+                str(Path(root, d).relative_to(ROOT_DIR)).replace("\\", "/").startswith(e + "/")
+                for e in EXEMPT_PATHS
+            )
+        ]
+        for f in files:
+            file_path = Path(root) / f
+            if should_scan(file_path):
+                scanned_count += 1
+                try:
+                    content = file_path.read_text(encoding="utf-8", errors="ignore").lower()
+                    for phrase in forbidden:
+                        if phrase in content:
+                            rel = file_path.relative_to(ROOT_DIR)
+                            violations.append((rel, phrase))
+                except Exception as e:
+                    print(f"Warning reading {file_path}: {e}")
 
     print(f"Scanned {scanned_count} files across PashuPoshan workspace.")
 

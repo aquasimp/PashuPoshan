@@ -94,7 +94,9 @@ test.describe("Carousel and SmoothDrawer E2E Integration Suite", () => {
     await page.waitForTimeout(600);
 
     // Section 7 Product Carousel component
-    await expect(page.getByText("7. Product Carousel Component")).toBeVisible();
+    const section7 = page.getByText("7. Product Carousel Component");
+    await section7.scrollIntoViewIfNeeded();
+    await expect(section7).toBeVisible();
 
     // Test carousel states: Loading, Empty, Error
     await page.getByRole("button", { name: "Loading" }).click();

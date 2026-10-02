@@ -19,6 +19,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { SyncStatusBadge } from "@/lib/sync";
 import { db, OutboxItem, LocalSample } from "@/lib/db";
 import { useI18n } from "@/lib/i18n";
+import { apiFetch } from "@/lib/api";
 
 export default function SyncCenterPage() {
   const { t } = useI18n();
@@ -78,7 +79,7 @@ export default function SyncCenterPage() {
 
       let serverSuccess = false;
       try {
-        const res = await fetch("/api/v1/sync/push", {
+        const res = await apiFetch("/api/v1/sync/push", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ items: pushItems }),

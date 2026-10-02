@@ -22,6 +22,7 @@ import {
 import { Navbar } from "@/components/layout/Navbar";
 import { DemoBadge } from "@/components/ui/DemoBadge";
 import { EvidenceTag } from "@/components/ui/EvidenceTag";
+import { apiFetch } from "@/lib/api";
 
 interface ModelMetric {
   target: string;
@@ -42,7 +43,7 @@ export default function AdminCommandPage() {
   useEffect(() => {
     async function loadMetrics() {
       try {
-        const res = await fetch("/api/v1/models/metrics");
+        const res = await apiFetch("/api/v1/models/metrics");
         if (res.ok) {
           const data = await res.json();
           setMetrics(data);

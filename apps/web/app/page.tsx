@@ -128,12 +128,12 @@ export default function FarmerHomePage() {
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="font-semibold text-ink-1 text-base">
-                  Kisan Dairy Testing Node #1
+                  {t("home.testingNode")}
                 </h2>
                 <DemoBadge label="SIMULATED" size="sm" />
               </div>
               <p className="text-xs text-ink-3">
-                Kisan Pragati Cooperative Union (Fictional Demo Cluster)
+                {t("home.demoCluster")}
               </p>
             </div>
           </div>
@@ -145,13 +145,13 @@ export default function FarmerHomePage() {
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-300 border border-amber-500/30 text-xs font-medium hover:bg-amber-500/20 transition-colors"
               >
                 <HardDrive className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-                <span>{pendingSync} tests pending sync</span>
-                <span className="underline font-bold">Sync Now</span>
+                <span>{pendingSync} {t("home.testsPending")}</span>
+                <span className="underline font-bold">{t("home.syncNow")}</span>
               </Link>
             ) : (
               <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-forest dark:text-emerald-300 border border-emerald-500/20 text-xs font-medium">
                 <span className="w-2 h-2 rounded-full bg-moss animate-pulse" />
-                <span>Local DB Ready · Offline Active</span>
+                <span>{t("home.localDbReady")}</span>
               </div>
             )}
           </div>
@@ -165,20 +165,20 @@ export default function FarmerHomePage() {
           <div className="relative z-10 max-w-2xl space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 dark:bg-white/5 backdrop-blur-md text-xs font-medium text-mist border border-white/15 dark:border-white/10 shadow-glass">
               <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-              <span>Rapid Multi-Modal Screening · Problem Statement SIH26111</span>
+              <span>{t("home.rapidBadge")}</span>
             </div>
 
             <h1 className="font-display text-2xl sm:text-4xl font-bold tracking-tight leading-tight">
-              Instant Silage &amp; Cattle Feed <br />
-              <span className="text-mist dark:text-sage-light font-normal">Quality Intelligence</span>
+              {t("home.heroTitle1")} <br />
+              <span className="text-mist dark:text-sage-light font-normal">{t("home.heroTitle2")}</span>
             </h1>
 
             <p className="text-sm sm:text-base text-mist/90 dark:text-sage-light/80 max-w-xl font-sans leading-relaxed">
-              Multi-modal rapid on-farm screening fusing optical imaging, core silage temperature, and pH sensing with full offline capability.
+              {t("home.heroDesc")}
             </p>
 
             <p className="text-xs text-mist/75 dark:text-sage-light/65 max-w-lg leading-relaxed">
-              Provides immediate actionable risk guidance on low-cost smartphones. Confirmatory laboratory testing is recommended for suspect or non-declared adulterant batches.
+              {t("home.heroCaveat")}
             </p>
 
             <div className="pt-2 flex flex-wrap items-center gap-4">
@@ -188,7 +188,7 @@ export default function FarmerHomePage() {
                 id="btn-start-new-test"
               >
                 <PlusCircle className="w-5 h-5 text-forest dark:text-dark-surface shrink-0" />
-                <span className="text-balance leading-normal">{t("farmer.startTest")}</span>
+                <span className="text-balance leading-normal">{t("home.startTest")}</span>
                 <ArrowRight className="w-4 h-4 ml-1 shrink-0" />
               </Link>
 
@@ -196,7 +196,7 @@ export default function FarmerHomePage() {
                 href="/demo/hero"
                 className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white/10 dark:bg-white/5 hover:bg-white/20 text-white font-medium text-sm border border-white/20 dark:border-white/15 backdrop-blur-md transition-all min-h-[48px]"
               >
-                <span className="text-balance leading-normal">Healthy vs Spoiled Demo</span>
+                <span className="text-balance leading-normal">{t("home.healthyVsSpoiled")}</span>
                 <ChevronRight className="w-4 h-4 shrink-0" />
               </Link>
             </div>
@@ -223,10 +223,10 @@ export default function FarmerHomePage() {
                 <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
               </div>
               <p className="text-sm font-semibold text-ink-1 mt-0.5">
-                Bunker Pit #2 (Sorghum): Aerobic Core Heating ESTIMATED (+8.2°C above ambient)
+                {t("home.storageAlertTitle")}
               </p>
               <p className="text-xs text-ink-2 mt-0.5 leading-relaxed">
-                Shoulder air ingress identified. Recommended action: Trim deteriorating shoulder and blend with dry fodder.
+                {t("home.storageAlertDesc")}
               </p>
             </div>
           </div>
@@ -260,11 +260,11 @@ export default function FarmerHomePage() {
                 {t("farmer.testSilage")}
               </h3>
               <p className="text-xs text-muted dark:text-dark-muted mt-1 leading-relaxed">
-                Test fermented silage pits and bunker bags. Analyzes pH, temperature differential, dry matter, and spoilage risk.
+                {t("farmer.testSilageSubtitle")}
               </p>
             </div>
             <div className="mt-4 pt-3 border-t border-bone dark:border-dark-border flex items-center justify-between text-xs font-semibold text-forest dark:text-emerald-400">
-              <span>Start Silage Evaluation</span>
+              <span>{t("testSelect.selectSilage")}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -287,11 +287,11 @@ export default function FarmerHomePage() {
                 {t("farmer.testFeed")}
               </h3>
               <p className="text-xs text-muted dark:text-dark-muted mt-1 leading-relaxed">
-                Inspect cattle feed pellets, mash, oil cakes, and dry fodder for physical integrity, visible mould, and chemical screening.
+                {t("farmer.testFeedSubtitle")}
               </p>
             </div>
             <div className="mt-4 pt-3 border-t border-bone dark:border-dark-border flex items-center justify-between text-xs font-semibold text-forest dark:text-emerald-400">
-              <span>Start Feed Concentrate Check</span>
+              <span>{t("testSelect.selectFeed")}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>

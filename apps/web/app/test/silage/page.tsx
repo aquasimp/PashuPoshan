@@ -108,10 +108,10 @@ function SilageSensorsContent() {
       <div className="flex items-center gap-2 text-xs text-muted dark:text-dark-muted">
         <Link href={`/test/capture?type=${testType}`} className="hover:text-forest dark:hover:text-emerald-400 flex items-center gap-1">
           <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Capture QA</span>
+          <span>{t("capture.breadcrumb")}</span>
         </Link>
         <span>/</span>
-        <span className="text-ink dark:text-dark-ink font-medium">Silage Sensor Readings</span>
+        <span className="text-ink dark:text-dark-ink font-medium">{t("silage.breadcrumb")}</span>
       </div>
 
       {/* Header */}
@@ -119,15 +119,15 @@ function SilageSensorsContent() {
         <div>
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold uppercase tracking-wider text-moss dark:text-emerald-400">
-              Step 3 of 4
+              {t("silage.step3")}
             </span>
-            <DemoBadge label="SIMULATED PROBES" size="sm" />
+            <DemoBadge label={t("silage.probeConnection")} size="sm" />
           </div>
           <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink dark:text-dark-ink">
-            Silage Fermentation Sensors
+            {t("silage.title")}
           </h1>
           <p className="text-xs sm:text-sm text-muted dark:text-dark-muted">
-            Measure pH, core internal probe temperature, and ambient differential (ΔT).
+            {t("silage.subtitle")}
           </p>
         </div>
 
@@ -140,7 +140,7 @@ function SilageSensorsContent() {
               isSimulatedProbe ? "bg-forest dark:bg-emerald-600 text-white shadow-sm" : "text-muted dark:text-dark-muted hover:text-ink dark:hover:text-white"
             }`}
           >
-            Probe Connection
+            {t("silage.probeConnection")}
           </button>
           <button
             type="button"
@@ -149,7 +149,7 @@ function SilageSensorsContent() {
               !isSimulatedProbe ? "bg-forest dark:bg-emerald-600 text-white shadow-sm" : "text-muted dark:text-dark-muted hover:text-ink dark:hover:text-white"
             }`}
           >
-            Manual Entry
+            {t("silage.manualEntry")}
           </button>
         </div>
       </div>
@@ -159,7 +159,7 @@ function SilageSensorsContent() {
         <div className="flex items-center justify-between">
           <span className="text-xs font-bold uppercase tracking-wider text-muted dark:text-dark-muted flex items-center gap-1.5">
             <Cpu className="w-4 h-4 text-forest dark:text-emerald-400" />
-            <span>Simulate Hardware Probe Scenarios:</span>
+            <span>{t("silage.scenariosTitle")}</span>
           </span>
           <EvidenceTag tag={isSimulatedProbe ? "SENSOR-MEASURED" : "USER-ENTERED"} />
         </div>
@@ -170,7 +170,7 @@ function SilageSensorsContent() {
             onClick={() => applyPreset("healthy")}
             className="p-3 rounded-2xl bg-emerald-50/80 dark:bg-emerald-950/40 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 text-forest dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 text-left transition-colors"
           >
-            <span className="font-bold block">1. Healthy Corn</span>
+            <span className="font-bold block">{t("silage.healthyCorn")}</span>
             <span className="text-[11px] text-forest/80 dark:text-emerald-400/80">pH 3.9 · ΔT +2.5°C</span>
           </button>
 
@@ -179,7 +179,7 @@ function SilageSensorsContent() {
             onClick={() => applyPreset("heating")}
             className="p-3 rounded-2xl bg-amber-50/80 dark:bg-amber-950/40 hover:bg-amber-100 dark:hover:bg-amber-900/60 text-amber-900 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60 text-left transition-colors"
           >
-            <span className="font-bold block">2. Aerobic Heating</span>
+            <span className="font-bold block">{t("silage.aerobicHeating")}</span>
             <span className="text-[11px] text-amber-800 dark:text-amber-400">pH 5.4 · ΔT +14°C</span>
           </button>
 
@@ -188,7 +188,7 @@ function SilageSensorsContent() {
             onClick={() => applyPreset("clostridial")}
             className="p-3 rounded-2xl bg-rose-50/80 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/60 text-terracotta dark:text-rose-300 border border-rose-200 dark:border-rose-800/60 text-left transition-colors"
           >
-            <span className="font-bold block">3. Clostridial Spoilage</span>
+            <span className="font-bold block">{t("silage.clostridial")}</span>
             <span className="text-[11px] text-terracotta/80 dark:text-rose-400">pH 5.8 · Butyric acid</span>
           </button>
 
@@ -197,7 +197,7 @@ function SilageSensorsContent() {
             onClick={() => applyPreset("sensor_fault")}
             className="p-3 rounded-2xl bg-stone-100 dark:bg-stone-900/60 hover:bg-stone-200 dark:hover:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-300 dark:border-stone-700 text-left transition-colors"
           >
-            <span className="font-bold block">4. Sensor Fault</span>
+            <span className="font-bold block">{t("silage.sensorFault")}</span>
             <span className="text-[11px] text-stone-600 dark:text-stone-400">pH 11.2 (Out of range)</span>
           </button>
         </div>
@@ -209,8 +209,8 @@ function SilageSensorsContent() {
         <div className="glass-card p-5 rounded-3xl border border-bone dark:border-dark-border shadow-card space-y-3">
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-xs font-bold text-ink dark:text-dark-ink block">Silage Core pH</span>
-              <span className="text-[11px] text-muted dark:text-dark-muted">Optimal lactic range: 3.8 – 4.2</span>
+              <span className="text-xs font-bold text-ink dark:text-dark-ink block">{t("silage.ph")}</span>
+              <span className="text-[11px] text-muted dark:text-dark-muted">Optimal: 3.8 – 4.2</span>
             </div>
             <span className="font-mono text-xl font-bold text-forest dark:text-emerald-400 bg-forest/10 dark:bg-emerald-500/10 px-3 py-1 rounded-xl">
               {ph.toFixed(1)}
@@ -228,11 +228,11 @@ function SilageSensorsContent() {
           />
 
           <div className="flex justify-between text-[11px] font-mono text-muted dark:text-dark-muted">
-            <span>2.5 (Acidic)</span>
+            <span>2.5</span>
             <span className={ph <= 4.2 ? "text-moss dark:text-emerald-400 font-bold" : ph <= 4.8 ? "text-amber-600 dark:text-amber-400 font-bold" : "text-terracotta dark:text-rose-400 font-bold"}>
-              {ph <= 4.2 ? "Lactic Fermentation" : ph <= 4.8 ? "Marginal" : "Poor / Spoilage"}
+              {ph <= 4.2 ? t("results.good") : ph <= 4.8 ? t("results.attention") : t("results.highRisk")}
             </span>
-            <span>8.5 (Spoiled)</span>
+            <span>8.5</span>
           </div>
         </div>
 
@@ -240,9 +240,9 @@ function SilageSensorsContent() {
         <div className="glass-card p-5 rounded-3xl border border-bone dark:border-dark-border shadow-card space-y-3">
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-xs font-bold text-ink dark:text-dark-ink block">Thermal Differential (ΔT)</span>
+              <span className="text-xs font-bold text-ink dark:text-dark-ink block">{t("silage.deltaT")}</span>
               <span className="text-[11px] text-muted dark:text-dark-muted">
-                Internal ({internalTemp.toFixed(1)}°C) - Ambient ({ambientTemp.toFixed(1)}°C)
+                {t("silage.internalTemp")} ({internalTemp.toFixed(1)}°C) - {t("silage.ambientTemp")} ({ambientTemp.toFixed(1)}°C)
               </span>
             </div>
             <span
@@ -260,7 +260,7 @@ function SilageSensorsContent() {
 
           <div className="grid grid-cols-2 gap-3 text-xs">
             <div>
-              <label className="text-[11px] text-muted dark:text-dark-muted block mb-1">Internal Temp (°C)</label>
+              <label className="text-[11px] text-muted dark:text-dark-muted block mb-1">{t("silage.internalTemp")} (°C)</label>
               <input
                 type="number"
                 step="0.5"
@@ -270,7 +270,7 @@ function SilageSensorsContent() {
               />
             </div>
             <div>
-              <label className="text-[11px] text-muted dark:text-dark-muted block mb-1">Ambient Temp (°C)</label>
+              <label className="text-[11px] text-muted dark:text-dark-muted block mb-1">{t("silage.ambientTemp")} (°C)</label>
               <input
                 type="number"
                 step="0.5"
@@ -282,9 +282,9 @@ function SilageSensorsContent() {
           </div>
 
           <div className="text-[11px] font-mono text-muted dark:text-dark-muted flex justify-between">
-            <span>ΔT &lt; 5°C: Stable</span>
+            <span>ΔT &lt; 5°C</span>
             <span className={deltaT > 10 ? "text-terracotta dark:text-rose-400 font-bold" : "text-moss dark:text-emerald-400 font-bold"}>
-              {deltaT > 10 ? "Severe Heating Alert" : "Aerobic Stability Normal"}
+              {deltaT > 10 ? t("results.highRisk") : t("results.good")}
             </span>
           </div>
         </div>
@@ -293,8 +293,8 @@ function SilageSensorsContent() {
         <div className="glass-card p-5 rounded-3xl border border-bone dark:border-dark-border shadow-card space-y-3">
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-xs font-bold text-ink dark:text-dark-ink block">Dry Matter / Moisture</span>
-              <span className="text-[11px] text-muted dark:text-dark-muted">Optimal corn target: 30% – 38% DM</span>
+              <span className="text-xs font-bold text-ink dark:text-dark-ink block">{t("silage.dryMatter")}</span>
+              <span className="text-[11px] text-muted dark:text-dark-muted">Optimal: 30% – 38% DM</span>
             </div>
             <span className="font-mono text-xl font-bold text-forest dark:text-emerald-400 bg-forest/10 dark:bg-emerald-500/10 px-3 py-1 rounded-xl">
               {dryMatterPct.toFixed(1)}% DM
@@ -312,24 +312,24 @@ function SilageSensorsContent() {
           />
 
           <div className="flex justify-between text-[11px] font-mono text-muted dark:text-dark-muted">
-            <span>15% (Too Wet)</span>
-            <span className={dryMatterPct < 28 ? "text-amber-600 dark:text-amber-400 font-bold" : dryMatterPct > 42 ? "text-amber-600 dark:text-amber-400 font-bold" : "text-moss dark:text-emerald-400 font-bold"}>
-              {dryMatterPct < 28 ? "Clostridial Risk (Seepage)" : dryMatterPct > 42 ? "Dry / Hard to Pack" : "Ideal Fermentation"}
+            <span>15%</span>
+            <span className={dryMatterPct < 28 || dryMatterPct > 42 ? "text-amber-600 dark:text-amber-400 font-bold" : "text-moss dark:text-emerald-400 font-bold"}>
+              {dryMatterPct < 28 || dryMatterPct > 42 ? t("results.attention") : t("results.good")}
             </span>
-            <span>60% (Dry)</span>
+            <span>60%</span>
           </div>
         </div>
 
         {/* Pit Open Duration & Mould Card */}
         <div className="glass-card p-5 rounded-3xl border border-bone dark:border-dark-border shadow-card space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-ink dark:text-dark-ink">Bunker Management Context</span>
-            <span className="text-[11px] text-muted dark:text-dark-muted">Days open: {daysOpen} d</span>
+            <span className="text-xs font-bold text-ink dark:text-dark-ink">{t("silage.daysOpen")}</span>
+            <span className="text-[11px] text-muted dark:text-dark-muted">{daysOpen} d</span>
           </div>
 
           <div className="grid grid-cols-2 gap-3 text-xs">
             <div>
-              <label className="text-[11px] text-muted dark:text-dark-muted block mb-1">Days Pit Open</label>
+              <label className="text-[11px] text-muted dark:text-dark-muted block mb-1">{t("silage.daysOpen")}</label>
               <input
                 type="number"
                 value={daysOpen}
@@ -338,7 +338,7 @@ function SilageSensorsContent() {
               />
             </div>
             <div>
-              <label className="text-[11px] text-muted dark:text-dark-muted block mb-1">Visible Mould (%)</label>
+              <label className="text-[11px] text-muted dark:text-dark-muted block mb-1">{t("silage.visibleMould")} (%)</label>
               <input
                 type="number"
                 value={visibleMouldPct}
@@ -347,10 +347,6 @@ function SilageSensorsContent() {
               />
             </div>
           </div>
-
-          <p className="text-[11px] text-muted dark:text-dark-muted leading-tight">
-            Advancing the bunker face at &gt;15 cm/day prevents air ingress behind the plastic sheet.
-          </p>
         </div>
       </div>
 
@@ -358,7 +354,7 @@ function SilageSensorsContent() {
       <div className="p-5 rounded-3xl glass-card border border-bone dark:border-dark-border shadow-float flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <span className="text-xs font-bold text-muted dark:text-dark-muted uppercase tracking-wider block">
-            Instant Engine Preliminary Outlook:
+            {t("silage.livePreview")}:
           </span>
           <div className="flex items-center gap-3 mt-1">
             <span
@@ -370,10 +366,14 @@ function SilageSensorsContent() {
                   : "bg-rose-50 dark:bg-rose-950/40 text-terracotta dark:text-rose-300 border border-rose-300 dark:border-rose-800/60"
               }`}
             >
-              {previewEval.overallRisk}
+              {previewEval.overallRisk === "GOOD"
+                ? t("results.good")
+                : previewEval.overallRisk === "ATTENTION"
+                ? t("results.attention")
+                : t("results.highRisk")}
             </span>
             <span className="text-xs font-semibold text-ink dark:text-dark-ink">
-              Action Recommendation: <strong>{previewEval.actionDecision}</strong>
+              {t("advisory.decision")}: <strong>{t("advisory.decisions." + previewEval.actionDecision) || previewEval.actionDecision}</strong>
             </span>
           </div>
         </div>
@@ -384,7 +384,7 @@ function SilageSensorsContent() {
           className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-forest dark:bg-emerald-600 hover:bg-deep dark:hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition-all shrink-0"
           id="btn-run-silage-analysis"
         >
-          <span>Run Multimodal Fusion</span>
+          <span>{t("silage.runAnalysis")}</span>
           <ArrowRight className="w-4 h-4 ml-1" />
         </button>
       </div>
@@ -393,10 +393,11 @@ function SilageSensorsContent() {
 }
 
 export default function SilageSensorsPage() {
+  const { t } = useI18n();
   return (
     <div className="min-h-screen bg-ivory dark:bg-dark-bg text-ink dark:text-dark-ink flex flex-col font-sans transition-colors duration-200">
       <Navbar />
-      <Suspense fallback={<div className="p-8 text-center text-xs text-muted dark:text-dark-muted">Loading sensor inputs...</div>}>
+      <Suspense fallback={<div className="p-8 text-center text-xs text-muted dark:text-dark-muted">{t("silage.breadcrumb")}...</div>}>
         <SilageSensorsContent />
       </Suspense>
     </div>

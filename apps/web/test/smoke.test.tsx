@@ -18,10 +18,18 @@ describe("PashuPoshan Design System Smoke Tests", () => {
   });
 
   it("renders status chips with correct labels", () => {
-    render(<StatusChip status="GOOD" />);
+    render(
+      <I18nProvider>
+        <StatusChip status="GOOD" />
+      </I18nProvider>
+    );
     expect(screen.getByText("GOOD")).toBeInTheDocument();
 
-    render(<StatusChip status="HIGH RISK" />);
+    render(
+      <I18nProvider>
+        <StatusChip status="HIGH RISK" />
+      </I18nProvider>
+    );
     expect(screen.getByText("HIGH RISK")).toBeInTheDocument();
   });
 
@@ -55,6 +63,6 @@ describe("PashuPoshan Design System Smoke Tests", () => {
       </I18nProvider>
     );
 
-    expect(screen.getByText("FeedShield")).toBeInTheDocument();
+    expect(screen.getByText("PashuPoshan")).toBeInTheDocument();
   });
 });

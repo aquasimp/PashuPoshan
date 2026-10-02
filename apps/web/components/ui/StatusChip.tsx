@@ -1,5 +1,6 @@
 import React from "react";
 import { CheckCircle, AlertTriangle, XCircle, HelpCircle } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 export type StatusLevel = "GOOD" | "ATTENTION" | "HIGH RISK" | "HIGH_RISK" | "INDETERMINATE";
 
@@ -11,9 +12,10 @@ interface StatusChipProps {
 
 const statusConfig: Record<
   string,
-  { label: string; bg: string; text: string; border: string; icon: React.ElementType }
+  { key: string; label: string; bg: string; text: string; border: string; icon: React.ElementType }
 > = {
   GOOD: {
+    key: "good",
     label: "GOOD",
     bg: "bg-emerald-50 dark:bg-emerald-950/40",
     text: "text-forest dark:text-emerald-300",
@@ -21,6 +23,7 @@ const statusConfig: Record<
     icon: CheckCircle,
   },
   ATTENTION: {
+    key: "attention",
     label: "ATTENTION",
     bg: "bg-amber-50 dark:bg-amber-950/40",
     text: "text-amber-800 dark:text-amber-300",
@@ -28,6 +31,7 @@ const statusConfig: Record<
     icon: AlertTriangle,
   },
   "HIGH RISK": {
+    key: "highRisk",
     label: "HIGH RISK",
     bg: "bg-rose-50 dark:bg-rose-950/40",
     text: "text-rose-800 dark:text-rose-300",
@@ -35,6 +39,7 @@ const statusConfig: Record<
     icon: XCircle,
   },
   HIGH_RISK: {
+    key: "highRisk",
     label: "HIGH RISK",
     bg: "bg-rose-50 dark:bg-rose-950/40",
     text: "text-rose-800 dark:text-rose-300",
@@ -42,6 +47,7 @@ const statusConfig: Record<
     icon: XCircle,
   },
   INDETERMINATE: {
+    key: "indeterminate",
     label: "INDETERMINATE",
     bg: "bg-stone-100 dark:bg-stone-900/40",
     text: "text-stone-700 dark:text-stone-300",
@@ -51,9 +57,11 @@ const statusConfig: Record<
 };
 
 export const StatusChip: React.FC<StatusChipProps> = ({ status, className = "", size = "md" }) => {
+  const { t } = useI18n();
   const normalized = status.toUpperCase().replace("-", " ");
   const config = statusConfig[normalized] || statusConfig["INDETERMINATE"];
   const Icon = config.icon;
+  const label = t(`results.${config.key}`, config.label);
 
   const sizeClasses = {
     sm: "px-2 py-0.5 text-xs gap-1",
@@ -72,7 +80,7 @@ export const StatusChip: React.FC<StatusChipProps> = ({ status, className = "", 
       className={`inline-flex items-center rounded-full font-medium border font-sans shadow-sm ${config.bg} ${config.text} ${config.border} ${sizeClasses} ${className}`}
     >
       <Icon className={`${iconSizes} flex-shrink-0`} />
-      <span>{config.label}</span>
+      <span>{label}</span>
     </span>
   );
 };

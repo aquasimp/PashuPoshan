@@ -19,6 +19,7 @@ import {
   FlaskConical,
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
+import { apiFetch } from "@/lib/api";
 
 interface ModelEntry {
   model_name: string;
@@ -62,7 +63,7 @@ export default function ModelRegistryPage() {
   useEffect(() => {
     async function fetchModels() {
       try {
-        const res = await fetch("/api/v1/models");
+        const res = await apiFetch("/api/v1/models");
         if (res.ok) {
           const data = await res.json();
           setModels(data.models || []);

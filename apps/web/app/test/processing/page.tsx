@@ -13,7 +13,7 @@ import {
   Check,
 } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
-import { db, LocalSample, LocalAnalysis, LocalAdvisory, OutboxItem } from "@/lib/db";
+import { db, LocalSample, LocalImage, LocalAnalysis, LocalAdvisory, OutboxItem } from "@/lib/db";
 import { generateSampleId, generateClientId } from "@/lib/sync";
 import { evaluateSilage } from "@/lib/rules/silageEngine";
 
@@ -231,6 +231,19 @@ function ProcessingContent() {
         await db.analyses.put(localAnalysis);
         await db.advisories.put(localAdvisory);
         await db.outbox.put(outboxItem);
+
+        if (testData.capturedImage) {
+          const localImage: LocalImage = {
+            id: `img-${sampleId}`,
+            sampleId,
+            dataUrl: testData.capturedImage,
+            blurScore: testData.qa?.blurScore,
+            exposureScore: testData.qa?.exposureScore,
+            isAcceptable: testData.qa?.isAcceptable ?? true,
+            createdAt: now,
+          };
+          await db.images.put(localImage);
+        }
       } catch (err) {
         console.error("Dexie put error:", err);
       }

@@ -249,7 +249,7 @@ export const Navbar: React.FC = () => {
           }`}
         >
           <Home className="w-5 h-5 mb-0.5" />
-          <span className="text-[10px] leading-tight font-sans">Home</span>
+          <span className="text-[10px] leading-tight font-sans">{t("nav.home")}</span>
         </Link>
 
         <Link
@@ -262,7 +262,7 @@ export const Navbar: React.FC = () => {
           }`}
         >
           <PlusCircle className="w-5 h-5 mb-0.5" />
-          <span className="text-[10px] leading-tight font-sans">Test</span>
+          <span className="text-[10px] leading-tight font-sans">{t("nav.test")}</span>
         </Link>
 
         <Link
@@ -275,7 +275,7 @@ export const Navbar: React.FC = () => {
           }`}
         >
           <History className="w-5 h-5 mb-0.5" />
-          <span className="text-[10px] leading-tight font-sans">History</span>
+          <span className="text-[10px] leading-tight font-sans">{t("nav.history")}</span>
         </Link>
 
         <Link
@@ -293,7 +293,7 @@ export const Navbar: React.FC = () => {
               {pendingSyncCount}
             </span>
           )}
-          <span className="text-[10px] leading-tight font-sans">Sync</span>
+          <span className="text-[10px] leading-tight font-sans">{t("nav.sync")}</span>
         </Link>
 
         <button
@@ -306,7 +306,7 @@ export const Navbar: React.FC = () => {
           }`}
         >
           <MoreHorizontal className="w-5 h-5 mb-0.5" />
-          <span className="text-[10px] leading-tight font-sans">More</span>
+          <span className="text-[10px] leading-tight font-sans">{t("nav.more")}</span>
         </button>
       </nav>
 
@@ -314,7 +314,7 @@ export const Navbar: React.FC = () => {
       <Sheet
         isOpen={isMobileSheetOpen}
         onClose={() => setIsMobileSheetOpen(false)}
-        title="More PashuPoshan Modules"
+        title={t("nav.moreModules")}
       >
         <div className="space-y-2">
           <Link
@@ -325,7 +325,7 @@ export const Navbar: React.FC = () => {
             <Sparkles className="w-5 h-5 text-forest dark:text-emerald-400" />
             <div>
               <div className="text-sm font-semibold">{t("nav.demo")}</div>
-              <div className="text-xs text-ink-2">Healthy vs Spoiled side-by-side</div>
+              <div className="text-xs text-ink-2">{t("nav.subtitles.demo")}</div>
             </div>
           </Link>
 
@@ -337,7 +337,7 @@ export const Navbar: React.FC = () => {
             <Compass className="w-5 h-5 text-forest dark:text-emerald-400" />
             <div>
               <div className="text-sm font-semibold">{t("nav.tour")}</div>
-              <div className="text-xs text-ink-2">Interactive 3-minute walk-through</div>
+              <div className="text-xs text-ink-2">{t("nav.subtitles.tour")}</div>
             </div>
           </Link>
 
@@ -349,7 +349,7 @@ export const Navbar: React.FC = () => {
             <Layers className="w-5 h-5 text-forest dark:text-emerald-400" />
             <div>
               <div className="text-sm font-semibold">{t("nav.models")}</div>
-              <div className="text-xs text-ink-2">Chemometric NIR models &amp; metrics</div>
+              <div className="text-xs text-ink-2">{t("nav.subtitles.models")}</div>
             </div>
           </Link>
 
@@ -361,7 +361,7 @@ export const Navbar: React.FC = () => {
             <Layers className="w-5 h-5 text-forest dark:text-emerald-400" />
             <div>
               <div className="text-sm font-semibold">{t("nav.compare")}</div>
-              <div className="text-xs text-ink-2">Compare feed batches &amp; pits</div>
+              <div className="text-xs text-ink-2">{t("nav.subtitles.compare")}</div>
             </div>
           </Link>
 
@@ -373,7 +373,7 @@ export const Navbar: React.FC = () => {
             <Warehouse className="w-5 h-5 text-forest dark:text-emerald-400" />
             <div>
               <div className="text-sm font-semibold">{t("nav.storage")}</div>
-              <div className="text-xs text-ink-2">Bunker &amp; pit sensor telemetry</div>
+              <div className="text-xs text-ink-2">{t("nav.subtitles.storage")}</div>
             </div>
           </Link>
 
@@ -385,7 +385,7 @@ export const Navbar: React.FC = () => {
             <Settings className="w-5 h-5 text-forest dark:text-emerald-400" />
             <div>
               <div className="text-sm font-semibold">{t("nav.settings")}</div>
-              <div className="text-xs text-ink-2">Voice, sync &amp; display preferences</div>
+              <div className="text-xs text-ink-2">{t("nav.subtitles.settings")}</div>
             </div>
           </Link>
 
@@ -397,7 +397,7 @@ export const Navbar: React.FC = () => {
             <BarChart3 className="w-5 h-5 text-forest dark:text-emerald-400" />
             <div>
               <div className="text-sm font-semibold">{t("nav.admin")}</div>
-              <div className="text-xs text-ink-2">Cooperative command center</div>
+              <div className="text-xs text-ink-2">{t("nav.subtitles.admin")}</div>
             </div>
           </Link>
 
@@ -409,7 +409,7 @@ export const Navbar: React.FC = () => {
             <Palette className="w-5 h-5 text-forest dark:text-emerald-400" />
             <div>
               <div className="text-sm font-semibold">{t("nav.designSystem")}</div>
-              <div className="text-xs text-ink-2">Liquid glass tokens &amp; components</div>
+              <div className="text-xs text-ink-2">{t("nav.subtitles.designSystem")}</div>
             </div>
           </Link>
 

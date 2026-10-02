@@ -27,6 +27,7 @@ import { LiquidGlassButton } from "@/components/ui/liquid-glass";
 import { db, LocalSample, LocalAnalysis, LocalAdvisory } from "@/lib/db";
 import { ensureDemoDataLoaded } from "@/lib/seedLocalDb";
 import { useI18n } from "@/lib/i18n";
+import { getApiBaseUrl } from "@/lib/api";
 
 function AdvisoryContent() {
   const searchParams = useSearchParams();
@@ -130,24 +131,24 @@ function AdvisoryContent() {
       <div className="flex items-center gap-2 text-xs text-muted dark:text-dark-muted">
         <Link href={`/test/result?id=${sample.id}`} className="hover:text-forest dark:hover:text-emerald-400 flex items-center gap-1">
           <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Back to Result</span>
+          <span>{t("results.title")}</span>
         </Link>
         <span>/</span>
-        <span className="text-ink dark:text-dark-ink font-medium">Actionable Advisory</span>
+        <span className="text-ink dark:text-dark-ink font-medium">{t("advisory.title")}</span>
       </div>
 
       {/* Decision Banner Card with Rich Contrast */}
       <div className={`rounded-3xl p-6 sm:p-8 ${decisionTheme.bg} ${decisionTheme.text} shadow-float space-y-3 border border-white/20 dark:border-white/10`}>
         <div className="flex items-center justify-between">
           <span className="text-xs font-mono font-bold uppercase tracking-wider bg-white/20 backdrop-blur-md px-3 py-1 rounded-full shadow-sm">
-            {decisionTheme.tag}
+            {t("advisory.decisions." + advisory.decision) || decisionTheme.tag}
           </span>
           <span className="text-xs font-mono opacity-80">{sample.id}</span>
         </div>
 
         <div>
           <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">
-            Decision: {advisory.decision}
+            {t("advisory.decision")}: {t("advisory.decisions." + advisory.decision) || advisory.decision}
           </h1>
           <p className="text-sm opacity-90 mt-1 max-w-xl font-sans leading-relaxed">
             {decisionTheme.sub}
@@ -299,7 +300,7 @@ function AdvisoryContent() {
               size="md"
               icon={<Download className="w-4 h-4 text-emerald-300" />}
               onClick={() => {
-                window.open(`/api/v1/reports/${analysis.id}/pdf`, "_blank");
+                window.open(`${getApiBaseUrl()}/reports/${analysis.id}/pdf`, "_blank");
               }}
               className="flex-1 sm:flex-initial min-h-[48px]"
             >

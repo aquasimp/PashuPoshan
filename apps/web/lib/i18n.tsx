@@ -28,7 +28,7 @@ const I18nContext = createContext<I18nContextType>({
   setLocale: () => {},
   language: "en",
   setLanguage: () => {},
-  t: (key) => key,
+  t: (key, fallback) => fallback || key,
 });
 
 export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {

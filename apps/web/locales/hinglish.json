@@ -46,6 +46,7 @@
     "admin": "Admin Intelligence",
     "settings": "Settings",
     "designSystem": "Design System",
+    "download": "APK Download",
     "language": "Bhasha (Language)",
     "theme": "Theme",
     "online": "Online",
@@ -58,7 +59,8 @@
       "storage": "Bunker aur silage pit sensor telemetry",
       "settings": "Awaaz, sync aur display settings",
       "admin": "Cooperative command center",
-      "designSystem": "Liquid glass UI components"
+      "designSystem": "Liquid glass UI components",
+      "download": "Signed release APK (v1.0)"
     }
   },
   "home": {
@@ -74,6 +76,11 @@
     "heroCaveat": "Normal smartphone par fauran sahi guidance. Agar sample suspect ya milaawati lage toh lab test karwayein.",
     "healthyVsSpoiled": "Healthy vs Kharab Demo",
     "startTest": "Naya Test Shuru Karein",
+    "downloadApk": "Android App Download Karein",
+    "installCardTitle": "Android par PashuPoshan Install Karein",
+    "installCardDesc": "Apne smartphone ke liye official signed APK download karein. Bina internet khet me silage testing, camera scanning aur sensor recording karein.",
+    "downloadApkBtn": "APK Download Karein (5.7 MB)",
+    "installGuideBtn": "Installation Guide",
     "recentTests": "Haal ke tests",
     "storageAlerts": "Silage Pit Alerts",
     "storageAlertTitle": "Bunker Pit #2 (Jowar): Core Heating (+8.2°C ambient se zyada)",
@@ -343,5 +350,30 @@
     "decision": "Decision",
     "keyMetrics": "Key Metrics",
     "viewDetails": "Pura Analysis Dekhein"
+  },
+  "download": {
+    "title": "Android ke liye PashuPoshan Download Karein",
+    "subtitle": "Official signed APK release (v1.0) - offline support, native camera capture aur on-device storage ke saath.",
+    "downloadBtn": "Official APK Download Karein",
+    "fileSize": "File Size: 5.7 MB",
+    "version": "Version: 1.0 (Build 1)",
+    "targetAndroid": "Android 8.0 ya higher zaroori hai",
+    "packageId": "Package: com.pashuposhan.app",
+    "howToInstall": "Android par Install Kaise Karein",
+    "step1Title": "1. APK Download Karein",
+    "step1Desc": "Upar diye gaye download button par tap karke apne phone me PashuPoshan.apk download karein.",
+    "step2Title": "2. File Open Karein aur Permission dein",
+    "step2Desc": "Download hone ke baad notification ya phone ke Downloads folder se APK kholein. Agar phone unknown apps install warn kare, to Settings me jaakar 'Allow from this source' enable karein.",
+    "step3Title": "3. 'Install anyway' par tap karein",
+    "step3Desc": "Agar Google Play Protect warning dikhaye kyunki app direct browser se download hua hai, to 'More details' dabakar 'Install anyway' select karein.",
+    "step4Title": "4. Open karein aur test shuru karein",
+    "step4Desc": "PashuPoshan open karein, camera permission allow karein aur feed & silage test karna start karein!",
+    "featuresTitle": "Android Native App ke Features",
+    "feature1": "Field me clear photos ke liye fast camera autofocus aur flash controls",
+    "feature2": "Bina internet pure on-device test aur secure local cache",
+    "feature3": "Smooth back button navigation aur dark mode",
+    "feature4": "Install ke baad rural farms me zero internet data usage",
+    "qrTitle": "Phone Camera se Scan Karke Download Karein",
+    "qrSubtitle": "Apne phone ke camera ya scanner se direct APK download karne ke liye scan karein."
   }
 }

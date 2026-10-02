@@ -46,6 +46,7 @@
     "admin": "Admin Intelligence",
     "settings": "Settings",
     "designSystem": "Design System",
+    "download": "Download APK",
     "language": "Language",
     "theme": "Theme",
     "online": "Online",
@@ -58,7 +59,8 @@
       "storage": "Bunker & pit sensor telemetry",
       "settings": "Voice, sync & display preferences",
       "admin": "Cooperative command center",
-      "designSystem": "Liquid glass tokens & components"
+      "designSystem": "Liquid glass tokens & components",
+      "download": "Signed release APK (v1.0)"
     }
   },
   "home": {
@@ -74,6 +76,11 @@
     "heroCaveat": "Provides immediate actionable risk guidance on low-cost smartphones. Confirmatory laboratory testing is recommended for suspect or non-declared adulterant batches.",
     "healthyVsSpoiled": "Healthy vs Spoiled Demo",
     "startTest": "Start New Test",
+    "downloadApk": "Download Android App",
+    "installCardTitle": "Install PashuPoshan on Android",
+    "installCardDesc": "Get the official signed APK for your smartphone. Perform offline silage evaluations, camera quality scans, and thermal sensor logging anywhere in the field.",
+    "downloadApkBtn": "Download APK (5.7 MB)",
+    "installGuideBtn": "Installation Guide",
     "recentTests": "Recent Sample Tests",
     "storageAlerts": "Active Pit Warnings",
     "storageAlertTitle": "Bunker Pit #2 (Sorghum): Aerobic Core Heating ESTIMATED (+8.2°C above ambient)",
@@ -343,5 +350,30 @@
     "decision": "Action Decision",
     "keyMetrics": "Measured & Estimated Metrics",
     "viewDetails": "View Full Analysis"
+  },
+  "download": {
+    "title": "Download PashuPoshan for Android",
+    "subtitle": "Official signed APK release (v1.0) with offline-first support, native camera capture, and on-device storage.",
+    "downloadBtn": "Download Official APK",
+    "fileSize": "File Size: 5.7 MB",
+    "version": "Version: 1.0 (Build 1)",
+    "targetAndroid": "Requires Android 8.0 (Oreo) or higher",
+    "packageId": "Package: com.pashuposhan.app",
+    "howToInstall": "How to Install on Android",
+    "step1Title": "1. Download APK",
+    "step1Desc": "Tap the download button above to download PashuPoshan.apk to your phone.",
+    "step2Title": "2. Open File & Allow Installation",
+    "step2Desc": "Tap the downloaded notification or locate the APK in your phone's 'Downloads' folder. If prompted with 'For your security, your phone is not allowed to install unknown apps', tap Settings and enable 'Allow from this source'.",
+    "step3Title": "3. Confirm 'Install Anyway'",
+    "step3Desc": "If Google Play Protect displays a prompt because the app was downloaded directly instead of the Play Store, tap 'More details' followed by 'Install anyway'.",
+    "step4Title": "4. Launch & Grant Permissions",
+    "step4Desc": "Open PashuPoshan, allow Camera access for instant optical scans, and begin testing feed & silage!",
+    "featuresTitle": "Why install the Android Native App?",
+    "feature1": "Fast Native Camera with autofocus and flash controls for field imaging",
+    "feature2": "Complete offline functionality with on-device SQLite / IndexedDB cache",
+    "feature3": "Natural hardware back button navigation and immersive dark mode",
+    "feature4": "Zero data consumption after install for remote farm operations",
+    "qrTitle": "Scan with Phone Camera to Download",
+    "qrSubtitle": "Open your phone camera or QR scanner to download the APK directly to your device."
   }
 }

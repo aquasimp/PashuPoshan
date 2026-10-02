@@ -16,6 +16,8 @@ import {
   ExternalLink,
   ChevronRight,
   TrendingUp,
+  Download,
+  Smartphone,
 } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { StatusChip } from "@/components/ui/StatusChip";
@@ -199,6 +201,17 @@ export default function FarmerHomePage() {
                 <span className="text-balance leading-normal">{t("home.healthyVsSpoiled")}</span>
                 <ChevronRight className="w-4 h-4 shrink-0" />
               </Link>
+
+              <a
+                href="/PashuPoshan.apk"
+                download="PashuPoshan.apk"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-emerald-500/25 hover:bg-emerald-500/35 text-white font-semibold text-sm border border-emerald-400/40 backdrop-blur-md hover:scale-[1.02] active:scale-[0.98] transition-all min-h-[48px] shadow-sm"
+                id="btn-hero-download-apk"
+              >
+                <Download className="w-4 h-4 text-emerald-300 shrink-0" />
+                <span className="text-balance leading-normal">{t("home.downloadApk")}</span>
+                <span className="text-[11px] opacity-80 font-mono">(5.7 MB)</span>
+              </a>
             </div>
           </div>
 
@@ -295,6 +308,54 @@ export default function FarmerHomePage() {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
+        </div>
+
+        {/* Dedicated Android Native App Download Card */}
+        <div className="relative overflow-hidden rounded-3xl p-6 sm:p-7 glass-surface-2 border border-edge shadow-subtle flex flex-col md:flex-row items-start md:items-center justify-between gap-5 transition-all">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-forest/10 dark:bg-emerald-500/15 border border-forest/20 dark:border-emerald-500/30 flex items-center justify-center text-forest dark:text-emerald-400 shrink-0">
+              <Smartphone className="w-6 h-6" />
+            </div>
+            <div className="space-y-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-forest dark:text-emerald-400 font-mono">
+                  Official Android App · v1.0
+                </span>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-emerald-500/10 text-forest dark:text-emerald-300 border border-emerald-500/20">
+                  Signed Release
+                </span>
+                <span className="text-[10px] text-muted dark:text-dark-muted font-mono">
+                  5.7 MB
+                </span>
+              </div>
+              <h3 className="font-display font-bold text-lg text-ink dark:text-dark-ink">
+                {t("home.installCardTitle")}
+              </h3>
+              <p className="text-xs text-muted dark:text-dark-muted max-w-xl leading-relaxed">
+                {t("home.installCardDesc")}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 w-full md:w-auto shrink-0">
+            <a
+              href="/PashuPoshan.apk"
+              download="PashuPoshan.apk"
+              className="flex-1 md:flex-none inline-flex items-center justify-center gap-2.5 px-5 py-3 rounded-2xl bg-forest hover:bg-deep dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow-subtle hover:scale-[1.02] active:scale-[0.98] transition-all min-h-[44px]"
+              id="btn-card-download-apk"
+            >
+              <Download className="w-4 h-4" />
+              <span>{t("home.downloadApkBtn")}</span>
+            </a>
+
+            <Link
+              href="/download"
+              className="flex-1 md:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-2xl glass-surface-1 hover:glass-surface-2 border border-edge text-ink dark:text-dark-ink font-medium text-xs sm:text-sm transition-all min-h-[44px]"
+            >
+              <span>{t("home.installGuideBtn")}</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </div>
 
         {/* Recent Sample Tests Carousel Section */}

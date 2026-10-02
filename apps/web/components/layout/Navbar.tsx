@@ -21,6 +21,8 @@ import {
   Settings,
   Palette,
   ExternalLink,
+  Download,
+  Smartphone,
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
@@ -88,6 +90,7 @@ export const Navbar: React.FC = () => {
 
   // Secondary items for "More" menu
   const secondaryLinks = [
+    { href: "/download", label: t("nav.download"), icon: Smartphone },
     { href: "/demo/tour", label: t("nav.tour"), icon: Compass },
     { href: "/compare", label: t("nav.compare"), icon: Layers },
     { href: "/storage", label: t("nav.storage"), icon: Warehouse },
@@ -191,6 +194,17 @@ export const Navbar: React.FC = () => {
 
           {/* Action Controls Cluster */}
           <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+            {/* Download APK Quick Action Pill */}
+            <Link
+              href="/download"
+              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-forest/10 hover:bg-forest/20 dark:bg-emerald-500/15 dark:hover:bg-emerald-500/25 text-forest dark:text-emerald-300 border border-forest/20 dark:border-emerald-500/30 transition-all hover:scale-105"
+              title="Download Android APK (v1.0 • 5.7 MB)"
+              id="nav-btn-download-apk"
+            >
+              <Download className="w-3.5 h-3.5 text-forest dark:text-emerald-400" />
+              <span>{t("nav.download")}</span>
+            </Link>
+
             {/* Online / Offline Status Pill */}
             <div
               className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border font-sans ${
@@ -317,6 +331,24 @@ export const Navbar: React.FC = () => {
         title={t("nav.moreModules")}
       >
         <div className="space-y-2">
+          {/* Download Android App Promo in Sheet */}
+          <Link
+            href="/download"
+            onClick={() => setIsMobileSheetOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-2xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-ink-1 transition-all"
+          >
+            <Smartphone className="w-5 h-5 text-forest dark:text-emerald-400" />
+            <div>
+              <div className="text-sm font-semibold flex items-center gap-2">
+                <span>{t("nav.download")}</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/20 text-forest dark:text-emerald-300">
+                  v1.0 · 5.7 MB
+                </span>
+              </div>
+              <div className="text-xs text-ink-2">{t("nav.subtitles.download")}</div>
+            </div>
+          </Link>
+
           <Link
             href="/demo/hero"
             onClick={() => setIsMobileSheetOpen(false)}
